@@ -6,6 +6,7 @@
     "server-dev": "npx nodemon server.js"
   },
   "dependencies": {
+    "eslint-config-airbnb": "^18.2.1",
     "express": "^4.17.1",
     "jquery": "^3.6.0",
     "nodemon": "^2.0.7",

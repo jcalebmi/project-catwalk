@@ -1,12 +1,12 @@
 const express = require('express');
+
 const app = express();
+const path = require('path');
 
-app.use(express.static(__dirname + '/client/dist'));
+app.use(express.static(path.join(__dirname, 'client', 'dist')));
 
-
-
-let port = 3000;
+const port = 3000;
 
 app.listen(port, () => {
   console.log('listening on ', port);
-})
+});
