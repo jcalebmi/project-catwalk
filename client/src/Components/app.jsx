@@ -1,13 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Count from './Count.jsx';
-import CountContainer from '../containers/CountContainer';
+/* The provider component makes the Redux store available to any nested
+    components that need to access the store */
+import { Provider } from 'react-redux';
+import Count from './Count';
+import store from '../store/store';
 
 const App = () => (
-  <div>
-    <h1>Hello World </h1>
-    <Count />
-  </div>
+  <Provider store={store}>
+    <div>
+      <h1>Hello World </h1>
+      <Count />
+    </div>
+  </Provider>
 );
 
 // function App() {
@@ -21,3 +26,4 @@ const App = () => (
 // }
 
 ReactDOM.render(<App />, document.getElementById('app'));
+export default App;
