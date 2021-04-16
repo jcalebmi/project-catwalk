@@ -1,0 +1,24 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "jest": true,
+        "frisby": true,
+        "enzyme": true,
+        "supertest": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "airbnb-base"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ]
+}
