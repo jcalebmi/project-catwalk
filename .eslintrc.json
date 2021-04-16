@@ -1,11 +1,15 @@
 {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "jest": true,
+        "frisby": true,
+        "enzyme": true,
+        "supertest": true
     },
     "extends": [
         "plugin:react/recommended",
-        "airbnb"
+        "airbnb-base"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -16,7 +20,5 @@
     },
     "plugins": [
         "react"
-    ],
-    "rules": {
-    }
+    ]
 }

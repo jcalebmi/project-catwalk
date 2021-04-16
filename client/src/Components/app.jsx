@@ -1,10 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 /* The provider component makes the Redux store available to any nested
     components that need to access the store */
 import { Provider } from 'react-redux';
-import Count from './Count';
-import store from '../store/store';
+import Count from './Count.jsx';
+import store from '../store/store.jsx';
 
 const App = () => (
   <Provider store={store}>
@@ -24,6 +23,4 @@ const App = () => (
 //     </h1>
 //   );
 // }
-
-ReactDOM.render(<App />, document.getElementById('app'));
 export default App;

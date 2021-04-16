@@ -5,8 +5,9 @@ const path = require('path');
 
 app.use(express.static(path.join(__dirname, 'client', 'dist')));
 
-const port = 3000;
-
-app.listen(port, () => {
-  console.log('listening on ', port);
+app.get('/test', (req, res) => {
+  res.status = 200;
+  res.send('passed!');
 });
+
+module.exports = app;
