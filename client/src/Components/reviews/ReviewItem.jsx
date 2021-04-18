@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import updateHelpfulness from './helpers/updateHelpfulness.js';
 const moment = require('moment');
 
 function ReviewItem (props) {
 
+  const [helpfulClicked, setHelpfulClick] = useState(false);
+
  const handleHelpfulness = () => {
+   if (!helpfulClicked) {
     updateHelpfulness(props.item.review_id);
+    setHelpfulClick(true)
+    }
   }
  console.log(props.item)
   return (
