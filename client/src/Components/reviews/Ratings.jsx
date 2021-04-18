@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import getReviews from './getReviews.js';
+import getReviews from './helpers/getReviews.js';
 import { useSelector, useDispatch } from 'react-redux';
 
 

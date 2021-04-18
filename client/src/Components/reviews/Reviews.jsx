@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import ReviewItem from './ReviewItem.jsx';
-import getReviews from './getReviews.js';
+import getReviews from './helpers/getReviews.js';
 import { useSelector, useDispatch } from 'react-redux';
 
 
@@ -16,6 +16,9 @@ function Reviews (props) {
   const products = useSelector(selectAllProducts) || [];
   //Review results for current Product
   const [results, setResults] = useState([]);
+  //currently displayed results
+  const [display, setDisplay] = useState(results.slice(0, 3));
+
 
   useEffect( () => {
     //Call to Axios GET
@@ -23,19 +26,34 @@ function Reviews (props) {
       if (product.id !== undefined) {
          return getReviews(product.id).then(data => {
            setResults(data);
+           setDisplay([data[0], data[1]])
          });
       }
     }
     reviews();
-});
+  });
+
+  const handleMoreReviews = () => {
+    const length = display.length;
+    setDisplay(results.slice(0, length + 3));
+  }
   return (
       <div className="reviewsContainer">
-        <h5 className="bold">
-        {results.length} reviews, sorted by..</h5>
-        <ul>
-          {results.map((item, index) => <ReviewItem item={item} key={item.review_id}/>)}
+        <span className="bold">
+          <label for="sort">{results.length} reviews, sorted by </label>
+          <select name="options" id="options" className="reviewSort">
+            <option value="relevance">relevance</option>
+            <option value="helpful">helpful</option>
+            <option value="newest">newest</option>
+          </select>
+        </span>
+        <ul className="reviewList">
+          {display.map((item, index) => <ReviewItem item={item} key={item.review_id}/>)}
         </ul>
-        <span><button>More Reviews</button> <button>Add A Review +</button></span>
+        <span>
+          {results.length > 2 && display.length < results.length ?
+          <button onClick={handleMoreReviews}>More Reviews</button>
+           : null } <button>Add A Review +</button></span>
       </div>
     )
 }

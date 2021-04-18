@@ -5,7 +5,7 @@ function ReviewItem (props) {
   return (
     <li className="reviews">
       <div className="reviewDate">
-        <span>*****</span><span> {props.item.reviewer_name} </span><span> {moment(props.item.date).format('MMM Do YYYY')}</span>
+        <span>*****</span><span className="spanRight"> {props.item.reviewer_name} {moment(props.item.date).format('MMM Do YYYY')}</span>
       </div>
       <p className="bold">{props.item.summary}</p>
       <p>{props.item.body}</p>

@@ -41,8 +41,8 @@ class App extends Component {
         <div>Catwalk</div>
         <Overview />
         <div id="ratingReviewContainer">
-          <Ratings list={sampleData.results}/>
-          <Reviews list={sampleData.results}/>
+          <Ratings />
+          <Reviews />
         </div>
       </Provider>
     );
