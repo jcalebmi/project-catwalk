@@ -1,3 +1,32 @@
 body {
   background-color:aliceblue
 }
+
+.bold {
+  font-weight: bold;
+}
+
+
+
+
+/* Ratings And Reviews */
+
+/* Container */
+#ratingReviewContainer {
+  display: inline-grid;
+  grid-template-columns: 30% 65%;
+}
+/* Review List & Items */
+li
+.reviews {
+  list-style: none;
+  border-bottom: solid grey
+}
+
+/* Ratings */
+#ratings {
+  font-size: .75em;
+}
+.ratingAve {
+  font-size: 4em;
+}
