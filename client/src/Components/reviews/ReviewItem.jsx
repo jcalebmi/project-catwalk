@@ -7,7 +7,7 @@ function ReviewItem (props) {
  const handleHelpfulness = () => {
     updateHelpfulness(props.item.review_id);
   }
-
+ console.log(props.item)
   return (
     <li className="reviews">
       <div className="reviewDate">
@@ -19,7 +19,7 @@ function ReviewItem (props) {
       <p>"checkmark" I recommend this product</p> :
       null}
       {props.item.response !== null && props.item.response.length > 0 ?
-      <p>Response from seller: {props.item.response}</p> : null}
+      <p className="sellerResponse">Response from seller: {props.item.response}</p> : null}
       <span>Helpful? <button className="helpfulness useBgColor" onClick={handleHelpfulness}>Yes</button> ({props.item.helpfulness}) | <a href='#'>Report</a></span>
     </li>
   )
