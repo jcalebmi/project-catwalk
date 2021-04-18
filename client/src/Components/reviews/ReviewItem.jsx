@@ -1,7 +1,13 @@
 import React from 'react';
+import updateHelpfulness from './helpers/updateHelpfulness.js';
 const moment = require('moment');
 
 function ReviewItem (props) {
+
+ const handleHelpfulness = () => {
+    updateHelpfulness(props.item.review_id);
+  }
+
   return (
     <li className="reviews">
       <div className="reviewDate">
@@ -12,8 +18,9 @@ function ReviewItem (props) {
       {props.item.recommend ?
       <p>"checkmark" I recommend this product</p> :
       null}
-      <p>{props.item.response}</p>
-      <span>Helpful? <a href='#'>Yes</a> ({props.item.helpfulness}) | <a href='#'>Report</a></span>
+      {props.item.response !== null && props.item.response.length > 0 ?
+      <p>Response from seller: {props.item.response}</p> : null}
+      <span>Helpful? <button className="helpfulness useBgColor" onClick={handleHelpfulness}>Yes</button> ({props.item.helpfulness}) | <a href='#'>Report</a></span>
     </li>
   )
 }

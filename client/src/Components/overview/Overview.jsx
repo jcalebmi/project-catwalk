@@ -9,7 +9,7 @@ const Overview = () => {
   const products = useSelector(selectAllProducts) || [];
 
 
-console.log(products)
+//console.log(products)
   return (
     <div>
       {products.map((prod) => (

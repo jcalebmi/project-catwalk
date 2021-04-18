@@ -40,8 +40,8 @@ function Reviews (props) {
   return (
       <div className="reviewsContainer">
         <span className="bold">
-          <label for="sort">{results.length} reviews, sorted by </label>
-          <select name="options" id="options" className="reviewSort">
+          <label htmlFor="sort">{results.length} reviews, sorted by </label>
+          <select name="options" id="options" className="reviewSort useBgColor">
             <option value="relevance">relevance</option>
             <option value="helpful">helpful</option>
             <option value="newest">newest</option>
