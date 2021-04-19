@@ -75,14 +75,14 @@ function Ratings (props) {
 
   }
   ratingsTotal();
-
+  let starWidth = (ave/5) * 99.97 || 0;
   return (
     <div id="ratings">
       <div className="ratingsHead">
         <div className="ratingAve">{ave}</div>
         <div className="ratingStars">
           <div className="outerRatingStars">
-            <div className="innerRatingStars" style={{width: (ave/5) * 100  + '%'}}>
+            <div className="innerRatingStars" style={{width: starWidth}}>
             </div>
           </div>
         </div>

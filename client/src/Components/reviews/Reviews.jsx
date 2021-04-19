@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import ReviewItem from './ReviewItem.jsx';
 import getReviews from './helpers/getReviews.js';
+import AddReview from './AddReview.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 
 
@@ -18,24 +19,32 @@ function Reviews (props) {
   const [results, setResults] = useState([]);
   //currently displayed results
   const [display, setDisplay] = useState(results.slice(0, 3));
+  const [currentProduct, setProduct] = useState({});
 
     //Call to Axios GET
-  const reviews = () => {
-    if (product.id !== undefined) {
+  useEffect( () => {
+    const reviews = () => {
+      if (product.id !== undefined) {
+        setProduct(product);
         return getReviews(product.id).then(data => {
           setResults(data);
           setDisplay([data[0], data[1]])
         });
+      }
     }
-  }
-  reviews();
+    reviews();
+  });
 
 
   const handleMoreReviews = () => {
     const length = display.length;
     setDisplay(results.slice(0, length + 3));
-  }
+  };
 
+  const [addReview, setAddReview] = useState(false);
+  const handleAddReview = () => {
+    setAddReview(true);
+  }
   return (
       <div className="reviewsContainer">
         <span className="bold">
@@ -52,8 +61,11 @@ function Reviews (props) {
         <span className="reviewsButtons">
           {results.length > 2 && display.length < results.length ?
           <button onClick={handleMoreReviews}>More Reviews</button>
-          : null } <button>Add A Review +</button>
+          : null } <button onClick={handleAddReview}>Add A Review +</button>
         </span>
+        {addReview === true ?
+        <AddReview className="addReview overlay" product={currentProduct} /> :
+        null}
       </div>
     )
 
