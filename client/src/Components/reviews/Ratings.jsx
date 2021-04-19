@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import getReviews from './helpers/getReviews.js';
 import getMetaData from './helpers/getMeta.js';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const selectProductById = (state) => state.product;
-const selectAllProducts = (state) => state.products;
 
 function Ratings() {
   //  Finding curreint product
@@ -17,17 +16,6 @@ function Ratings() {
   const [meta, setMeta] = useState({});
 
   useEffect(() => {
-    //  Get reviews for product
-    const reviews = () => {
-      if (product.id !== undefined) {
-        return getReviews(product.id).then(data => {
-          setResults(data);
-          metaData();
-        });
-      }
-    }
-    reviews();
-
     //  Get Reviews MetaData
     const metaData = () => {
       if (product.id !== undefined) {
@@ -36,19 +24,30 @@ function Ratings() {
         });
       }
     };
-    // metaData();
+    //  Get reviews for product
+    const reviews = () => {
+      if (product.id !== undefined) {
+        return getReviews(product.id).then((data) => {
+          setResults(data);
+          metaData();
+        });
+      }
+    };
+    reviews();
 
     //  Func for finding average rating
     const getAve = () => {
       let sum = 0;
-      results.forEach((item) => sum += item.rating)
+      results.forEach((item) => {
+        sum += item.rating;
+      });
       if (!Number.isNaN(sum / results.length)) {
         setAve((sum / results.length).toFixed(1));
       }
     };
     getAve();
     //  Func for finding recommendation %
-    const getRecommend = function () {
+    const getRecommend = () => {
       let sum = 0;
       results.forEach((item) => {
         if (item.recommend) {
