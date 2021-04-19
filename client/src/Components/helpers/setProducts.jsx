@@ -10,7 +10,7 @@ const getProducts = function (id) {
       .catch((err) => {
         console.log('ERROR: ', err);
       });
-}
+};
 
 const setProducts = () => {
   return getProducts().then(data => {
