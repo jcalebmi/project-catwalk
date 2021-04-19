@@ -7,7 +7,7 @@ const path = require('path');
 const getReviews = require('./reviewHelpers/getReviews.js');
 const updateHelpful = require('./reviewHelpers/helpfulness.js');
 const getMetaData = require('./reviewHelpers/getMeta.js')
-
+const getQuestions = require('./client/src/components/qas/helpers/getQuestions.js')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
@@ -46,5 +46,27 @@ app.put('/reviews/:review_id/helpful', (req, res) => {
     res.end()
   });
 })
+
+app.get('/qa/questions/:product_id', (req, res) => {
+  let id = req.params.id;
+  getQuestions(id)
+    .then((res) => {
+      console.log('success');
+    })
+    .catch((err) => {
+      console.log(err);
+  });
+});
+
+app.get('/qa/questions/:question_id/answers', (req, res) => {
+  let id = req.params.id;
+  getQuestions(id)
+    .then((res) => {
+      console.log('success');
+    })
+    .catch((err) => {
+      console.log(err);
+  });
+});
 
 module.exports = app;

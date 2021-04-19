@@ -10,6 +10,8 @@ import Reviews from './reviews/Reviews.jsx';
 import sampleData from '../../dist/sampleData.js';
 import Ratings from './reviews/Ratings.jsx';
 import apiToken from '../../../myconfig.js';
+// QAs Imports
+import QAs from './qas/QAs';
 
 const axios = require('axios');
 
@@ -40,6 +42,9 @@ class App extends Component {
       <Provider store={store}>
         <div>Catwalk</div>
         <Overview />
+        <div id="questions-answers-container">
+          <QAs />
+        </div>
         <div id="ratingReviewContainer">
           <Ratings />
           <Reviews />
