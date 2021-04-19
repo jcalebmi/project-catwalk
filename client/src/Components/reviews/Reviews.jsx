@@ -59,16 +59,15 @@ function Reviews (props) {
           {display.map((item, index) => <ReviewItem item={item} key={item.review_id}/>)}
         </ul>
         <span className="reviewsButtons">
-          {results.length > 2 && display.length < results.length ?
-          <button onClick={handleMoreReviews}>More Reviews</button>
-          : null } <button onClick={handleAddReview}>Add A Review +</button>
+          {results.length > 2 && display.length < results.length
+            ? <button onClick={handleMoreReviews}>More Reviews</button>
+            : null } <button onClick={handleAddReview}>Add A Review +</button>
         </span>
-        {addReview === true ?
-        <AddReview className="addReview overlay" product={currentProduct} /> :
-        null}
+        {addReview === true
+          ? <AddReview className="addReview overlay" product={currentProduct} />
+          : null}
       </div>
-    )
-
+  );
 }
 
 export default Reviews;

@@ -3,24 +3,21 @@ import getReviews from './helpers/getReviews.js';
 import getMetaData from './helpers/getMeta.js';
 import { useSelector, useDispatch } from 'react-redux';
 
-
 const selectProductById = (state) => state.product;
 const selectAllProducts = (state) => state.products;
 
-function Ratings (props) {
-
-  //Finding curreint product
-  const product = useSelector(selectProductById) || 19089;
-  const products = useSelector(selectAllProducts) || [];
+function Ratings() {
+  //  Finding curreint product
+  const product = useSelector(selectProductById) || {};
   const [results, setResults] = useState([]);
 
-  //Average ratings & Recommnedation %
+  //  Average ratings & Recommnedation %
   const [ave, setAve] = useState(0);
-  const [recommend, setRec] = useState(0 + '%');
+  const [recommend, setRec] = useState(`${0}%`);
   const [meta, setMeta] = useState({});
 
   useEffect(() => {
-    //Get reviews for product
+    //  Get reviews for product
     const reviews = () => {
       if (product.id !== undefined) {
         return getReviews(product.id).then(data => {
@@ -31,39 +28,39 @@ function Ratings (props) {
     }
     reviews();
 
-    //Get Reviews MetaData
+    //  Get Reviews MetaData
     const metaData = () => {
       if (product.id !== undefined) {
-        return getMetaData(product.id).then(data => {
+        return getMetaData(product.id).then((data) => {
           setMeta(data);
-        })
+        });
       }
-    }
+    };
     // metaData();
 
-    //Func for finding average rating
-    const getAve = function () {
+    //  Func for finding average rating
+    const getAve = () => {
       let sum = 0;
-      results.forEach(item => sum += item.rating)
-      if (!isNaN(sum/results.length)) {
-        setAve((sum/results.length).toFixed(1));
+      results.forEach((item) => sum += item.rating)
+      if (!Number.isNaN(sum / results.length)) {
+        setAve((sum / results.length).toFixed(1));
       }
     };
     getAve();
-    //Func for finding recommendation %
+    //  Func for finding recommendation %
     const getRecommend = function () {
       let sum = 0;
-      results.forEach(item => {
+      results.forEach((item) => {
         if (item.recommend) {
           sum += 1;
         }
-      })
-      if (!isNaN(sum/results.length)) {
-        setRec((sum/results.length) * 100 + '%');
-        }
-    }
+      });
+      if (!Number.isNaN(sum / results.length)) {
+        setRec(`${(sum / results.length) * 100}%`);
+      }
+    };
     getRecommend();
-});
+  });
 
   let ratingSum = 0;
   const ratingsTotal = () => {
@@ -72,17 +69,17 @@ function Ratings (props) {
       sum += Number(meta.ratings[key]);
     }
     ratingSum = sum;
-
-  }
+  };
   ratingsTotal();
-  let starWidth = (ave/5) * 99.97 || 0;
+  const starWidth = (ave / 5) * 99.97 || 0;
   return (
     <div id="ratings">
       <div className="ratingsHead">
         <div className="ratingAve">{ave}</div>
         <div className="ratingStars">
           <div className="outerRatingStars">
-            <div className="innerRatingStars" style={{width: starWidth}}>
+            <div className="innerRatingStars"
+            style={{ width: starWidth }}>
             </div>
           </div>
         </div>
@@ -138,7 +135,7 @@ function Ratings (props) {
         </div>
       </div>
     </div>
-  )
-};
+  );
+}
 
 export default Ratings;

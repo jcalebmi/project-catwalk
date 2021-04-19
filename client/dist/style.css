@@ -184,8 +184,18 @@ select.reviewSort {
   left: 0;
   right: 0;
   bottom: 0;
-  padding-top: 40%;
-  background-color: lightgray;
-  opacity: .85;
+  padding-top: 250px;
+  background-color: white;
+  opacity: .95;
   z-index: 2;
+}
+.addReview.overlay h1 {
+  padding-bottom: 0px;
+}
+.addReview.overlay h3 {
+  padding-top: 0px;
+}
+
+.writeReview {
+
 }
