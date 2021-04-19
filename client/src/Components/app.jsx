@@ -4,7 +4,12 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import Count from './Count.jsx';
 import store from '../store/store.jsx';
-import Overview from '../components/overview/Overview.jsx'
+import Overview from '../Components/overview/Overview.jsx'
+//Review Imports
+import Reviews from './reviews/Reviews.jsx';
+import sampleData from '../../dist/sampleData.js';
+import Ratings from './reviews/Ratings.jsx';
+import apiToken from '../../../myconfig.js';
 
 const axios = require('axios');
 
@@ -12,9 +17,9 @@ class App extends Component {
 
   componentDidMount() {
 
-    axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products', {headers: {authorization: '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'}})
+    axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products', {headers: {authorization: apiToken}})
     .then((res) => {
-      console.log(res.data)
+      //console.log(res.data)
       store.dispatch({
           type: 'UPDATE_CURRENT_PRODUCT',
           payload: res.data[0]
@@ -29,11 +34,16 @@ class App extends Component {
       });
   }
 
+
   render() {
     return (
       <Provider store={store}>
         <div>Catwalk</div>
         <Overview />
+        <div id="ratingReviewContainer">
+          <Ratings />
+          <Reviews />
+        </div>
       </Provider>
     );
   }

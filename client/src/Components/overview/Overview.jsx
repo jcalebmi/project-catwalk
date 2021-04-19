@@ -8,6 +8,8 @@ const Overview = () => {
   const product = useSelector(selectProductById);
   const products = useSelector(selectAllProducts) || [];
 
+
+//console.log(products)
   return (
     <div>
       {products.map((prod) => (
