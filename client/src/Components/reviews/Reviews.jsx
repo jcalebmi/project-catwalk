@@ -19,8 +19,6 @@ function Reviews (props) {
   //currently displayed results
   const [display, setDisplay] = useState(results.slice(0, 3));
 
-
-
     //Call to Axios GET
   const reviews = () => {
     if (product.id !== undefined) {
