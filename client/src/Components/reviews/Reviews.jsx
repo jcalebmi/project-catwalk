@@ -12,7 +12,7 @@ const selectAllProducts = (state) => state.products;
 
 function Reviews (props) {
   //Current product state
-  const product = useSelector(selectProductById) || 19089;
+  const product = useSelector(selectProductById) || { id: 19089 };
   const products = useSelector(selectAllProducts) || [];
   //Review results for current Product
   const [results, setResults] = useState([]);
