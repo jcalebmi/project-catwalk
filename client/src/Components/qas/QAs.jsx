@@ -9,29 +9,30 @@ const getAnswers = require('./helpers/getAnswers.js');
 const selectSingleProduct = (state) => state.product;
 
 const QAs = () => {
-  // product Id variable for later
   let productId;
-  // state for questions & select current product
   let [questionArray, setProductQuestions] = useState([]);
-  const product = useSelector(selectSingleProduct) || [];
+  let [answersArray, setProductAnswers] = useState([]);
 
-  // callback for helper func
+  let product = useSelector(selectSingleProduct) || [];
+
+  // callbacks for helper funcs
   const productQuestions = (questions) => {
-    // fill state array
     setProductQuestions(questions);
   }
-  // once component is rendered
+
+  const productAnswers = (answers) => {
+    return answers;
+  }
+
   useEffect(() => {
-    // only get products if request is finished
     if (product !== null && product.id !== undefined) {
-      // set product Id
       productId = product.id;
-      // invoke helper func with product id for get request
       getQuestions(productId, productQuestions);
     }
   });
-  // only display the first 4 questions
+
   let questionsDisplay = questionArray.slice(0, 4);
+
 
   return (
     <div>
@@ -39,7 +40,7 @@ const QAs = () => {
         <QAsSearch />
       </div>
       {questionsDisplay.map((question) => (
-        <p key={question.question_id}>Q: {question.question_body}</p>
+        <p key={question.question_id}>Q: {question.question_body} Helpful? <a href="">Yes({question.question_helpfulness})</a> | <a href="">Add Answer</a> <br />    </p>
       ))}
     </div>
   );
