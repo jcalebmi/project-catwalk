@@ -7,8 +7,6 @@ import { useSelector, useDispatch } from 'react-redux';
 const selectProductById = (state) => state.product;
 const selectAllProducts = (state) => state.products;
 
-
-
 function Ratings (props) {
 
   //Finding curreint product
