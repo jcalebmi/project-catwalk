@@ -25,6 +25,7 @@ function Ratings (props) {
       if (product.id !== undefined) {
         return getReviews(product.id).then(data => {
           setResults(data);
+          metaData();
         });
       }
     }
@@ -38,7 +39,7 @@ function Ratings (props) {
         })
       }
     }
-    metaData();
+    // metaData();
 
     //Func for finding average rating
     const getAve = function () {

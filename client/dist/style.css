@@ -114,7 +114,6 @@ li.reviews {
   position: absolute;
   display: inline-block;
   top: 0;
-  padding-right: 14px;
   overflow: hidden;
 }
 .innerRatingStars::before {

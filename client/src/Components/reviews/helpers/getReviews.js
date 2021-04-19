@@ -1,6 +1,5 @@
 const axios = require('axios');
-import apiToken from '../../../../../myconfig.js';
-import store from '../../../store/store.jsx';
+
 
 //Get request to Catwalk Server
 const getReviews = function (id, results) {

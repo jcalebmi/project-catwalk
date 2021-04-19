@@ -5,13 +5,13 @@ const moment = require('moment');
 function ReviewItem (props) {
 
   const [helpfulClicked, setHelpfulClick] = useState(false);
+  //Call helpfulness API
   const handleHelpfulness = () => {
    if (!helpfulClicked) {
     updateHelpfulness(props.item.review_id);
     setHelpfulClick(true)
     }
   }
-
 
   //Calculates Rating for filling stars
   let starWidth = 0;

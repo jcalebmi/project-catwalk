@@ -20,18 +20,18 @@ function Reviews (props) {
   const [display, setDisplay] = useState(results.slice(0, 3));
 
 
-  useEffect( () => {
+
     //Call to Axios GET
-    const reviews = () => {
-      if (product.id !== undefined) {
-         return getReviews(product.id).then(data => {
-           setResults(data);
-           setDisplay([data[0], data[1]])
-         });
-      }
+  const reviews = () => {
+    if (product.id !== undefined) {
+        return getReviews(product.id).then(data => {
+          setResults(data);
+          setDisplay([data[0], data[1]])
+        });
     }
-    reviews();
-  });
+  }
+  reviews();
+
 
   const handleMoreReviews = () => {
     const length = display.length;
@@ -54,10 +54,11 @@ function Reviews (props) {
         <span className="reviewsButtons">
           {results.length > 2 && display.length < results.length ?
           <button onClick={handleMoreReviews}>More Reviews</button>
-           : null } <button>Add A Review +</button>
-         </span>
+          : null } <button>Add A Review +</button>
+        </span>
       </div>
     )
+
 }
 
 export default Reviews;
