@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import ReviewItem from './ReviewItem.jsx';
 import getReviews from './helpers/getReviews.js';
 import AddReview from './AddReview.jsx';
