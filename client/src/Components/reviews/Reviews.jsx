@@ -37,6 +37,7 @@ function Reviews (props) {
     const length = display.length;
     setDisplay(results.slice(0, length + 3));
   }
+
   return (
       <div className="reviewsContainer">
         <span className="bold">
@@ -50,10 +51,11 @@ function Reviews (props) {
         <ul className="reviewList">
           {display.map((item, index) => <ReviewItem item={item} key={item.review_id}/>)}
         </ul>
-        <span>
+        <span className="reviewsButtons">
           {results.length > 2 && display.length < results.length ?
           <button onClick={handleMoreReviews}>More Reviews</button>
-           : null } <button>Add A Review +</button></span>
+           : null } <button>Add A Review +</button>
+         </span>
       </div>
     )
 }

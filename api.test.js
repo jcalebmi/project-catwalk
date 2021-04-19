@@ -49,6 +49,24 @@ describe('project-catwalk reviews api', () => {
   ));
 });
 
+describe('project-catwalk reviews api', () => {
+  it('GET /reviews/meta should return the 200 status code', () => (
+    frisby
+      .get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews/meta/?product_id=19289')
+      .expect('status', 200)
+  ));
+
+  it('GET /reviews/meta should return an array of objects', () => (
+    frisby
+      .get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews/meta/?product_id=19289')
+      .expect('status', 200)
+      .expect('jsonTypes', {
+        product_id: Joi.number(),
+        ratings: Joi.object(),
+      })
+  ));
+});
+
 
 //Need to make a test review to stop udating
 //helpfulness on reload
