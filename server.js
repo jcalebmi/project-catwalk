@@ -7,9 +7,10 @@ const path = require('path');
 const getProducts = require('./appHelpers/getProducts.js');
 const getReviews = require('./reviewHelpers/getReviews.js');
 const updateHelpful = require('./reviewHelpers/helpfulness.js');
-const getMetaData = require('./reviewHelpers/getMeta.js')
+const getMetaData = require('./reviewHelpers/getMeta.js');
+const fetchQuestions = require('./questionsHelpers/fetchQuestions.js');
+const fetchAnswers = require('./questionsHelpers/fetchAnswers.js');
 
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use(express.static(path.join(__dirname, 'client', 'dist')));
@@ -54,5 +55,19 @@ app.put('/reviews/:review_id/helpful', (req, res) => {
     res.end()
   });
 })
+
+app.get('/qa/questions/:product_id', (req, res) => {
+  const id = req.params.product_id;
+  fetchQuestions(id, (results) => {
+    res.send(results);
+  });
+});
+
+app.get('/qa/questions/:question_id/answers', (req, res) => {
+  const id = req.params.question_id;
+  fetchAnswers(id, (results) => {
+    res.send(results);
+  });
+});
 
 module.exports = app;

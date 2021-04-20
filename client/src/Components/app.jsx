@@ -13,6 +13,9 @@ import Ratings from './reviews/Ratings.jsx';
 //Initialization of Products
 import setProducts from './helpers/setProducts.jsx';
 
+//QAs Import
+import QAs from './qas/QAs.jsx';
+
 function App() {
   useEffect(() => {
     setProducts();
@@ -22,6 +25,9 @@ function App() {
     <Provider store={store}>
       <div>Catwalk</div>
       <Overview />
+      <div id="questions-answers-container">
+          <QAs />
+        </div>
       <div id="ratingReviewContainer">
         <Ratings />
         <Reviews />
