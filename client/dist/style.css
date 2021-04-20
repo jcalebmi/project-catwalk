@@ -188,10 +188,11 @@ select.reviewSort {
   left: 0;
   right: 0;
   bottom: 0;
-  padding-top: 50px;
+  padding-top: 0px;
   background-color: white;
   opacity: .95;
   z-index: 2;
+  overflow: scroll;
 }
 .addReview.overlay h1 {
   padding-bottom: 0px;
@@ -215,4 +216,19 @@ select.reviewSort {
 }
 .overallRating {
   text-align: left;
+}
+
+#reviewIMG img {
+  width: 50%;
+  height: auto;
+}
+#reviewIMG img:hover {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 5%;
+  width: 90%;
+  height: 90%;
 }

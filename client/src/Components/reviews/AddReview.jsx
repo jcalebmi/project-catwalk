@@ -18,6 +18,7 @@ function AddReview(props) {
   const [summary, setSummary] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [files, setFiles] = useState(null);
 
   const helpful = (boolean) => {
     setIsHelpful(boolean);
@@ -57,6 +58,26 @@ function AddReview(props) {
     const text = e.target.value;
     setEmail(text);
   };
+  const handleFiles = (e) => {
+    setFiles(e.target.files);
+    const imgCont = document.getElementById('reviewIMG');
+    const img = document.createElement("img");
+    for (let i = 0; i < e.target.files.length; i++) {
+      img.src = URL.createObjectURL(e.target.files[i]);
+      imgCont.appendChild(img);
+    }
+  };
+
+  const onSubmit = () => {
+
+    // const data = new FormData()
+    // for (var i = 0; i < files.length; i++) {
+    //   data.append('file', files[i]);
+
+      // axios.post('/reviews', data, auth)
+    // }
+  }
+
 
   return (
     <div className="addReview overlay">
@@ -131,6 +152,16 @@ function AddReview(props) {
               <Quality
               handleQuality={handleQuality}
               className='pointer' />
+              <input
+              type="file"
+              name="files"
+              accept="image/*"
+              className="form-control"
+              multiple
+              onChange={handleFiles}></input>
+              <div id="reviewIMG">
+
+              </div>
             </div>
             <input type="submit"></input>
           </form>
