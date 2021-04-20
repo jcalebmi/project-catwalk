@@ -1,15 +1,12 @@
 const axios = require('axios');
-const apiToken = require('../../../../../myconfig.js');
 
-const getAnswers = (id) => {
-  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions/${id}/answers`, {headers: {authorization: apiToken}})
+const getAnswers = (id, callback) => {
+  axios.get(`/qa/questions/${id}/answers`)
     .then((res) => {
-      return {
-        id: res.data.results
-      }
+      callback(res.data);
     })
-    .catch((err) => {
-      console.log(err);
+    .catch((error) => {
+      throw error;
     });
 };
 

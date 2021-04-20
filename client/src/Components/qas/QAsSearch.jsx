@@ -6,7 +6,7 @@ class QAsSearch extends React.Component {
 
     this.state = {
       search: '',
-    }
+    };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSearchClick = this.handleSearchClick.bind(this);
   }
@@ -19,7 +19,7 @@ class QAsSearch extends React.Component {
 
   handleSearchClick(e) {
     e.preventDefault();
-  }
+   }
 
   render() {
     return (

@@ -2,10 +2,7 @@
     "env": {
         "browser": true,
         "es2021": true,
-        "jest": true,
-        "frisby": true,
-        "enzyme": true,
-        "supertest": true
+        "jest": true
     },
     "extends": [
         "plugin:react/recommended",
