@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import getReviews from './helpers/getReviews.js';
 import getMetaData from './helpers/getMeta.js';
-import { useSelector } from 'react-redux';
+import Characteristics from './Characteristics.jsx';
+import StarRating from './StarRating.jsx'
 
 const selectProductById = (state) => state.product;
 
@@ -84,55 +86,8 @@ function Ratings() {
         </div>
       </div><br></br>
       <span>{recommend} of reviews recommend this product</span>
-      <div className="numberOfStars underline">
-        <span>5 stars </span>
-        <progress
-          value={meta.ratings === undefined ? 0 : meta.ratings['5']}
-          max={ratingSum}>
-        </progress><br></br>
-        <span>4 stars </span>
-        <progress
-          value={meta.ratings === undefined ? 0 : meta.ratings['4']}
-          max={ratingSum}>
-        </progress><br></br>
-        <span>3 stars </span>
-        <progress
-          value={meta.ratings === undefined ? 0 : meta.ratings['3'] || 0}
-          max={ratingSum}>
-        </progress><br></br>
-        <span>2 stars </span>
-        <progress
-          value={meta.ratings === undefined ? 0 : meta.ratings['2'] || 0}
-          max={ratingSum}>
-        </progress><br></br>
-        <span>1 stars </span>
-        <progress
-          value={meta.ratings === undefined ? 0 : meta.ratings['1'] || 0}
-          max={ratingSum}>
-        </progress><br></br>
-      </div>
-      <div className="characteristicsRating">
-        <h6>Comfort</h6>
-        <div className="ratingSlider">
-          <input type="range" min='1' max="5" readOnly={true} value={meta.characteristics === undefined ? '1' : meta.characteristics.Comfort.value}>
-          </input>
-        </div>
-        <h6>Fit</h6>
-        <div className="ratingSlider">
-          <input type="range" min='1' max="5" readOnly={true} value={meta.characteristics === undefined ? '1' : meta.characteristics.Fit.value}>
-          </input>
-        </div>
-        <h6>Length</h6>
-        <div className="ratingSlider">
-          <input type="range" min='1' max="5" readOnly={true} value={meta.characteristics === undefined ? '1' : meta.characteristics.Length.value}>
-          </input>
-        </div>
-        <h6>Quality</h6>
-        <div className="ratingSlider">
-          <input type="range" min='1' max="5" readOnly={true} value={meta.characteristics === undefined ? '1' : meta.characteristics.Quality.value}>
-          </input>
-        </div>
-      </div>
+      <StarRating meta={meta} ratingSum={ratingSum} />
+      <Characteristics meta={meta} />
     </div>
   );
 }
