@@ -1,57 +1,61 @@
-import React from 'react';
+/* eslint-disable no-param-reassign */
+import React, { useState, useEffect } from 'react';
 
-class OverallRating extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      star1: 'black',
-      star2: 'black',
-      star3: 'black',
-      star4: 'black',
-      star5: 'black',
-    };
-    this.handleStarClick = this.handleStarClick.bind(this);
-  }
+function OverallRating(props) {
+  const [stars, setStars] = useState([
+    { name: '1', color: 'black', index: 1 },
+    { name: '2', color: 'black', index: 2 },
+    { name: '3', color: 'black', index: 3 },
+    { name: '4', color: 'black', index: 4 },
+    { name: '5', color: 'black', index: 5 },
+  ]);
+  const [rating, setRating] = useState(0);
 
-  handleStarClick(e) {
-    const stars = ['star1', 'star2', 'star3', 'star4', 'star5'];
-    const star = e.target.className;
-
-    if (this.state[star] === 'black') {
-      this.setState({
-        [star]: 'gold',
-      });
+  const handleStarClick = (e) => {
+    const currentStar = stars[e.target.className - 1];
+    let newColor;
+    if (currentStar.color === 'black') {
+      newColor = 'gold';
     } else {
-      this.setState({
-        [star]: 'black',
-      });
+      newColor = 'black';
     }
-  }
+    const newStarsArr = stars.map((star) => {
+      if (newColor === 'gold') {
+        if (star.index <= currentStar.index) {
+          star.color = 'gold';
+        } else {
+          star.color = 'black';
+        }
+      }
+      if (newColor === 'black') {
+        if (star.index > currentStar.index) {
+          star.color = 'black';
+        } else {
+          star.color = 'gold';
+        }
+      }
+      return star;
+    });
+    setStars(newStarsArr);
+    setRating(currentStar.index);
+    props.handleStarRating(rating);
+  };
 
-  render() {
-    return (
-      <div className="overallRating">
-        <span>
-          Overall Rating:
-        </span>
-        <span style={{ color: this.state.star1 }} className="star1" onClick={this.handleStarClick}>
+  return (
+    <div className="overallRating pointer">
+      <span>
+        Overall Rating:
+      </span>
+      {stars.map((star) =>
+        <span
+        style={{color: star.color}}
+        key={star.index}
+        className={star.name}
+        onClick={handleStarClick}>
         ✭
-        </span>
-        <span style={{ color: this.state.star2 }} className="star2" onClick={this.handleStarClick}>
-        ✭
-        </span>
-        <span style={{ color: this.state.star3} } className="star3" onClick={this.handleStarClick}>
-        ✭
-        </span>
-        <span style={{ color: this.state.star4 }} className="star4" onClick={this.handleStarClick}>
-        ✭
-        </span>
-        <span style={{ color: this.state.star5 }} className="star5" onClick={this.handleStarClick}>
-        ✭
-        </span>
-      </div>
-    );
-  }
+        </span>)}
+    </div>
+  );
 }
 
 export default OverallRating;

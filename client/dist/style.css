@@ -16,6 +16,10 @@ body {
   background-color: aliceblue;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 
 /* Ratings And Reviews */
 
@@ -184,7 +188,7 @@ select.reviewSort {
   left: 0;
   right: 0;
   bottom: 0;
-  padding-top: 250px;
+  padding-top: 50px;
   background-color: white;
   opacity: .95;
   z-index: 2;
@@ -197,5 +201,18 @@ select.reviewSort {
 }
 
 .writeReview {
+  position: relative;
+  padding-left: 40%;
+  padding-right: 35%;
+}
 
+.writeReview .summaryContainer {
+  text-align: left;
+  width: 100%;
+}
+.reviewMinCharacters {
+  font-size: .6em;
+}
+.overallRating {
+  text-align: left;
 }

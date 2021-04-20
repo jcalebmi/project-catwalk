@@ -4,10 +4,10 @@ import updateHelpfulness from './helpers/updateHelpfulness.js';
 const moment = require('moment');
 
 function ReviewItem(props) {
-  const [helpfulClicked, setHelpfulClick] = useState(false);
+  const [ishelpfulClicked, setHelpfulClick] = useState(false);
   //  Call helpfulness API
   const handleHelpfulness = () => {
-    if (!helpfulClicked) {
+    if (!ishelpfulClicked) {
       updateHelpfulness(props.item.review_id);
       setHelpfulClick(true);
     }

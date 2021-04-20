@@ -14,6 +14,7 @@ function Reviews() {
   //  currently displayed results
   const [display, setDisplay] = useState(results.slice(0, 3));
   const [currentProduct, setProduct] = useState({});
+  const [addReview, setAddReview] = useState(false);
 
   //  Call to Axios GET
   useEffect(() => {
@@ -34,7 +35,6 @@ function Reviews() {
     setDisplay(results.slice(0, length + 3));
   };
 
-  const [addReview, setAddReview] = useState(false);
   const handleAddReview = () => {
     setAddReview(true);
   };
