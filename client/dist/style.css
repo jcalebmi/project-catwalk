@@ -113,6 +113,8 @@ li.reviews {
 .outerRatingStars::before {
   content: "\272D \272D \272D \272D \272D";
   color: grey;
+  margin: 0;
+  padding: 0;
 }
 .innerRatingStars {
   position: absolute;
@@ -123,6 +125,8 @@ li.reviews {
 .innerRatingStars::before {
   content: "\272D \272D \272D \272D \272D";
   color: gold;
+  margin: 0;
+  padding: 0;
 }
 
 .ratingAve {

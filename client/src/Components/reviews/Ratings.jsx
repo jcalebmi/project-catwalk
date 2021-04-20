@@ -72,7 +72,7 @@ function Ratings() {
     ratingSum = sum;
   };
   ratingsTotal();
-  const starWidth = (ave / 5) * 99.97 || 0;
+  const starWidth = (ave / 5) * 100 || 0;
   return (
     <div id="ratings">
       <div className="ratingsHead">
