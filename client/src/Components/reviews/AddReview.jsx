@@ -64,7 +64,7 @@ function AddReview(props) {
     const img = document.createElement("img");
     for (let i = 0; i < e.target.files.length; i++) {
       img.src = URL.createObjectURL(e.target.files[i]);
-      img.className = 'reviewIMG'
+      img.className = 'reviewIMG';
       imgCont.appendChild(img);
     }
     setFiles(files.concat(e.target.files));
@@ -79,7 +79,6 @@ function AddReview(props) {
       // axios.post('/reviews', data, auth)
     // }
   }
-
 
   return (
     <div className="addReview overlay">
