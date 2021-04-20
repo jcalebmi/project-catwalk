@@ -16,11 +16,10 @@ import setProducts from './helpers/setProducts.jsx';
 function App() {
   useEffect(() => {
     setProducts();
-  })
+  });
 
   return (
     <Provider store={store}>
-      <div>Catwalk</div>
       <Overview />
       <div id="ratingReviewContainer">
         <Ratings />

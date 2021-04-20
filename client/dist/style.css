@@ -1,7 +1,9 @@
 /* Global Styles */
 
 body {
-  background-color:aliceblue
+  background-color:aliceblue;
+  max-width: 1000px;
+  margin: auto;
 }
 
 .bold {
@@ -16,7 +18,68 @@ body {
   background-color: aliceblue;
 }
 
-
+/* Overview */
+  /* Navigation Bar */
+  .overview {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .overview
+  .navigationBar {
+    display: flex;
+    padding: 0 100px 0 100px;
+    justify-content: space-between;
+    height: 50px;
+    align-items:center;
+    background-color: aqua;
+  }
+  .overview
+  .navigationBar
+  #logo {
+    height: 70%;
+  }
+  /* Announcement */
+  .overview
+  .announcement {
+    margin: auto;
+    padding: 5px 0 5px 0;
+  }
+  /* Main Overview */
+  .overview
+  .main {
+    height: 400px;
+  }
+  /*Product Overview */
+  .overview
+  .productOverview {
+    display: flex;
+    flex-direction: column;
+    height: 150px;
+  }
+  .overview
+  .productOverview
+  .information {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    min-height: 100px;
+  }
+  .overview
+  .productOverview
+  .description {
+    padding-left: 50px;
+  }
+  .overview
+  .productOverview
+  .tags {
+    padding-right: 50px;
+  }
+  .overview
+  .productOverview
+  .shareButtons {
+    height: 50px
+  }
 /* Ratings And Reviews */
 
 /* Container */
