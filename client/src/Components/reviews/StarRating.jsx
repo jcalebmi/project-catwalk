@@ -29,6 +29,6 @@ function StarRating(props) {
           max={props.ratingSum}>
         </progress><br></br>
       </div>
-    );
+  );
 }
 export default StarRating;
