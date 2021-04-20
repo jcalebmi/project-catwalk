@@ -4,7 +4,6 @@ function Fit(props) {
   const [rating, setRating] = useState('');
   const buttons = ['1', '2', '3', '4', '5'];
   const handleClick = (e) => {
-    console.log(e.target.value);
     if (e.target.value === '1') {
       setRating('Runs tight');
     }

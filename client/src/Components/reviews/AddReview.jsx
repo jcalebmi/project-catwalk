@@ -52,12 +52,10 @@ function AddReview(props) {
   const handleName = (e) => {
     const text = e.target.value;
     setName(text);
-    console.log(name);
   };
   const handleEmail = (e) => {
     const text = e.target.value;
     setEmail(text);
-    console.log(email)
   };
 
   return (
