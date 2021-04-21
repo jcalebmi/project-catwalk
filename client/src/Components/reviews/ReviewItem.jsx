@@ -18,7 +18,6 @@ function ReviewItem(props) {
   if (props.item !== undefined) {
     starWidth = ((props.item.rating/5) * 66.64)
   }
-
   return (
     <li className="reviews">
       <div className="reviewDate">
@@ -36,6 +35,13 @@ function ReviewItem(props) {
       {props.item.recommend ?
       <p>&#10003; I recommend this product</p> :
         null}
+      {props.item.photos.length > 0
+        ? props.item.photos.map((photo, index) => {
+          <div key={index}>
+            <img src={photo.url}></img>
+          </div>
+        })
+        : null}
       {props.item.response !== null && props.item.response.length > 0
         ? <p className="sellerResponse"><strong>Response from seller: </strong>{props.item.response}</p> : null}
       <span>Helpful? <button className="helpfulness useBgColor" onClick={handleHelpfulness}>Yes</button> ({props.item.helpfulness}) | <a href='#'>Report</a></span>
