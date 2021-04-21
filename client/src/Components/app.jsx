@@ -11,12 +11,15 @@ import sampleData from '../../dist/sampleData.js';
 import Ratings from './reviews/Ratings.jsx';
 
 //Initialization of Products
-import setProducts from './helpers/setProducts.jsx';
+import setProduct from './helpers/setProduct.jsx';
 
 function App() {
-  useEffect(() => {
-    setProducts();
-  });
+  const [once, inc] = useState(0);
+  if (once === 0) {
+    setProduct();
+    console.log('increment', once);
+    inc(once + 1);
+  }
 
   return (
     <Provider store={store}>

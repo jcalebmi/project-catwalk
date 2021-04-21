@@ -48,8 +48,42 @@ body {
   /* Main Overview */
   .overview
   .main {
-    height: 400px;
+    display: flex;
+    height: 600px;
   }
+    /* Image Gallery */
+    .overview
+    .defaultImageGallery {
+      display: inline-block;
+      position: relative;
+      width: fit-content;
+      height: 100%;
+    }
+    .overview
+    .defaultImageGallery
+    .mainImage {
+      vertical-align: middle;
+      object-fit: contain;
+      height: 100%;
+    }
+    .overview
+    .defaultImageGallery
+    .thumbnailContainer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: fit-content;
+      display: flex;
+      flex-direction: column;
+    }
+    .overview
+    .defaultImageGallery
+    .thumbnail {
+      height: 40px;
+      object-fit: cover;
+      padding: 5px 5px 5px 5px;
+    }
+
   /*Product Overview */
   .overview
   .productOverview {

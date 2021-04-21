@@ -1,26 +1,30 @@
 import React, { useState } from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
-import DefaultView from './DefaultView.jsx';
-// const selectProductById = (state) => state.product;
-// const selectAllProducts = (state) => state.products;
+import { useSelector } from 'react-redux';
+import DefaultImageGallery from './DefaultImageGallery.jsx';
+import getStyles from './helpers/getStyles.jsx';
+import ProductSelection from './ProductSelection.jsx';
 
 const MainOverview = () => {
-  const [isExpanded, setView] = useState(false);
-  const setExpanded = () => {
-    setView(true);
-  };
-  // const setDefault = () => {
-  //   setView(false);
-  // };
+  const [isExpanded, setExpanded] = useState(false);
+  const [styleIdx, setStyleIdx] = useState(0);
+  const product = useSelector((state) => state.product) || {};
+  console.log('product: ', product);
+  if (product.id) {
+    const styles = getStyles(product.id);
+    const style = styles[styleIdx];
+    console.log('style: ', style);
+  }
+
   if (!isExpanded) {
     return (
     <div className='main'>
-      <DefaultView setExpanded={setExpanded}/>
+      <DefaultImageGallery setExpanded={setExpanded}/>
+      {/* <ProductSelection product={product} styles={styles} style={style}/> */}
     </div>
     );
   }
   return null;
-  // <ExpandedView setDefault={setDefault}/>;
+  // <ExpandedView setExpanded={setExpanded}/>;
 };
 
 export default MainOverview;
