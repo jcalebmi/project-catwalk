@@ -4,6 +4,7 @@ import ReviewItem from './ReviewItem.jsx';
 import getReviews from './helpers/getReviews.js';
 import AddReview from './AddReview.jsx';
 import sortReviews from './helpers/sortReviews.js';
+import Search from './Search.jsx';
 
 const selectProductById = (state) => state.product;
 
@@ -12,17 +13,22 @@ function Reviews() {
   const product = useSelector(selectProductById) || {};
   //  Review results for current Product
   const [results, setResults] = useState([]);
+  const [resultsStorage, setResultsStorage] = useState([]);
   //  currently displayed results
   const [display, setDisplay] = useState(results.slice(0, 3));
   const [currentProduct, setProduct] = useState({});
-  const [addReview, setAddReview] = useState(false);
+  const [addReview, setAddReview] = useState(false)
+  const [search, setSearch] = useState('');
+  const [filter, setFilter] = useState('relevance');
 
   const handleSort = (e) => {
     const sortBy = e.target.value;
-    const sorted = sortReviews(sortBy, results);
-    console.log(sorted);
+    const sorted = sortReviews(sortBy, results, search);
+    const sliced = sorted.slice(0, 2);
+    setResults(resultsStorage);
+    setFilter(sortBy);
     setResults(sorted);
-    setDisplay([sorted[0], sorted[1]]);
+    setDisplay(sliced);
   };
 
   //  Call to Axios GET
@@ -32,7 +38,8 @@ function Reviews() {
         setProduct(product);
         return getReviews(product.id).then((data) => {
           setResults(data);
-          const sorted = sortReviews('relevance', data);
+          setResultsStorage(data);
+          const sorted = sortReviews(filter, data, search);
           const sliced = sorted.slice(0, 2);
           setDisplay(sliced);
         });
@@ -49,6 +56,13 @@ function Reviews() {
     setAddReview(true);
   };
 
+  const handleSearch = (text) => {
+    setSearch(text);
+    const sorted = sortReviews(filter, results, search);
+    const sliced = sorted.slice(0, 2);
+    setResults(resultsStorage);
+    setDisplay(sorted);
+  };
 
   return (
       <div className="reviewsContainer">
@@ -66,6 +80,9 @@ function Reviews() {
             <option
               value="newest">newest</option>
           </select>
+        </span>
+        <span className="floatRight">
+          <Search sendSearch={handleSearch}/>
         </span>
         <ul className="reviewList">
           {display.map((item) => <ReviewItem item={item} key={item.review_id}/>)}

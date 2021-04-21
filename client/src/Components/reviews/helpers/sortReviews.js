@@ -1,4 +1,5 @@
-const sortReviews = (sortBy, reviews) => {
+const sortReviews = (sortBy, reviews, search) => {
+  const reviewsArr = reviews.slice();
   if (sortBy === 'newest') {
     reviews.sort((a, b) => new Date(b.date) - new Date(a.date));
   }
@@ -13,7 +14,13 @@ const sortReviews = (sortBy, reviews) => {
       return new Date(b.date) - new Date(a.date);
     });
   }
-  return reviews;
+
+  if (search.length >= 2) {
+    const filtered = reviews.filter((review) => review.body.toLowerCase().includes(search));
+    return filtered;
+  } else {
+    return reviews;
+  }
 };
 
 export default sortReviews;
