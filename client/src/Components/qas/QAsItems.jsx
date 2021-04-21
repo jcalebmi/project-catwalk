@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Answers from './Answers.jsx';
 import LoadMoreQuestions from './LoadMoreQuestions.jsx';
 import QAsSearch from './QAsSearch.jsx';
+import helpfulness from './helpers/helpfulness';
 
 const QAsItems = ({ questions }) => {
   const [displayAll, setDisplayAll] = useState(false);
@@ -39,7 +40,7 @@ const QAsItems = ({ questions }) => {
     <div>
       {questionsDisplay.map((question) => (
         <div key={question.asker_name}>
-        <p className="bold" key={question.question_id}>Q: {question.question_body} <span> Helpful? Yes({question.helpfulness || 0}) | Report </span></p>
+        <p className="bold" key={question.question_id}>Q: {question.question_body} <span> Helpful? <button onClick={helpfulness}>Yes({question.helpfulness || 0})</button> | Report </span></p>
         <Answers
           questionId={question.question_id}
         />
