@@ -31,7 +31,6 @@ function Reviews() {
     setResults(sorted);
     setDisplay(sliced);
   };
-
   //  Call to Axios GET
   useEffect(() => {
     const reviews = () => {
@@ -47,7 +46,7 @@ function Reviews() {
       }
     };
     reviews();
-  });
+  }, [product.id]);
   // shows 2 more reviews
   const handleMoreReviews = () => {
     const length = display.length;
