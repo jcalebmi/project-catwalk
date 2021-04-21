@@ -5,11 +5,11 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { shallow, mount } from 'enzyme';
 // import App from '../../app.jsx';
-import Reviews from '../Reviews.jsx';
+import QAs from '../QAs.jsx';
 
 const mockStore = configureMockStore([thunk]);
 
-describe('Review', () => {
+describe('App', () => {
   it('should render without crashing', () => {
     const store = mockStore({
       product: {
@@ -26,11 +26,20 @@ describe('Review', () => {
     });
     const wrapper = mount(
       <Provider store={store}>
-        <Reviews />
+        <QAs />
       </Provider>,
     );
-    // const listItems = wrapper.find('ReviewItem');
-    // console.log(wrapper.html());
     expect(wrapper.find('ul').length).toEqual(1);
+  });
+});
+
+describe('QAs', () => {
+  it('should have at least one p element', () => {
+    const wrapper = shallow(<QAs />);
+    expect(wrapper.find('p').length).toBeGreaterOrEqual(1);
+  });
+  it('should have at least one li element', () => {
+    const wrapper = mount(<QAs />);
+    expect(wrapper.find('li').length).toBeGreaterOrEqual(1);
   });
 });

@@ -83,6 +83,10 @@ body {
       object-fit: cover;
       padding: 5px 5px 5px 5px;
     }
+.pointer {
+  cursor: pointer;
+}
+
 
   /*Product Overview */
   .overview
@@ -206,6 +210,8 @@ li.reviews {
 .outerRatingStars::before {
   content: "\272D \272D \272D \272D \272D";
   color: grey;
+  margin: 0;
+  padding: 0;
 }
 .innerRatingStars {
   position: absolute;
@@ -216,6 +222,8 @@ li.reviews {
 .innerRatingStars::before {
   content: "\272D \272D \272D \272D \272D";
   color: gold;
+  margin: 0;
+  padding: 0;
 }
 
 .ratingAve {
@@ -270,4 +278,58 @@ select.reviewSort {
 .reviewsButtons {
   border-top: 0px;
   z-index: 1;
+}
+
+.addReview.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-top: 0px;
+  background-color: white;
+  opacity: .95;
+  z-index: 2;
+  overflow: scroll;
+}
+.addReview.overlay h1 {
+  padding-bottom: 0px;
+}
+.addReview.overlay h3 {
+  padding-top: 0px;
+}
+
+.writeReview {
+  position: relative;
+  padding-left: 40%;
+  padding-right: 35%;
+}
+
+.writeReview .summaryContainer {
+  text-align: left;
+  width: 100%;
+}
+.reviewMinCharacters {
+  font-size: .6em;
+}
+.overallRating {
+  text-align: left;
+}
+
+#reviewIMG img {
+  width: 50%;
+  height: auto;
+}
+#reviewIMG img:hover {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 5%;
+  width: 90%;
+  height: 90%;
 }

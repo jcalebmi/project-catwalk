@@ -3,7 +3,7 @@ import store from '../../store/store.jsx';
 
 // Get request to Catwalk Server
 const getProduct = (id = 19093) => (
-  axios.get(`/product/${id}`)
+  axios.get(`/products/${id}`)
     .then((res) => (res.data))
     .catch((err) => {
       console.log('ERROR: ', err);

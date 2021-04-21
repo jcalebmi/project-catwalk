@@ -13,6 +13,9 @@ import Ratings from './reviews/Ratings.jsx';
 //Initialization of Products
 import setProduct from './helpers/setProduct.jsx';
 
+//QAs Import
+import QAs from './qas/QAs.jsx';
+
 function App() {
   const [once, inc] = useState(0);
   if (once === 0) {
@@ -24,6 +27,9 @@ function App() {
   return (
     <Provider store={store}>
       <Overview />
+      <div id="questions-answers-container">
+          <QAs />
+        </div>
       <div id="ratingReviewContainer">
         <Ratings />
         <Reviews />
