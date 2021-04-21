@@ -156,14 +156,20 @@ li.reviews {
 
 .ratingSlider input[type="range"] {
   -webkit-appearance: none;
+  width: 150px
 }
 .ratingSlider input[type="range"]::-webkit-slider-runnable-track {
   background-color: lightgrey;
   height: .5em;
+  width: 150px;
 }
 
-
-
+.reviews.characteristics {
+  display: inline-grid;
+  grid-template-columns: 30% 30% 30%;
+  width: 200px;
+  font-size: .5em;
+}
 
 /* Username & Date */
 span.spanRight {

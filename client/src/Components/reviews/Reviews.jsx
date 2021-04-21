@@ -17,7 +17,7 @@ function Reviews() {
   const [currentProduct, setProduct] = useState({});
   const [addReview, setAddReview] = useState(false);
 
-  const handleSort = () => {
+  const handleSort = (e) => {
     const sortBy = e.target.value;
     const sorted = sortReviews(sortBy, results);
     console.log(sorted);
@@ -33,7 +33,8 @@ function Reviews() {
         return getReviews(product.id).then((data) => {
           setResults(data);
           const sorted = sortReviews('relevance', data);
-          setDisplay(sorted);
+          const sliced = sorted.slice(0, 2);
+          setDisplay(sliced);
         });
       }
     };
