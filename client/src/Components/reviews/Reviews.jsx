@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import ReviewItem from './ReviewItem.jsx';
 import getReviews from './helpers/getReviews.js';
 import AddReview from './AddReview.jsx';
+import sortReviews from './helpers/sortReviews.js';
 
 const selectProductById = (state) => state.product;
 
@@ -16,6 +17,14 @@ function Reviews() {
   const [currentProduct, setProduct] = useState({});
   const [addReview, setAddReview] = useState(false);
 
+  const handleSort = () => {
+    const sortBy = e.target.value;
+    const sorted = sortReviews(sortBy, results);
+    console.log(sorted);
+    setResults(sorted);
+    setDisplay([sorted[0], sorted[1]]);
+  };
+
   //  Call to Axios GET
   useEffect(() => {
     const reviews = () => {
@@ -23,13 +32,13 @@ function Reviews() {
         setProduct(product);
         return getReviews(product.id).then((data) => {
           setResults(data);
-          setDisplay([data[0], data[1]]);
+          const sorted = sortReviews('relevance', data);
+          setDisplay(sorted);
         });
       }
     };
     reviews();
   });
-
   const handleMoreReviews = () => {
     const length = display.length;
     setDisplay(results.slice(0, length + 2));
@@ -38,14 +47,23 @@ function Reviews() {
   const handleAddReview = () => {
     setAddReview(true);
   };
+
+
   return (
       <div className="reviewsContainer">
         <span className="bold">
           <label htmlFor="sort">{results.length} reviews, sorted by </label>
-          <select name="options" id="options" className="reviewSort useBgColor">
-            <option value="relevance">relevance</option>
-            <option value="helpful">helpful</option>
-            <option value="newest">newest</option>
+          <select
+            onChange={handleSort}
+            name="options"
+            id="options"
+            className="reviewSort useBgColor">
+            <option
+              value="relevance">relevance</option>
+            <option
+              value="helpful">helpful</option>
+            <option
+              value="newest">newest</option>
           </select>
         </span>
         <ul className="reviewList">

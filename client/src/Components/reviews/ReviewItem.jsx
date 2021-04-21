@@ -20,9 +20,8 @@ function ReviewItem(props) {
   //  Calculates Rating for filling stars
   let starWidth = 0;
   if (props.item !== undefined) {
-    starWidth = ((props.item.rating/5) * 66.64)
-  }
-  console.log(props.item.rating);
+    starWidth = ((props.item.rating/5) * 66.64);
+  };
   return (
     <li className="reviews">
       <div className="reviewDate">
