@@ -91,19 +91,19 @@ function AddReview(props) {
       return `urlplaceholder/${file.name}`;
     });
     const info = {
-      "product_id": props.product.id,
-      "rating": Number(starRating),
-      "summary": summary,
-      "body": review,
-      "recommend": isRecommended,
-      "name": name,
-      "email": email,
-      "photos": photos,
-      "characteristics": {
-        "64742": Number(fit),
-        "64744": Number(comfort),
-        '64743': Number(length),
-        '64745': Number(quality),
+      product_id: props.product.id,
+      rating: Number(starRating),
+      summary: summary,
+      body: review,
+      recommend: isRecommended,
+      name: name,
+      email: email,
+      photos: filesSRC,
+      characteristics: {
+        64742: Number(fit),
+        64744: Number(comfort),
+        64743: Number(length),
+        64745: Number(quality),
       }
     };
     postReview(info);

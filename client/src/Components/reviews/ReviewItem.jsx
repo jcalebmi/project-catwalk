@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import updateHelpfulness from './helpers/updateHelpfulness.js';
+import sendReport from './helpers/sendReport';
 
 const moment = require('moment');
 
@@ -12,12 +13,16 @@ function ReviewItem(props) {
       setHelpfulClick(true);
     }
   };
+  const report = () => {
+    sendReport(props.item.review_id);
+  };
 
   //  Calculates Rating for filling stars
   let starWidth = 0;
   if (props.item !== undefined) {
     starWidth = ((props.item.rating/5) * 66.64)
   }
+  console.log(props.item.rating);
   return (
     <li className="reviews">
       <div className="reviewDate">
@@ -44,7 +49,7 @@ function ReviewItem(props) {
         : null}
       {props.item.response !== null && props.item.response.length > 0
         ? <p className="sellerResponse"><strong>Response from seller: </strong>{props.item.response}</p> : null}
-      <span>Helpful? <button className="helpfulness useBgColor" onClick={handleHelpfulness}>Yes</button> ({props.item.helpfulness}) | <a href='#'>Report</a></span>
+      <span>Helpful? <button className="helpfulness useBgColor" onClick={handleHelpfulness}>Yes</button> ({props.item.helpfulness}) | <a className="underline" onClick={report}>Report</a></span>
     </li>
   );
 }
