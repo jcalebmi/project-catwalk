@@ -58,6 +58,6 @@ app.put('/reviews/:review_id/helpful', (req, res) => {
 app.post('/reviews/', (req, res) => {
   const data = req.body;
   sendReview(data);
-})
+});
 
 module.exports = app;

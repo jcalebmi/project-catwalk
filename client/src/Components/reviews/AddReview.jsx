@@ -75,9 +75,8 @@ function AddReview(props) {
       if (files.length < 5) {
         setFiles(files.concat(e.target.files[i]));
       }
-      const imgObj = {'url': img.src};
       if (filesSRC.length < 5) {
-        setFilesSRC(filesSRC.concat(imgObj));
+        setFilesSRC(filesSRC.concat(img.src));
       }
     }
   };
@@ -88,21 +87,24 @@ function AddReview(props) {
     // files.forEach(file => {
     //   data.append('file', file);
     // });
+    const photos = files.map(file => {
+      return `urlplaceholder/${file.name}`;
+    });
     const info = {
       product_id: props.product.id,
       rating: Number(starRating),
       summary: summary,
       body: review,
       recommend: isRecommended,
-      reviewer_name: name,
+      name: name,
       email: email,
       characteristics: {
-        comfort: Number(comfort),
-        quality: Number(quality),
-        length: Number(length),
-        fit: Number(fit),
+        Comfort: Number(comfort),
+        Quality: Number(quality),
+        Length: Number(length),
+        Fit: Number(fit),
       },
-      photos: filesSRC,
+      photos: photos,
     };
     postReview(info);
     // const data = new FormData()
