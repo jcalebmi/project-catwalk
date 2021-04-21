@@ -20,11 +20,12 @@ function Reviews() {
   const [addReview, setAddReview] = useState(false)
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('relevance');
+  const [currentLength, setLength] = useState(2);
 
   const handleSort = (e) => {
     const sortBy = e.target.value;
     const sorted = sortReviews(sortBy, results, search);
-    const sliced = sorted.slice(0, 2);
+    const sliced = sorted.slice(0, currentLength);
     setResults(resultsStorage);
     setFilter(sortBy);
     setResults(sorted);
@@ -47,21 +48,23 @@ function Reviews() {
     };
     reviews();
   });
+  // shows 2 more reviews
   const handleMoreReviews = () => {
     const length = display.length;
     setDisplay(results.slice(0, length + 2));
+    setLength(currentLength + 2);
   };
-
+  // write a review button
   const handleAddReview = () => {
     setAddReview(true);
   };
-
+  // uses search bar helper function
   const handleSearch = (text) => {
     setSearch(text);
     const sorted = sortReviews(filter, results, search);
-    const sliced = sorted.slice(0, 2);
+    const sliced = sorted.slice(0, currentLength);
     setResults(resultsStorage);
-    setDisplay(sorted);
+    setDisplay(sliced);
   };
 
   return (
