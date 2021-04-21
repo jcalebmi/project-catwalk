@@ -34,7 +34,7 @@ function ReviewItem(props) {
       className="bold">{props.item.summary}</p>
       <p>{props.item.body}</p>
       {props.item.recommend ?
-      <p>"checkmark" I recommend this product</p> :
+      <p>&#10003; I recommend this product</p> :
         null}
       {props.item.response !== null && props.item.response.length > 0
         ? <p className="sellerResponse"><strong>Response from seller: </strong>{props.item.response}</p> : null}
