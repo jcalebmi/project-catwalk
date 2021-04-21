@@ -4,7 +4,6 @@ function Quality(props) {
   const [rating, setRating] = useState('');
   const buttons = ['1', '2', '3', '4', '5'];
   const handleClick = (e) => {
-    console.log(e.target.value);
     if (e.target.value === '1') {
       setRating('Poor');
     }
@@ -20,7 +19,7 @@ function Quality(props) {
     if (e.target.value === '5') {
       setRating('Perfect');
     }
-    props.handleComfort(Number(e.target.value));
+    props.handleQuality(Number(e.target.value));
   };
 
   return (

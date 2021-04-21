@@ -1,11 +1,11 @@
 import React from 'react';
 
-function HelpfulRadio(props) {
+function Recommend(props) {
   const handleClick = (e) => {
     if (e.target.value === 'yes') {
-      props.helpful(true);
+      props.recommended(true);
     } else {
-      props.helpful(false);
+      props.recommended(false);
     }
   };
 
@@ -22,4 +22,4 @@ function HelpfulRadio(props) {
     </div>
   );
 }
-export default HelpfulRadio;
+export default Recommend;

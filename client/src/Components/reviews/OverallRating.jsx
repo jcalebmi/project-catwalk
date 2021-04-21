@@ -9,9 +9,17 @@ function OverallRating(props) {
     { name: '4', color: 'black', index: 4 },
     { name: '5', color: 'black', index: 5 },
   ]);
-  const [rating, setRating] = useState(0);
+
+  const [rating, setRating] = useState('');
 
   const handleStarClick = (e) => {
+    const ratings = {
+      '1': 'Poor',
+      '2': 'Fair',
+      '3': 'Average',
+      '4': 'Good',
+      '5': 'Great',
+    };
     const currentStar = stars[e.target.className - 1];
     let newColor;
     if (currentStar.color === 'black') {
@@ -36,16 +44,16 @@ function OverallRating(props) {
       }
       return star;
     });
+    props.handleStarRating(Number(currentStar.index));
     setStars(newStarsArr);
-    setRating(currentStar.index);
-    props.handleStarRating(rating);
+    setRating(ratings[currentStar.index]);
   };
 
   return (
     <div className="overallRating pointer">
-      <span>
+      <span className="bold">
         Overall Rating:
-      </span>
+      </span><br></br>
       {stars.map((star) =>
         <span
         style={{color: star.color}}
@@ -54,6 +62,7 @@ function OverallRating(props) {
         onClick={handleStarClick}>
         ✭
         </span>)}
+        <span> {rating}</span>
     </div>
   );
 }

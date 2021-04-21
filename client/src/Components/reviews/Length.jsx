@@ -4,7 +4,6 @@ function Length(props) {
   const [rating, setRating] = useState('');
   const buttons = ['1', '2', '3', '4', '5'];
   const handleClick = (e) => {
-    console.log(e.target.value);
     if (e.target.value === '1') {
       setRating('Runs short');
     }
@@ -20,7 +19,7 @@ function Length(props) {
     if (e.target.value === '5') {
       setRating('Runs long');
     }
-    props.handleComfort(Number(e.target.value));
+    props.handleLength(Number(e.target.value));
   };
 
   return (

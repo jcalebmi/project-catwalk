@@ -8,6 +8,7 @@ const getProducts = require('./appHelpers/getProducts.js');
 const getReviews = require('./reviewHelpers/getReviews.js');
 const updateHelpful = require('./reviewHelpers/helpfulness.js');
 const getMetaData = require('./reviewHelpers/getMeta.js');
+const sendReview = require('./reviewHelpers/sendReview.js');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -53,5 +54,10 @@ app.put('/reviews/:review_id/helpful', (req, res) => {
     res.end();
   });
 });
+
+app.post('/reviews/', (req, res) => {
+  const data = req.body;
+  sendReview(data);
+})
 
 module.exports = app;

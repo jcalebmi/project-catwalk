@@ -19,7 +19,7 @@ function Fit(props) {
     if (e.target.value === '5') {
       setRating('Runs long');
     }
-    props.handleComfort(Number(e.target.value));
+    props.handleFit(Number(e.target.value));
   };
 
   return (

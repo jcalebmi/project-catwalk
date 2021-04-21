@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import OverallRating from './OverallRating.jsx';
-import HelpfulRadio from './HelpfulRadio.jsx';
+import Recommend from './Recommend.jsx';
 import Comfort from './Comfort.jsx';
 import Fit from './Fit.jsx';
 import Length from './Length.jsx';
 import Quality from './Quality.jsx';
+import postReview from './helpers/postReview.js';
 
 function AddReview(props) {
-  const [isHelpful, setIsHelpful] = useState('');
+  const [isRecommended, setIsRecommended] = useState('');
   const [starRating, setStarRating] = useState(0);
   const [comfort, setComfort] = useState(0);
   const [fit, setFit] = useState(0);
@@ -19,14 +20,15 @@ function AddReview(props) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [files, setFiles] = useState([]);
+  const [filesSRC, setFilesSRC] = useState([]);
 
-  const helpful = (boolean) => {
-    setIsHelpful(boolean);
-    console.log(isHelpful);
+  const recommended = (boolean) => {
+    setIsRecommended(boolean);
   };
 
   const handleStarRating = (number) => {
-    setStarRating(number);
+    const rating = number;
+    setStarRating(rating);
   };
 
   const handleComfort = (number) => {
@@ -40,6 +42,10 @@ function AddReview(props) {
   };
   const handleQuality = (number) => {
     setQuality(number);
+  };
+  const handleSummary = (e) => {
+    const text = e.target.value;
+    setSummary(text);
   };
   const handleReviewChange = (e) => {
     const text = e.target.value;
@@ -61,85 +67,115 @@ function AddReview(props) {
 
   const handleFiles = (e) => {
     const imgCont = document.getElementById('reviewIMG');
-    const img = document.createElement("img");
-    for (let i = 0; i < e.target.files.length; i++) {
+    const img = document.createElement('img');
+    for (let i = 0; i < e.target.files.length; i += 1) {
       img.src = URL.createObjectURL(e.target.files[i]);
       img.className = 'reviewIMG';
       imgCont.appendChild(img);
+      if (files.length < 5) {
+        setFiles(files.concat(e.target.files[i]));
+      }
+      const imgObj = {'url': img.src};
+      if (filesSRC.length < 5) {
+        setFilesSRC(filesSRC.concat(imgObj));
+      }
     }
-    setFiles(files.concat(e.target.files));
   };
 
-  const onSubmit = () => {
-
+  const onSubmit = (e) => {
+    e.preventDefault();
+    // const data = new FormData();
+    // files.forEach(file => {
+    //   data.append('file', file);
+    // });
+    const info = {
+      product_id: props.product.id,
+      rating: Number(starRating),
+      summary: summary,
+      body: review,
+      recommend: isRecommended,
+      reviewer_name: name,
+      email: email,
+      characteristics: {
+        comfort: Number(comfort),
+        quality: Number(quality),
+        length: Number(length),
+        fit: Number(fit),
+      },
+      photos: filesSRC,
+    };
+    postReview(info);
     // const data = new FormData()
     // for (var i = 0; i < files.length; i++) {
     //   data.append('file', files[i]);
 
-      // axios.post('/reviews', data, auth)
+  // axios.post('/reviews', data, auth)
     // }
-  }
+  };
 
   return (
-    <div className="addReview overlay">
+    <div className='addReview overlay'>
       <h1>Write Your Review</h1>
       <h3>About the {props.product.name}
       </h3>
-      <div id="writeReviewContainer">
-        <div className="writeReview">
-          <form id="addReview">
+      <div id='writeReviewContainer'>
+        <div className='writeReview'>
+          <form
+            onSubmit={onSubmit}
+            id='addReview'>
             <OverallRating handleStarRating={handleStarRating} />
-            <div className="summaryContainer">
-              <label className="bold">
+            <div className='summaryContainer'>
+              <label className='bold'>
                 Review Summary: <br></br>
                 <textarea
                   type='text'
-                  placeholder="Best purchase ever!"
-                  maxLength="60">
+                  placeholder='Best purchase ever!'
+                  maxLength='60'
+                  onChange={handleSummary}>
                 </textarea>
               </label><br></br>
-              <label className="bold">
+              <label className='bold'>
                 Review: <br></br>
                 <textarea
                   type='textArea'
-                  placeholder="Why did you like the product or not?"
+                  placeholder='Why did you like the product or not?'
                   maxLength='1000'
-                  minLength="50"
+                  minLength='50'
                   onChange={handleReviewChange} >
                 </textarea>
               </label><br></br>
-              <span className="reviewMinCharacters">
+              <span className='reviewMinCharacters'>
                 {charMin > 50
                   ? 'Minimum Reached'
                   : `Minimum required characters left: ${charMin}`}
               </span><br></br>
-              <label className="bold">
+              <label className='bold'>
                 NickName: <br></br>
                 <input
-                  type="text"
-                  placeholder="jackson11!"
-                  maxLength="60"
+                  type='text'
+                  placeholder='jackson11!'
+                  maxLength='60'
                   onChange={handleName}></input>
               </label><br></br>
                 <span
-                  className="reviewMinCharacters">
+                  className='reviewMinCharacters'>
                     For privacy reasons, do not use your full name or email address
                   </span><br></br>
-              <label className="bold">
+              <label className='bold'>
                 Email: <br></br>
                 <input
-                  type="text"
-                  placeholder="jackson11@email.com"
-                  maxLength="60"
+                  type='text'
+                  placeholder='jackson11@email.com'
+                  maxLength='60'
                   onChange={handleEmail}></input>
               </label><br></br>
                 <span
-                  className="reviewMinCharacters">
+                  className='reviewMinCharacters'>
                     For authentication reasons, you will not be emailed
                   </span><br></br>
-              <span className="bold">Do you recommend this product?</span><br></br>
-              <HelpfulRadio
-              helpful={helpful}
+              <span className='bold'>Do you recommend this product?</span><br></br>
+              <Recommend
+              recommended={recommended}
               className='pointer' />
               <Comfort
               handleComfort={handleComfort}
@@ -154,17 +190,17 @@ function AddReview(props) {
               handleQuality={handleQuality}
               className='pointer' />
               <input
-              type="file"
-              name="files"
-              accept="image/*"
-              className="form-control"
+              type='file'
+              name='files'
+              accept='image/*'
+              className='form-control'
               multiple
               onChange={handleFiles}></input>
-              <div id="reviewIMG">
+              <div id='reviewIMG'>
 
               </div>
             </div>
-            <input type="submit"></input>
+            <input type='submit'></input>
           </form>
         </div>
       </div>
