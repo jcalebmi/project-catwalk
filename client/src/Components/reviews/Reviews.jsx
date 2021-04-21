@@ -32,7 +32,7 @@ function Reviews() {
 
   const handleMoreReviews = () => {
     const length = display.length;
-    setDisplay(results.slice(0, length + 3));
+    setDisplay(results.slice(0, length + 2));
   };
 
   const handleAddReview = () => {
