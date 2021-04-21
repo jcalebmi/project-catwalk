@@ -11,6 +11,7 @@ const getMetaData = require('./reviewHelpers/getMeta.js');
 const fetchQuestions = require('./questionsHelpers/fetchQuestions.js');
 const fetchAnswers = require('./questionsHelpers/fetchAnswers.js');
 
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use(express.static(path.join(__dirname, 'client', 'dist')));
@@ -58,7 +59,10 @@ app.put('/reviews/:review_id/helpful', (req, res) => {
 
 app.get('/qa/questions/:product_id', (req, res) => {
   const id = req.params.product_id;
-  fetchQuestions(id, (results) => {
+  fetchQuestions(id, (err, results) => {
+    if (err) {
+      console.log(err);
+    }
     res.send(results);
   });
 });

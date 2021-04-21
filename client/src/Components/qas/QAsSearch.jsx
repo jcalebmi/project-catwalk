@@ -1,36 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-class QAsSearch extends React.Component {
-  constructor(props) {
-    super(props);
+const QAsSearch = ({ handleSearch }) => {
+  const [input, setInput] = useState('');
 
-    this.state = {
-      search: '',
-    };
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSearchClick = this.handleSearchClick.bind(this);
-  }
+  const handleInputChange = (e) => {
+    setInput(e.target.value);
+    if (e.target.value.length >= 3) {
+      handleSearch(input);
+    }
+  };
 
-  handleInputChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-  }
-
-  handleSearchClick(e) {
+  const handleSearchClick = (e) => {
     e.preventDefault();
-   }
+  };
 
-  render() {
-    return (
+  return (
       <div>
         <form>
-        <input name="search" type="text" placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..." onChange={this.handleInputChange}></input>
-        <button type="submit" onClick={this.handleSearchClick}>Go</button>
+        <input name="search" type="text" placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..." onChange={handleInputChange}></input>
+        <button type="submit" onClick={handleSearchClick}>Go</button>
         </form>
       </div>
-    );
-  }
-}
+  );
+};
 
 export default QAsSearch;
