@@ -265,6 +265,12 @@ li.reviews {
   width: 150px;
 }
 
+.reviews.progressBar:hover{
+  color: blue;
+  background-color: white;
+  cursor: pointer;
+}
+
 .reviews.characteristics {
   display: inline-grid;
   grid-template-columns: 30% 30% 30%;

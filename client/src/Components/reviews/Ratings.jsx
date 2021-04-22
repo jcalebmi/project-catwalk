@@ -52,7 +52,7 @@ function Ratings(props) {
         </div>
       </div><br></br>
       <span>{ratingResults.recommend} of reviews recommend this product</span>
-      <StarRating meta={meta} ratingSum={ratingResults.ratingSum} />
+      <StarRating meta={meta} ratingSum={ratingResults.ratingSum} handleStars={props.handleStars} />
       <Characteristics meta={meta} />
     </div>
   );

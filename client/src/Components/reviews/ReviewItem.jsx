@@ -7,6 +7,7 @@ const moment = require('moment');
 function ReviewItem(props) {
   const [ishelpfulClicked, setHelpfulClick] = useState(false);
   //  Call helpfulness API
+
   const handleHelpfulness = () => {
     if (!ishelpfulClicked) {
       updateHelpfulness(props.item.review_id);

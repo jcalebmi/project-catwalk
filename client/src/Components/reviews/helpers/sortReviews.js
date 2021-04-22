@@ -1,4 +1,15 @@
-const sortReviews = (sortBy, reviews, search) => {
+let stars = [];
+const filteredStars = (arr) => {
+  if (arr !== undefined) {
+   stars = arr.filter((star) => star.value);
+   return stars;
+  } else {
+    return '';
+  }
+};
+console.log(stars);
+
+const sortReviews = (sortBy, reviews, search, starFilter) => {
   const reviewsArr = reviews.slice();
   if (sortBy === 'newest') {
     reviews.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -14,13 +25,20 @@ const sortReviews = (sortBy, reviews, search) => {
       return new Date(b.date) - new Date(a.date);
     });
   }
-
+  let filtered = [];
   if (search.length >= 2) {
-    const filtered = reviews.filter((review) => review.body.toLowerCase().includes(search));
-    return filtered;
+    filtered = reviews.filter((review) => review.body.toLowerCase().includes(search));
   } else {
-    return reviews;
+    filtered = reviews;
   }
-};
+  if (starFilter.length > 0) {
+    const starRating = starFilter.map((star) => {
+      const rating = Number(star.name[0])
+      return rating;
+    });
+      filtered = filtered.filter((item) => starRating.includes(item.rating));
+  }
 
-export default sortReviews;
+  return filtered;
+};
+export {filteredStars, sortReviews, stars};

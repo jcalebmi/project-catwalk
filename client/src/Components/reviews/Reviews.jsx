@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import ReviewItem from './ReviewItem.jsx';
 import getReviews from './helpers/getReviews.js';
 import AddReview from './AddReview.jsx';
-import sortReviews from './helpers/sortReviews.js';
+import { sortReviews, stars } from './helpers/sortReviews.js';
 import Search from './Search.jsx';
 
 const selectProductById = (state) => state.product;
@@ -25,7 +25,7 @@ function Reviews(props) {
   //console.log(product);
   const handleSort = (e) => {
     const sortBy = e.target.value;
-    const sorted = sortReviews(sortBy, results, search);
+    const sorted = sortReviews(sortBy, results, search, stars);
     const sliced = sorted.slice(0, currentLength);
     setResults(resultsStorage);
     setFilter(sortBy);
@@ -40,14 +40,14 @@ function Reviews(props) {
         getReviews(product.id).then((data) => {
           setResults(data);
           setResultsStorage(data);
-          const sorted = sortReviews(filter, data, search);
+          const sorted = sortReviews(filter, data, search, stars);
           const sliced = sorted.slice(0, 2);
           setDisplay(sliced);
         });
       }
     };
-      reviews();
-  }, [product]);
+    reviews();
+  }, [product, stars]);
   // shows 2 more reviews
 
   const handleMoreReviews = () => {
@@ -62,7 +62,7 @@ function Reviews(props) {
   // uses search bar helper function
   const handleSearch = (text) => {
     setSearch(text);
-    const sorted = sortReviews(filter, results, search);
+    const sorted = sortReviews(filter, results, search, stars);
     const sliced = sorted.slice(0, currentLength);
     setResults(resultsStorage);
     setDisplay(sliced);
