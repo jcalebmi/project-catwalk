@@ -42,4 +42,18 @@ describe('QAs', () => {
     const wrapper = mount(<QAs />);
     expect(wrapper.find('li').length).toBeGreaterOrEqual(1);
   });
+
+  // TODO: thursday morning fun - build out test suite
+
+  /* async() data
+  toContain arr
+  assertions(1)
+    return functions.fetchUser().then(data => {
+      expect(Array.isArray(data)).toBetruthy()));
+  ) */
+  /**
+   * test if fn exists expect to be defined
+   * see if it does what you want it to do
+   * /toequal, tocontain, etc
+   */
 });

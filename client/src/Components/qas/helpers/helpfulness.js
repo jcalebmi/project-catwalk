@@ -1,3 +1,4 @@
+// mostly functioning, need to implment post request for btn counts
 const helpfulness = (e) => {
   const btnId = e.target.id;
   const btn = document.getElementById(`${btnId}`);

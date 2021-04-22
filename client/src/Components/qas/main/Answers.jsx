@@ -2,27 +2,26 @@ import React, { useState, useEffect } from 'react';
 import LoadMoreAnswers from '../buttons/LoadMoreAnswers.jsx';
 import AddAnswer from '../buttons/AddAnswerBtn.jsx';
 import helpfulness from '../helpers/helpfulness';
+import { fetchAnswers } from '../helpers/server-requests';
+import sortData from '../helpers/sortData';
+import toggle from '../helpers/toggle';
 
-const axios = require('axios');
 const moment = require('moment');
 
 const Answers = (questionIds) => {
-  let answersDisplay;
   const [answers, setAnswers] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [displayAll, setDisplayAll] = useState(false);
 
   useEffect(() => {
-    axios.get(`/qa/questions/${questionIds.questionId}/answers`)
-      .then((res) => {
-        if (res.data.length > 0) {
-          setAnswers(res.data);
-          setIsLoaded(true);
-        }
-      })
-      .then(() => {
+    // api GET helper
+    fetchAnswers(questionIds.questionId, (results) => {
+      // sort data helper
+      sortData(results, 'helpfulness', (sorted) => {
+        setAnswers(sorted);
         setIsLoaded(true);
       });
+    });
   }, []);
 
   if (!isLoaded || answers.length === 0) {
@@ -33,28 +32,8 @@ const Answers = (questionIds) => {
     );
   }
 
-  const sortedAnswers = answers.slice();
-
-  for (let i = 0; i < sortedAnswers.length; i += 1) {
-    for (let j = 0; j < sortedAnswers.length; j += 1) {
-      if (sortedAnswers[j].helpfulness < sortedAnswers[i].helpfulness) {
-        const temp = sortedAnswers[i];
-        sortedAnswers[i] = sortedAnswers[j];
-        sortedAnswers[j] = temp;
-      }
-    }
-  }
-
-  const handleMoreAnswersClick = () => {
-    if (!displayAll) setDisplayAll(true);
-    if (displayAll) setDisplayAll(false);
-  };
-
-  if (!displayAll) answersDisplay = sortedAnswers.slice(0, 2);
-  if (displayAll) answersDisplay = sortedAnswers.slice();
-
-  if (isLoaded && answers.length > 0) {
-    return (
+  const answersDisplay = !displayAll ? answers.slice(0, 2) : answers.slice();
+  return (
       <div>
         <ul>
         {answersDisplay.map((answer) => (
@@ -71,13 +50,12 @@ const Answers = (questionIds) => {
         ))}
         </ul>
         <div>
-        {answers.length > 2 ? <LoadMoreAnswers handler={handleMoreAnswersClick} /> : <></>}
+        {answers.length > 2 ? <LoadMoreAnswers
+         handler={() => setDisplayAll(toggle(displayAll))} /> : <></>}
         <AddAnswer />
         </div>
       </div>
-    );
-  }
-  return 'es lint hates me';
+  );
 };
 
 export default Answers;

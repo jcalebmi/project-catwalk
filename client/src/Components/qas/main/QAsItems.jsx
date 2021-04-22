@@ -5,42 +5,39 @@ import Answers from './Answers.jsx';
 import LoadMoreQuestions from '../buttons/LoadMoreQuestions.jsx';
 import QAsSearch from './QAsSearch.jsx';
 import helpfulness from '../helpers/helpfulness';
+import toggle from '../helpers/toggle';
 
 const QAsItems = ({ questions }) => {
   const [displayAll, setDisplayAll] = useState(false);
   const [displaySearch, setDisplaySearch] = useState([]);
   let questionsDisplay;
 
-  const handleMoreQuestions = () => {
-    if (!displayAll) setDisplayAll(true);
-    if (displayAll) setDisplayAll(false);
-  };
-
   if (displaySearch.length === 0) {
     questionsDisplay = !displayAll ? questions.slice(0, 4) : questions.slice();
   }
+
   if (displaySearch.length > 0) {
     questionsDisplay = displaySearch;
   }
 
+  // mostly functioning, need to add more thorough logic
   const handleSearch = (searchVal) => {
-    if (searchVal.length < 2) {
-      setDisplaySearch(questionsDisplay);
+    if (searchVal.length < 3) {
+      setDisplaySearch([]);
     }
-    // es lint does not like the below arrow arrow, don't know why - I will investigate
     const searchResults = questions.filter((val) => {
       if (val.question_body.toLowerCase().includes(searchVal.toLowerCase())) {
         return true;
       }
     });
+    if (searchResults.length === 0) setDisplaySearch([{ question_body: 'NO RESULTS FOUND' }]);
     setDisplaySearch(searchResults);
+    setDisplayAll(false);
   };
 
   return (
     <div>
-      <QAsSearch questions={questions}
-       handleSearch={handleSearch}
-       />
+      <QAsSearch handleSearch={handleSearch} />
     <div>
       {questionsDisplay.map((question) => (
         <div key={question.asker_name}>
@@ -50,7 +47,7 @@ const QAsItems = ({ questions }) => {
         />
         </div>
       ))}
-      <LoadMoreQuestions onClickHandler={handleMoreQuestions} />
+      <LoadMoreQuestions onClickHandler={() => setDisplayAll(toggle(displayAll))} />
     </div>
     </div>
   );

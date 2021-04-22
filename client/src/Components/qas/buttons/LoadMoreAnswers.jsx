@@ -1,9 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const LoadMoreAnswers = (handler) => (
+// should be working- have not yet had the chance to try it since the API data changed.
+const LoadMoreAnswers = ({ handler }) => (
   <div>
-    <button onClick={handler.handler}>LOAD MORE ANSWERS</button>
+    <button onClick={handler}>LOAD MORE ANSWERS</button>
   </div>
 );
+
+LoadMoreAnswers.propTypes = {
+  handler: PropTypes.func,
+};
 
 export default LoadMoreAnswers;
