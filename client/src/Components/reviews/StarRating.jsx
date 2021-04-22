@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {filteredStars} from './helpers/sortReviews.js';
+import setStarFilter from '../helpers/setStarFilter.jsx';
 
 function StarRating(props) {
   const [stars, setStars] = useState([
@@ -23,6 +24,7 @@ function StarRating(props) {
     const filterTrue = newStars.filter((star) => star.value === true);
     const filter = filterTrue.map((star) => `${star.name}, `);
     setFiltered(filter);
+    setStarFilter(newStars);
   };
   return (
       <div className="numberOfStars underline">

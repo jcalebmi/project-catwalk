@@ -23,7 +23,7 @@ const ratings = (meta, results) => {
     aveSum += item.rating;
   });
   if (!Number.isNaN(aveSum / results.length)) {
-    ave = (sum / results.length).toFixed(1);
+    ave = (aveSum / results.length).toFixed(1);
   }
 
   return {

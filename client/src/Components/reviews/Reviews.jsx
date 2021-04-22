@@ -7,6 +7,7 @@ import { sortReviews, stars } from './helpers/sortReviews.js';
 import Search from './Search.jsx';
 
 const selectProductById = (state) => state.product;
+const selectStarsFilter = (state) => state.stars;
 
 function Reviews(props) {
   //  Current product state
@@ -21,7 +22,7 @@ function Reviews(props) {
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('relevance');
   const [currentLength, setLength] = useState(2);
-
+  const [starFilter, setStars] = useState(stars);
   //console.log(product);
   const handleSort = (e) => {
     const sortBy = e.target.value;
@@ -41,15 +42,13 @@ function Reviews(props) {
           setResults(data);
           setResultsStorage(data);
           const sorted = sortReviews(filter, data, search, stars);
-          const sliced = sorted.slice(0, 2);
+          const sliced = sorted.slice(0, currentLength);
           setDisplay(sliced);
         });
       }
     };
     reviews();
-  }, [product, stars]);
-  // shows 2 more reviews
-
+  }, [product]);
   const handleMoreReviews = () => {
     const length = display.length;
     setDisplay(results.slice(0, length + 2));
