@@ -8,7 +8,7 @@ import Search from './Search.jsx';
 
 const selectProductById = (state) => state.product;
 
-function Reviews() {
+function Reviews(props) {
   //  Current product state
   const product = useSelector(selectProductById) || {};
   //  Review results for current Product
@@ -22,6 +22,7 @@ function Reviews() {
   const [filter, setFilter] = useState('relevance');
   const [currentLength, setLength] = useState(2);
 
+  //console.log(product);
   const handleSort = (e) => {
     const sortBy = e.target.value;
     const sorted = sortReviews(sortBy, results, search);
@@ -36,7 +37,7 @@ function Reviews() {
     const reviews = () => {
       if (product.id !== undefined) {
         setProduct(product);
-        return getReviews(product.id).then((data) => {
+        getReviews(product.id).then((data) => {
           setResults(data);
           setResultsStorage(data);
           const sorted = sortReviews(filter, data, search);
@@ -45,9 +46,10 @@ function Reviews() {
         });
       }
     };
-    reviews();
-  }, [product.id]);
+      reviews();
+  }, [product]);
   // shows 2 more reviews
+
   const handleMoreReviews = () => {
     const length = display.length;
     setDisplay(results.slice(0, length + 2));
@@ -57,7 +59,6 @@ function Reviews() {
   const handleAddReview = () => {
     setAddReview(true);
   };
-<<<<<<< HEAD
   // uses search bar helper function
   const handleSearch = (text) => {
     setSearch(text);
@@ -67,9 +68,6 @@ function Reviews() {
     setDisplay(sliced);
   };
 
-=======
-  if (display.length > 1) {
->>>>>>> main
   return (
       <div className="reviewsContainer">
         <span className="bold">
@@ -90,23 +88,21 @@ function Reviews() {
         <span className="floatRight">
           <Search sendSearch={handleSearch}/>
         </span>
-        <ul className="reviewList">
-          {display.map((item, index) => <ReviewItem item={item} key={index}/>)}
-        </ul>
-        <span className="reviewsButtons">
-          {results.length > 2 && display.length < results.length
-            ? <button onClick={handleMoreReviews}>More Reviews</button>
-            : null } <button onClick={handleAddReview}>Add A Review +</button>
-        </span>
-        {addReview === true
-          ? <AddReview className="addReview overlay" product={currentProduct} />
-          : null}
+        <div>
+          <ul className="reviewList">
+            {display.map((item, index) => <ReviewItem item={item} key={index}/>)}
+          </ul>
+          <span className="reviewsButtons">
+            {results.length > 2 && display.length < results.length
+              ? <button onClick={handleMoreReviews}>More Reviews</button>
+              : null } <button onClick={handleAddReview}>Add A Review +</button>
+          </span>
+          {addReview === true
+            ? <AddReview className="addReview overlay" product={currentProduct} />
+            : null}
+        </div>
       </div>
-  );} else {
-    return (
-      <div className="reviewsContainer"></div>
-    )
-  }
+  );
 }
 
 export default Reviews;

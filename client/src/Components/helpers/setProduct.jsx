@@ -11,7 +11,7 @@ const getProduct = (id = 19093) => (
 );
 
 const setProduct = (id) => {
-  console.log('in set product');
+  // console.log('in set product');
   return getProduct(id).then((data) => {
     store.dispatch({
       type: 'UPDATE_CURRENT_PRODUCT',

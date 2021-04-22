@@ -8,11 +8,11 @@ const MainOverview = () => {
   const [isExpanded, setExpanded] = useState(false);
   const [styleIdx, setStyleIdx] = useState(0);
   const product = useSelector((state) => state.product) || {};
-  console.log('product: ', product);
+  // console.log('product: ', product);
   if (product.id) {
     const styles = getStyles(product.id);
     const style = styles[styleIdx];
-    console.log('style: ', style);
+    // console.log('style: ', style);
   }
 
   if (!isExpanded) {
