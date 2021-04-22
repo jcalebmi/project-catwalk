@@ -18,6 +18,7 @@ function ReviewItem(props) {
   if (props.item !== undefined) {
     starWidth = ((props.item.rating/5) * 66.64)
   }
+  if (props.item !== undefined) {
   return (
     <li className="reviews">
       <div className="reviewDate">
@@ -47,6 +48,12 @@ function ReviewItem(props) {
       <span>Helpful? <button className="helpfulness useBgColor" onClick={handleHelpfulness}>Yes</button> ({props.item.helpfulness}) | <a href='#'>Report</a></span>
     </li>
   );
+} else {
+  return (
+    <li className="reviews">
+    </li>
+  );
+}
 }
 
 export default ReviewItem;

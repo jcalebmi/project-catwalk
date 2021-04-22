@@ -36,7 +36,8 @@ app.get('/products/:product_id/styles', (req, res) => {
   const id = req.params.product_id;
   getStyles(id).then((response) => {
     console.log('success');
-
+  });
+});
 
 //  Takes product ID & calls Axios helper
 //  in reviewHelpers/getReviews.js
