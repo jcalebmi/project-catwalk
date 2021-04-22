@@ -57,6 +57,7 @@ function Reviews() {
   const handleAddReview = () => {
     setAddReview(true);
   };
+<<<<<<< HEAD
   // uses search bar helper function
   const handleSearch = (text) => {
     setSearch(text);
@@ -66,6 +67,9 @@ function Reviews() {
     setDisplay(sliced);
   };
 
+=======
+  if (display.length > 1) {
+>>>>>>> main
   return (
       <div className="reviewsContainer">
         <span className="bold">
@@ -87,7 +91,7 @@ function Reviews() {
           <Search sendSearch={handleSearch}/>
         </span>
         <ul className="reviewList">
-          {display.map((item) => <ReviewItem item={item} key={item.review_id}/>)}
+          {display.map((item, index) => <ReviewItem item={item} key={index}/>)}
         </ul>
         <span className="reviewsButtons">
           {results.length > 2 && display.length < results.length
@@ -98,7 +102,11 @@ function Reviews() {
           ? <AddReview className="addReview overlay" product={currentProduct} />
           : null}
       </div>
-  );
+  );} else {
+    return (
+      <div className="reviewsContainer"></div>
+    )
+  }
 }
 
 export default Reviews;

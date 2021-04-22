@@ -10,9 +10,8 @@
 // export default store;
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { configureStore } from '@reduxjs/toolkit';
-import productFetcher from '../reducers/productFetcher';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import productFetcher from '../reducers/productFetcher.jsx';
 // import overviewReducer from '../client/src/components/overview/overviewSlice';
 // import qasReducer from '../client/src/components/qas/qasSlice';
 // import ratingsReviewReducer from '../client/src/components/ratingsReview/ratingsReviewSlice';
@@ -21,6 +20,9 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 const middleware = [thunk];
 
 const store = createStore(
-  productFetcher, {product: [], products: []}, composeWithDevTools(applyMiddleware(...middleware))
-)
+  productFetcher,
+  { product: [], products: [] },
+  composeWithDevTools(applyMiddleware(...middleware)),
+);
+
 export default store;

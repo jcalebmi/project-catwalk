@@ -4,29 +4,39 @@ const bodyParser = require('body-parser');
 
 const app = express();
 const path = require('path');
-const getProducts = require('./appHelpers/getProducts.js');
+const getProduct = require('./appHelpers/getProduct.js');
 const getReviews = require('./reviewHelpers/getReviews.js');
 const updateHelpful = require('./reviewHelpers/helpfulness.js');
 const getMetaData = require('./reviewHelpers/getMeta.js');
+const getStyles = require('./overviewHelpers/getStyles.js');
 const sendReview = require('./reviewHelpers/sendReview.js');
 const sendReport = require('./reviewHelpers/sendReport.js');
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 
 const fetchQuestions = require('./questionsHelpers/fetchQuestions.js');
 const fetchAnswers = require('./questionsHelpers/fetchAnswers.js');
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+
 app.use(express.static(path.join(__dirname, 'client', 'dist')));
 
-//  Takes product ID & calls Axios helper
-//  in appHelpers/getProducts.js
-//  Returns products back to client
-app.get('/products', (req, res) => {
-  const id = req.params.id;
-  getProducts(id).then((response) => {
+// Takes product ID & calls Axios helper
+// in appHelpers/getProducts.js
+// Returns products back to client
+app.get('/products/:product_id', (req, res) => {
+  const id = req.params.product_id;
+  getProduct(id).then((response) => {
+    console.log('success');
     res.status(200);
     res.send(response);
+  });
+});
+
+// Gets styles
+app.get('/products/:product_id/styles', (req, res) => {
+  const id = req.params.product_id;
+  getStyles(id).then((response) => {
+    console.log('success');
   });
 });
 
@@ -75,15 +85,16 @@ app.post('/reviews/', (req, res) => {
 
 app.get('/qa/questions/:product_id', (req, res) => {
   const id = req.params.product_id;
-  fetchQuestions(id, (results) => {
-    res.send(results);
+  fetchQuestions(id, (err, results) => {
+    if (err) throw err;
+    if (results !== undefined) res.send(results);
   });
 });
 
 app.get('/qa/questions/:question_id/answers', (req, res) => {
   const id = req.params.question_id;
   fetchAnswers(id, (results) => {
-    res.send(results);
+    if (results !== undefined) res.send(results);
   });
 });
 
