@@ -2,8 +2,8 @@ const axios = require('axios');
 
 
 //  Get request to Catwalk Server
-const updateHelpfulness = function (id) {
-  return axios.put(`/reviews/${id}/helpful`)
+const postReview = function (data) {
+  return axios.post(`/reviews/`, data, { header: {'Content-type': 'multipart/form-data'} })
     .then((res) => {
       return res;
     })
@@ -11,4 +11,4 @@ const updateHelpfulness = function (id) {
       console.log('ERROR: ', err);
     });
 };
-export default updateHelpfulness;
+export default postReview;

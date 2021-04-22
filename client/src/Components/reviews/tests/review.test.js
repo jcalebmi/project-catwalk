@@ -9,7 +9,7 @@ import Reviews from '../Reviews.jsx';
 
 const mockStore = configureMockStore([thunk]);
 
-describe('App', () => {
+describe('Review', () => {
   it('should render without crashing', () => {
     const store = mockStore({
       product: {
