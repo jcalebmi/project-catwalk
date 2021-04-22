@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
     components that need to access the store */
 import { Provider } from 'react-redux';
 import store from '../store/store.jsx';
-import Overview from '../Components/overview/Overview.jsx'
+import Overview from '../components/overview/Overview.jsx'
 
 //Review Imports
 import Reviews from './reviews/Reviews.jsx';
