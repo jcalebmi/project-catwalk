@@ -4,7 +4,10 @@ import PropTypes from 'prop-types';
 
 
 
-const ProductSelection = ({ product, styles, style }) => {
+const ProductSelection = ({
+  product,
+  styles,
+  styleIdx}) => {
   const price = style.original_price;
   return (
     <div className='ProductSelection' >

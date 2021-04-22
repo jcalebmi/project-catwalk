@@ -18,6 +18,19 @@ body {
   background-color: aliceblue;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
+.magnifier {
+  cursor: -moz-zoom-in;
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in;
+}
+
+#hidden {
+  visibility: hidden;
+}
 /* Overview */
   /* Navigation Bar */
   .overview {
@@ -56,14 +69,14 @@ body {
     .defaultImageGallery {
       display: inline-block;
       position: relative;
-      width: fit-content;
-      height: 100%;
+      width: 70%;
     }
     .overview
     .defaultImageGallery
     .mainImage {
       vertical-align: middle;
-      object-fit: contain;
+      object-fit: cover;
+      width: 100%;
       height: 100%;
     }
     .overview
@@ -81,12 +94,46 @@ body {
     .thumbnail {
       height: 40px;
       object-fit: cover;
-      padding: 5px 5px 5px 5px;
+      border: solid 3px transparent;
     }
-.pointer {
-  cursor: pointer;
-}
-
+    .overview
+    .defaultImageGallery
+    .thumbnail:hover {
+      border: solid 3px aqua;
+    }
+    .overview
+    .defaultImageGallery
+    .scrollArrows {
+      position: absolute;
+      top: calc(50% - 50px);
+      width: calc(100% - 70px);
+      margin-left: 70px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    .overview
+    .defaultImageGallery
+    .scrollArrows
+    .arrow {
+      display: flex;
+      background-color: white;
+      justify-content: center;
+      align-items: center;
+      opacity: 35%;
+      width: 50px;
+      height: 100px;
+      font-size: xx-large;
+      font-weight: bolder;
+      border: solid 3px transparent;
+    }
+    .overview
+    .defaultImageGallery
+    .scrollArrows
+    .arrow:hover {
+      border: solid 3px aqua;
+      opacity: 60%;
+    }
 
   /*Product Overview */
   .overview

@@ -1,4 +1,4 @@
-const productFetcher = (state = [], action) => {
+const productFetcher = (state = null, action) => {
   switch (action.type) {
     case 'UPDATE_CURRENT_PRODUCT':
       return {

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 /* The provider component makes the Redux store available to any nested
     components that need to access the store */
-import { Provider } from 'react-redux';
-import store from '../store/store.jsx';
 import Overview from '../Components/overview/Overview.jsx'
 
 //Review Imports
@@ -17,24 +15,24 @@ import setProduct from './helpers/setProduct.jsx';
 import QAs from './qas/QAs.jsx';
 
 function App() {
-  const [once, inc] = useState(0);
-  if (once === 0) {
-    setProduct();
-    console.log('increment', once);
-    inc(once + 1);
+  const [isProductLoaded, setProductLoaded] = useState(false);
+  if (!isProductLoaded) {
+    setProduct()
+      .then(() => {
+        setProductLoaded(true);
+      });
+    return null;
   }
 
   return (
-    <Provider store={store}>
       <Overview />
-      <div id="questions-answers-container">
-          <QAs />
-        </div>
-      <div id="ratingReviewContainer">
-        <Ratings />
-        <Reviews />
-      </div>
-    </Provider>
+      // <div id="questions-answers-container">
+      //   <QAs />
+      // </div>
+      // <div id="ratingReviewContainer">
+      //   <Ratings />
+      //   <Reviews />
+      // </div>
   );
 }
 

@@ -2,10 +2,8 @@ import axios from 'axios';
 
 // Get request to Catwalk Server
 const getStyles = (id) => (
-  axios.get(`/products/${id}/styles`)
-    .then((res) => (
-      res.data.results
-    ))
+  axios.get(`/styles/${id}`)
+    .then((res) => res.data)
     .catch((err) => {
       console.log('ERROR: ', err);
     })

@@ -3,7 +3,7 @@ import store from '../../store/store.jsx';
 
 // Get request to Catwalk Server
 const getProduct = (id = 19093) => (
-  axios.get(`/products/${id}`)
+  axios.get(`/product/${id}`)
     .then((res) => (res.data))
     .catch((err) => {
       console.log('ERROR: ', err);
@@ -11,7 +11,6 @@ const getProduct = (id = 19093) => (
 );
 
 const setProduct = (id) => {
-  console.log('in set product');
   return getProduct(id).then((data) => {
     store.dispatch({
       type: 'UPDATE_CURRENT_PRODUCT',

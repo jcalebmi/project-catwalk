@@ -21,7 +21,7 @@ const middleware = [thunk];
 
 const store = createStore(
   productFetcher,
-  { product: [], products: [] },
+  { product: {} },
   composeWithDevTools(applyMiddleware(...middleware)),
 );
 
