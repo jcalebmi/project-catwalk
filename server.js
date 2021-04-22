@@ -55,22 +55,20 @@ app.put('/reviews/:review_id/helpful', (req, res) => {
     res.status(204);
     res.end()
   });
-})
+});
 
 app.get('/qa/questions/:product_id', (req, res) => {
   const id = req.params.product_id;
   fetchQuestions(id, (err, results) => {
-    if (err) {
-      console.log(err);
-    }
-    res.send(results);
+    if (err) throw err;
+    if (results !== undefined) res.send(results);
   });
 });
 
 app.get('/qa/questions/:question_id/answers', (req, res) => {
   const id = req.params.question_id;
   fetchAnswers(id, (results) => {
-    res.send(results);
+    if (results !== undefined) res.send(results);
   });
 });
 

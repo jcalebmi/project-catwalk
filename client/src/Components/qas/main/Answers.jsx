@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import LoadMoreAnswers from './LoadMoreAnswers.jsx';
-import AddAnswer from './AddAnswerBtn.jsx';
-import helpfulness from './helpers/helpfulness';
+import LoadMoreAnswers from '../buttons/LoadMoreAnswers.jsx';
+import AddAnswer from '../buttons/AddAnswerBtn.jsx';
+import helpfulness from '../helpers/helpfulness';
 
 const axios = require('axios');
 const moment = require('moment');
@@ -33,13 +33,25 @@ const Answers = (questionIds) => {
     );
   }
 
+  const sortedAnswers = answers.slice();
+
+  for (let i = 0; i < sortedAnswers.length; i += 1) {
+    for (let j = 0; j < sortedAnswers.length; j += 1) {
+      if (sortedAnswers[j].helpfulness < sortedAnswers[i].helpfulness) {
+        const temp = sortedAnswers[i];
+        sortedAnswers[i] = sortedAnswers[j];
+        sortedAnswers[j] = temp;
+      }
+    }
+  }
+
   const handleMoreAnswersClick = () => {
     if (!displayAll) setDisplayAll(true);
     if (displayAll) setDisplayAll(false);
   };
 
-  if (!displayAll) answersDisplay = answers.slice(0, 2);
-  if (displayAll) answersDisplay = answers.slice();
+  if (!displayAll) answersDisplay = sortedAnswers.slice(0, 2);
+  if (displayAll) answersDisplay = sortedAnswers.slice();
 
   if (isLoaded && answers.length > 0) {
     return (
@@ -50,7 +62,10 @@ const Answers = (questionIds) => {
           <li key={answer.body}>A: {answer.body}</li>
           <p key={answer.answerer_name}>{answer.answerer_name}, {moment(answer.date).format('MMMM Do YYYY')}
           <span key={answer.date}>
-            Helpful? <button onClick={helpfulness}>Yes({answer.helpfulness || 0})</button> | Report
+            Helpful?
+            <button
+            id={answer.answer_id} onClick={helpfulness} >Yes({answer.helpfulness || 0})
+            </button> | Report
             </span></p>
           </div>
         ))}
@@ -62,6 +77,7 @@ const Answers = (questionIds) => {
       </div>
     );
   }
+  return 'es lint hates me';
 };
 
 export default Answers;
