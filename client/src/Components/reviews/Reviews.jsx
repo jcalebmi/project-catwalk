@@ -17,7 +17,7 @@ function Reviews() {
   //  currently displayed results
   const [display, setDisplay] = useState(results.slice(0, 3));
   const [currentProduct, setProduct] = useState({});
-  const [addReview, setAddReview] = useState(false)
+  const [addReview, setAddReview] = useState(false);
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('relevance');
   const [currentLength, setLength] = useState(2);
