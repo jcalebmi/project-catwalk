@@ -1,24 +1,16 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import NavigationBar from './NavigationBar.jsx';
+import Announcements from './Announcements.jsx';
+import MainOverview from './MainOverview.jsx';
+import ProductOverview from './ProductOverview.jsx';
 
-const selectProductById = (state) => state.product;
-const selectAllProducts = (state) => state.products;
-
-const Overview = () => {
-  const product = useSelector(selectProductById);
-  const products = useSelector(selectAllProducts) || [];
-
-
-//console.log(products)
-  return (
-    <div>
-      {products.map((prod) => (
-      <li key={prod.id}>{prod.description}</li>
-      ))}
-    </div>
-
-  )
-}
+const Overview = () => (
+  <div className='overview'>
+    <NavigationBar />
+    <Announcements />
+    <MainOverview />
+    <ProductOverview />
+  </div>
+);
 
 export default Overview;
-
