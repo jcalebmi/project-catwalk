@@ -104,7 +104,7 @@ function AddReview(props) {
         64744: Number(comfort),
         64743: Number(length),
         64745: Number(quality),
-      }
+      };
     };
     postReview(info);
     // const data = new FormData()
