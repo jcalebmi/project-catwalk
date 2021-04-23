@@ -1,11 +1,3 @@
-let stars = [];
-const filteredStars = (arr) => {
-  if (arr !== undefined) {
-    stars = arr.filter((star) => star.value);
-    return stars;
-  }
-  return '';
-};
 
 const sortReviews = (sortBy, reviews, search, starFilter) => {
   const reviewsArr = reviews.slice();
@@ -31,12 +23,11 @@ const sortReviews = (sortBy, reviews, search, starFilter) => {
   }
   if (starFilter.length > 0) {
     const starRating = starFilter.map((star) => {
-      const rating = Number(star.name[0])
+      const rating = Number(star[0]);
       return rating;
     });
     filtered = filtered.filter((item) => starRating.includes(item.rating));
   }
-
   return filtered;
 };
-export {filteredStars, sortReviews, stars};
+export default sortReviews;

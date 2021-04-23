@@ -7,6 +7,7 @@ import store from '../store/store.jsx';
 import Overview from '../components/overview/Overview.jsx'
 
 //Review Imports
+import ReviewsBox from './reviews/ReviewsBox.jsx';
 import Reviews from './reviews/Reviews.jsx';
 import sampleData from '../../dist/sampleData.js';
 import Ratings from './reviews/Ratings.jsx';
@@ -16,6 +17,7 @@ import setProduct from './helpers/setProduct.jsx';
 
 //QAs Import
 import QAs from './qas/QAs.jsx';
+
 
 
 function App() {
@@ -33,10 +35,11 @@ function App() {
       <div id="questions-answers-container">
           <QAs />
         </div>
-      <div id="ratingReviewContainer">
+      <ReviewsBox />
+      {/* <div id="ratingReviewContainer">
         <Ratings />
         <Reviews />
-      </div>
+      </div> */}
     </Provider>
   );
 }

@@ -251,6 +251,11 @@ li.reviews {
   background-color: rgb(0, 255, 0);
 }
 
+.numberOfStars h4 {
+  margin: 2px;
+  padding-left: 25px;
+}
+
 .characteristicsRating {
   width: 100%;
 }
