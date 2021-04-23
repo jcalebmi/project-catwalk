@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 /* The provider component makes the Redux store available to any nested
     components that need to access the store */
-import Overview from '../Components/overview/Overview.jsx'
+import Overview from './overview/Overview.jsx'
 
 //Review Imports
 import ReviewsBox from './reviews/ReviewsBox.jsx';
