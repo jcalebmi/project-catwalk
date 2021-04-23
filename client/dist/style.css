@@ -354,3 +354,19 @@ select.reviewSort {
   width: 90%;
   height: 90%;
 }
+
+.addReview.xBorder {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: absolute;
+  top:0;
+  left:0;
+  margin: 0;
+  border: solid black;
+  transform: rotate(45deg);
+  cursor: pointer;
+}
+.addReview.closeX {
+  font-size: 5em;
+}

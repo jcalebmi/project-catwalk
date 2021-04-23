@@ -117,6 +117,11 @@ function AddReview(props) {
 
   return (
     <div className='addReview overlay'>
+      <div
+        className="addReview xBorder"
+        onClick={props.closeReview}>
+        <span className="addReview closeX">+</span>
+      </div>
       <h1>Write Your Review</h1>
       <h3>About the {props.product.name}
       </h3>
