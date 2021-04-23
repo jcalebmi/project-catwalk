@@ -324,11 +324,22 @@ select.reviewSort {
 .addReview.overlay h3 {
   padding-top: 0px;
 }
-
+.addReview.container {
+  position: relative;
+  margin: 0% 33%;
+  height: 700px;
+  width: 300px;
+  overflow: scroll;
+}
+#writeReviewContainer  {
+  position: relative;
+  height: 600px;
+  width: 300px;
+}
 .writeReview {
   position: relative;
-  padding-left: 40%;
-  padding-right: 35%;
+  overflow: scroll;
+  background-color: whitesmoke;
 }
 
 .writeReview .summaryContainer {
@@ -346,16 +357,18 @@ select.reviewSort {
   width: 50%;
   height: auto;
 }
-#reviewIMG img:hover {
+/* #reviewIMG img:hover {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 5%;
-  width: 90%;
-  height: 90%;
-}
+  margin: 25%;
+  margin-bottom: 50%;
+  width: 50%;
+  height: 50%;
+  z-index: 5;
+} */
 
 .addReview.xBorder {
   width: 100px;
@@ -368,6 +381,7 @@ select.reviewSort {
   border: solid black;
   transform: rotate(45deg);
   cursor: pointer;
+  overflow: scroll;
 }
 .addReview.closeX {
   font-size: 5em;

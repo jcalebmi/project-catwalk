@@ -35,6 +35,8 @@ function Quality(props) {
             {button}
         </label>
         <input
+          required
+          required
           type='radio'
           value={button}
           name='quality'

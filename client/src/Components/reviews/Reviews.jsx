@@ -42,7 +42,8 @@ function Reviews(props) {
             ? <AddReview
                 className="addReview overlay"
                 product={props.currentProduct}
-                closeReview={handleAddReview} />
+                closeReview={handleAddReview}
+                />
             : null}
         </div>
       </div>
