@@ -295,6 +295,10 @@ body {
   padding-bottom: 0px;
   z-index: 1;
 }
+.reviewsContainer {
+  min-width: 360px;
+  max-width: 500px;
+}
 /* Review List & Items */
 ul.reviewList {
   min-height: 300px;
@@ -311,6 +315,7 @@ p.sellerResponse {
 }
 
 li.reviews {
+  flex-direction: column;
   list-style: none;
   border-bottom: solid grey;
   padding: 3px;
@@ -353,6 +358,7 @@ li.reviews {
 
 /* Ratings */
 #ratings {
+  overflow-x: scroll;
   font-size: .75em;
   max-width: 90%;
   padding-left: 5px;
