@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const QAsSearch = ({ handleSearch }) => (
+const QAsSearch = ({ searchHandler }) => (
         <div>
-          <form>
-          <input name="search" type="text" placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..." onChange={(e) => handleSearch(e.target.value) }></input>
+          <form id="search-field">
+          <input name="search" type="text" placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..." onChange={searchHandler}></input>
           </form>
         </div>
 );
 
 QAsSearch.propTypes = {
-  handleSearch: PropTypes.func,
-  questions: PropTypes.array,
+  searchHandler: PropTypes.func,
 };
 
 export default QAsSearch;
