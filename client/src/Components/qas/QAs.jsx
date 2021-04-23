@@ -23,7 +23,7 @@ const QAs = () => {
         });
       });
     }
-  });
+  }, [product]);
 
   if (!questionsLoaded) {
     return (

@@ -8,7 +8,7 @@ import Quality from './Quality.jsx';
 import postReview from './helpers/postReview.js';
 
 function AddReview(props) {
-  const [isRecommended, setIsRecommended] = useState('');
+  const [isRecommended, setIsRecommended] = useState(true);
   const [starRating, setStarRating] = useState(0);
   const [comfort, setComfort] = useState(0);
   const [fit, setFit] = useState(0);
@@ -98,13 +98,13 @@ function AddReview(props) {
       recommend: isRecommended,
       name: name,
       email: email,
+      photos: filesSRC,
       characteristics: {
-        Comfort: Number(comfort),
-        Quality: Number(quality),
-        Length: Number(length),
-        Fit: Number(fit),
-      },
-      photos: photos,
+        64742: Number(fit),
+        64744: Number(comfort),
+        64743: Number(length),
+        64745: Number(quality),
+      }
     };
     postReview(info);
     // const data = new FormData()
@@ -191,13 +191,15 @@ function AddReview(props) {
               <Quality
               handleQuality={handleQuality}
               className='pointer' />
-              <input
-              type='file'
-              name='files'
-              accept='image/*'
-              className='form-control'
-              multiple
-              onChange={handleFiles}></input>
+              <label className="bold">Add Photo: <br></br>
+                <input
+                type='file'
+                name='files'
+                accept='image/*'
+                className='form-control'
+                multiple
+                onChange={handleFiles}></input>
+              </label>
               <div id='reviewIMG'>
 
               </div>

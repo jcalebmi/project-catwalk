@@ -10,6 +10,7 @@ const updateHelpful = require('./reviewHelpers/helpfulness.js');
 const getMetaData = require('./reviewHelpers/getMeta.js');
 const getStyles = require('./overviewHelpers/getStyles.js');
 const sendReview = require('./reviewHelpers/sendReview.js');
+const sendReport = require('./reviewHelpers/sendReport.js');
 
 const fetchQuestions = require('./questionsHelpers/fetchQuestions.js');
 const fetchAnswers = require('./questionsHelpers/fetchAnswers.js');
@@ -36,7 +37,8 @@ app.get('/products/:product_id/styles', (req, res) => {
   const id = req.params.product_id;
   getStyles(id).then((response) => {
     console.log('success');
-
+  });
+});
 
 //  Takes product ID & calls Axios helper
 //  in reviewHelpers/getReviews.js
@@ -61,6 +63,15 @@ app.get('/reviews/meta/:id', (req, res) => {
 app.put('/reviews/:review_id/helpful', (req, res) => {
   const id = req.params.review_id;
   updateHelpful(id).then((response) => {
+    console.log('success');
+    res.status(204);
+    res.end();
+  });
+});
+
+app.put('/reviews/:review_id/report', (req, res) => {
+  const id = req.params.review_id;
+  sendReport(id).then((response) => {
     console.log('success');
     res.status(204);
     res.end();
