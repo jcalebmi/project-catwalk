@@ -45,7 +45,7 @@ function StarRating(props) {
       <div className="numberOfStars">
         <h4 className="filters">Rating Breakdown</h4>
         <span
-          className="filters">Filters: {filtered}</span><br></br>
+          className="filters bold">Filters: {filtered}</span><br></br>
           {filtered === 'none'
             ? null
             : <span

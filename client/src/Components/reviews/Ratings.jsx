@@ -6,11 +6,11 @@ import { ratings, ave } from './helpers/ratings.js';
 
 function Ratings(props) {
   const ratingResults = ratings(props.meta, props.results);
-  const starWidth = (ratingResults.ave / 5) * 100 || 0;
+  const starWidth = (ave / 5) * 100 || 0;
   return (
     <div id="ratings">
       <div className="ratingsHead">
-        <div className="ratingAve">{ratingResults.ave}</div>
+        <div className="ratingAve">{ave}</div>
         <RatingStars starWidth={starWidth} />
       </div><br></br>
       <span>{ratingResults.recommend} of reviews recommend this product</span>
