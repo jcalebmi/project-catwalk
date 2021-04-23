@@ -9,36 +9,42 @@ const ScrollArrows = ({
   let scrollArrows = null;
   let leftArrow = null;
   let rightArrow = null;
-  const handleClick = (e) => {
-    e.stopPropagation();
-    setPhotoIdx(photoIdx + 1);
-  };
 
   if (photoIdx !== 0) {
     leftArrow = <div
       key='left'
-      onClick={handleClick}
-      className='arrow left'> <span className='text'>&lt;</span>
+      onClick={(e) => {
+        e.stopPropagation();
+        setPhotoIdx(photoIdx - 1);
+      }}
+      className='arrowbox'>
+      <i className="arrow left"></i>
     </div>;
   } else {
     leftArrow = <div
       key='left'
-      className='arrow left'
-      id='hidden'> <span className='text'>&lt;</span>
+      className='arrowbox'
+      id='hidden'>
+      <i className="arrow left"></i>
     </div>;
   }
 
   if (photoIdx !== photos.length - 1) {
     rightArrow = <div
       key='right'
-      onClick={handleClick}
-      className='arrow right'> <span className='text'>&gt;</span>
+      onClick={(e) => {
+        e.stopPropagation();
+        setPhotoIdx(photoIdx + 1);
+      }}
+      className='arrowbox'>
+      <i className="arrow right"></i>
     </div>;
   } else {
     rightArrow = <div
       key='right'
-      className='arrow right'
-      id='hidden'> <span className='text'>&gt;</span>
+      className='arrowbox'
+      id='hidden'>
+      <i className="arrow right"></i>
     </div>;
   }
   scrollArrows = [leftArrow, rightArrow];

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import DefaultImageGallery from './DefaultImageGallery.jsx';
+import ImageGallery from './ImageGallery.jsx';
 import getStyles from './helpers/getStyles.jsx';
 import ProductSelection from './ProductSelection.jsx';
 
@@ -19,31 +19,35 @@ const MainOverview = () => {
     }
   }, [product]);
 
-  const updateStyleIdx = (idx) => {
-    setStyleIdx(idx);
-  };
-
   if (styles.length === 0) {
     return null;
   }
 
   if (!isExpanded) {
     return (
-    <div className='main'>
-      <DefaultImageGallery
+    <div className='main default'>
+      <ImageGallery
         styles={styles}
         styleIdx={styleIdx}
-        setExpanded={setExpanded}/>
+        setExpanded={setExpanded}
+        isExpanded={isExpanded}/>
       <ProductSelection
         product={product}
         styles={styles}
         styleIdx={styleIdx}
-        updateStyleIdx={updateStyleIdx}/>
+        setStyleIdx={setStyleIdx}/>
     </div>
     );
   }
-  return null;
-  // <ExpandedView setExpanded={setExpanded}/>;
+  return (
+    <div className='main expanded'>
+      <ImageGallery
+        styles={styles}
+        styleIdx={styleIdx}
+        setExpanded={setExpanded}
+        isExpanded={isExpanded}/>
+    </div>
+  );
 };
 
 export default MainOverview;
