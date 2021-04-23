@@ -1,4 +1,3 @@
-
 const productFetcher = (state, action) => {
   switch (action.type) {
     case 'UPDATE_CURRENT_PRODUCT':
@@ -12,10 +11,6 @@ const productFetcher = (state, action) => {
     case 'UPDATE_QUESTIONS':
       return {
         questions: action.payload,
-      };
-    case 'APP_LOADING':
-      return {
-        status: 'loaded',
       };
     default:
       return state;

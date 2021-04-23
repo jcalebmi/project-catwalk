@@ -1,11 +1,11 @@
 import React from 'react';
 
-function RatingStars (props) {
+function RatingStars ({starWidth}) {
   return (
     <div className="ratingStars">
           <div className="outerRatingStars">
             <div className="innerRatingStars"
-            style={{ width: props.starWidth }}>
+            style={{ width: starWidth }}>
             </div>
           </div>
         </div>
