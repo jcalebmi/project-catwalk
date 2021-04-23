@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Element, Link } from 'react-scroll';
 import StyleThumbnails from './StyleThumbnails.jsx';
 import SizeSelector from './SizeSelector.jsx';
 import QuantSelector from './QuantSelector.jsx';
 import AddToCart from './AddToCart.jsx';
 // import Favorite from './Favorite.jsx';
-import RatingStars from '../reviews/RatingStars.jsx';
 import { ave } from '../reviews/helpers/ratings.js';
 
 const ProductSelection = ({
@@ -31,9 +31,12 @@ const ProductSelection = ({
 
   return (
     <div className='productSelection' >
-      <div className='ratingsHead'>
-        <RatingStars starWidth={ave / 5 * 100} />
-      </div><br></br>
+      <div className='reviewLink'>
+        <div className="Stars" style={{ '--rating': ave }}></div>
+        <div className='scroll underline'>
+        <Link to="ratingReviewContainer" spy={true} smooth={true}>Read All Reviews</Link>
+        </div>
+      </div>
       <h5 className='category'>{product.category}</h5>
       <h2 className='name'>{product.name}</h2>
       {priceEl}

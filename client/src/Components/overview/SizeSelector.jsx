@@ -23,7 +23,7 @@ const SizeSelector = ({
       return acc;
     }, []);
   return (
-    <select onChange={ handleChange } defaultValue='SelectSize' id='sizeSelector'>
+    <select required onChange={ handleChange } defaultValue='SelectSize' id='sizeSelector'>
       <option value='SelectSize'>Select Size</option>
       {inStock.map((curSize, idx) => (
         <option
