@@ -1,54 +1,86 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable no-continue */
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Answers from './Answers.jsx';
 import LoadMoreQuestions from '../buttons/LoadMoreQuestions.jsx';
+import AddQuestion from '../buttons/AddQuestion.jsx';
 import QAsSearch from './QAsSearch.jsx';
 import helpfulness from '../helpers/helpfulness';
-import toggle from '../helpers/toggle';
+import filter from '../helpers/filter';
+import reported from '../helpers/reported';
 
 const QAsItems = ({ questions }) => {
-  const [displayAll, setDisplayAll] = useState(false);
-  const [displaySearch, setDisplaySearch] = useState([]);
-  let questionsDisplay;
-
-  if (displaySearch.length === 0) {
-    questionsDisplay = !displayAll ? questions.slice(0, 4) : questions.slice();
+  /* if the data is undefined, do not render component */
+  if (questions === undefined) {
+    return (
+      <div>Loading...</div>
+    );
   }
+  /* copy of questions array to avoid input mutations */
+  let display = questions.slice();
 
-  if (displaySearch.length > 0) {
-    questionsDisplay = displaySearch;
-  }
+  const [searchResults, setSearchResults] = useState([]);
+  const [isLoading, setLoading] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
+  const pointer = useRef(2);
 
-  // mostly functioning, need to add more thorough logic
+  /** handling searching state */
   const handleSearch = (searchVal) => {
-    if (searchVal.length < 3) {
-      setDisplaySearch([]);
+    if (searchVal.length >= 3) {
+      filter(searchVal, questions, (matchedResults) => {
+        setSearchResults(matchedResults);
+        setIsSearching(true);
+      });
     }
-    const searchResults = questions.filter((val) => {
-      if (val.question_body.toLowerCase().includes(searchVal.toLowerCase())) {
-        return true;
-      }
-    });
-    if (searchResults.length === 0) setDisplaySearch([{ question_body: 'NO RESULTS FOUND' }]);
-    setDisplaySearch(searchResults);
-    setDisplayAll(false);
+    if (searchVal.length < 3) {
+      setIsSearching(false);
+    }
   };
+  /** handling loading state */
+  const loadMore = (e) => {
+    if (e === undefined) {
+      return;
+    }
+    if (e.target.innerHTML === 'COLLAPSE QUESTIONS') {
+      e.target.innerHTML = 'LOAD MORE QUESTIONS';
+      pointer.current = 0;
+      setLoading(false);
+    }
+    if (pointer.current + 2 >= display.length) {
+      e.target.innerHTML = 'COLLAPSE QUESTIONS';
+      display = questions.slice();
+    }
+    pointer.current += 2;
+  };
+    /* else statement is meant to assert data that still needs to be loaded */
+  display = (!isLoading && !isSearching)
+    ? questions.slice(0, 4) : questions.slice(0, pointer.current + 2);
+
+  /** if questions are being searched */
+  if (isSearching) {
+    if (searchResults < 1) {
+      display = searchResults;
+      setIsSearching(false);
+    }
+    display = searchResults;
+  }
 
   return (
     <div>
-      <QAsSearch handleSearch={handleSearch} />
+      <QAsSearch searchHandler={(e) => handleSearch(e.target.value)}/>
     <div>
-      {questionsDisplay.map((question) => (
-        <div key={question.asker_name}>
-        <p className="bold" key={question.question_id} >Q: {question.question_body} <span> Helpful? <button id={question.question_id} onClick={helpfulness}>Yes({question.question_helpfulness || 0})</button> | Report </span></p>
+      {display.map((question) => (
+        <div id="questions" key={question.asker_name}>
+        <p className="bold" key={question.question_id} >Q: {question.question_body} <span> Helpful? <button id={question.question_id} onClick={helpfulness}>Yes({question.question_helpfulness || 0})</button> | <button onClick={reported}>Report</button> </span></p>
         <Answers
-          questionId={question.question_id}
+          questionId={question.question_id} questionBody={question.question_body}
         />
         </div>
       ))}
-      <LoadMoreQuestions onClickHandler={() => setDisplayAll(toggle(displayAll))} />
+      <LoadMoreQuestions onClick={(e) => loadMore(e)}/>
     </div>
+    <AddQuestion />
     </div>
   );
 };

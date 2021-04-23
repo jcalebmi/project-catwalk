@@ -6,6 +6,11 @@ import thunk from 'redux-thunk';
 import { shallow, mount } from 'enzyme';
 // import App from '../../app.jsx';
 import QAs from '../QAs.jsx';
+import QAsItems from '../main/QAsItems.jsx';
+import QAsSearch from '../main/QAsSearch.jsx';
+import Answers from '../main/Answers.jsx';
+import LoadMoreAnswers from '../buttons/LoadMoreAnswers.jsx';
+import LoadMoreQuestions from '../buttons/LoadMoreQuestions.jsx';
 
 const mockStore = configureMockStore([thunk]);
 
@@ -42,18 +47,58 @@ describe('QAs', () => {
     const wrapper = mount(<QAs />);
     expect(wrapper.find('li').length).toBeGreaterOrEqual(1);
   });
+  it('should render QAsItems component', () => {
+    const wrapper = shallow(<QAs />);
+    expect(wrapper.find(QAsItems)).to.have.lengthOf(1);
+  });
 
-  // TODO: thursday morning fun - build out test suite
+  describe('QAsItems', () => {
+    it('should render QAsSearch', () => {
+      const wrapper = shallow(<QAsItems />);
+      expect(wrapper.find(QAsSearch)).to.have.lengthOf(1);
+    });
+    it('should render Answers', () => {
+      const wrapper = mount(<QAsItems />);
+      expect(wrapper.find(Answers)).to.have.lengthOf(1);
+    });
+    it('should render LoadMoreQuestions button', () => {
+      const wrapper = mount(<QAsItems />);
+      expect(wrapper.find(LoadMoreQuestions)).to.have.lengthOf(1);
+    });
+    it('should display the correct number of questions', () => {
+      const wrapper = shallow(<QAsItems />);
+      const length = wrapper.find('questions').length;
+      expect(length).to.BeLessOrEqual(4);
+    });
+  });
 
-  /* async() data
-  toContain arr
-  assertions(1)
-    return functions.fetchUser().then(data => {
-      expect(Array.isArray(data)).toBetruthy()));
-  ) */
-  /**
-   * test if fn exists expect to be defined
-   * see if it does what you want it to do
-   * /toequal, tocontain, etc
-   */
+  describe('Answers', () => {
+    it('should render LoadMoreAnswers button', () => {
+      const wrapper = mount(<LoadMoreAnswers />);
+      expect(wrapper.find(QAsSearch)).to.have.lengthOf(1);
+    });
+    it('should be render AddAnswer button', () => {
+      const wrapper = mount(<LoadMoreQuestions />);
+      expect(wrapper.find(QAsSearch)).to.have.lengthOf(1);
+    });
+    it('should display the correct number of answers', () => {
+      const wrapper = shallow(<Answers />);
+      const length = wrapper.find('answers').length;
+      expect(length).to.BeLessOrEqual(2);
+    });
+  });
+
+  describe('QAsSearch', () => {
+    it('should render a form el', () => {
+      const wrapper = shallow(<QAsSearch />);
+      expect(wrapper.find('form').to.have.lengthOf(1));
+    });
+    it('should invoke an onChange function', () => {
+      const handleSearch = jest.fn();
+      const wrapper = shallow(<QAsSearch handleSearch={handleSearch} />);
+
+      wrapper.find(QAsSearch).handleSearch().simulate('change', { target: { value: 'A' } });
+      expect(handleSearch).toBeCalledWith(wrapper.value);
+    });
+  });
 });

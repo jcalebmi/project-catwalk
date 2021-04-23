@@ -10,20 +10,12 @@ import Overview from '../components/overview/Overview.jsx'
 import ReviewsBox from './reviews/ReviewsBox.jsx';
 
 //Initialization of Products
-import setProduct from './helpers/setProduct.jsx';
+import catwalkPromise from './helpers/setProduct.jsx';
 
 //QAs Import
 import QAs from './qas/QAs.jsx';
 
-function App() {
-  const [product, setCurrentProduct] = useState([]);
-  const [once, inc] = useState(0);
-  if (once === 0) {
-    setProduct();
-    // console.log('increment', once);
-    inc(once + 1);
-  }
-
+const App = () => {
   return (
     <Provider store={store}>
       <Overview />

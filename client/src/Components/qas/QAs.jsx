@@ -1,35 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import QAsItems from './main/QAsItems.jsx';
-import { fetchQuestions } from './helpers/server-requests';
 import sortData from './helpers/sortData';
 
-const selectSingleProduct = (state) => state.product;
+const selectQuestions = (state) => state.questions;
 
 const QAs = () => {
-  const [questions, setQuestions] = useState([]);
-  const [questionsLoaded, setQuestionsLoaded] = useState(false);
-
-  const product = useSelector(selectSingleProduct) || [];
+  let questions = useSelector(selectQuestions);
 
   useEffect(() => {
-    if (product.id !== undefined) {
-      // fetch questions helper
-      fetchQuestions(product.id, (results) => {
-        // data sort helper
-        sortData(results.data, 'question_helpfulness', (sorted) => {
-          setQuestions(sorted);
-          setQuestionsLoaded(true);
-        });
+    if (questions !== undefined) {
+      sortData(questions, 'question_helpfulness', (sorted) => {
+        questions = sorted;
       });
     }
-  }, [product]);
+    if (questions === undefined) {
+      return (
+        <div>Loading...</div>
+      );
+    }
+  });
 
-  if (!questionsLoaded) {
-    return (
-      <div>Loading...</div>
-    );
-  }
 
   return (
     <div className="questions-and-answers">

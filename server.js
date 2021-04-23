@@ -1,3 +1,4 @@
+
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -17,7 +18,6 @@ const fetchAnswers = require('./questionsHelpers/fetchAnswers.js');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-
 app.use(express.static(path.join(__dirname, 'client', 'dist')));
 
 // Takes product ID & calls Axios helper
