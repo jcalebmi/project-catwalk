@@ -297,7 +297,8 @@ body {
 }
 /* Review List & Items */
 ul.reviewList {
-  height: 300px;
+  min-height: 300px;
+  max-height: 400px;
   overflow-x: hidden;
   overflow-y: auto;
   padding: 0px;
@@ -354,10 +355,10 @@ li.reviews {
 #ratings {
   font-size: .75em;
   max-width: 90%;
-  overflow: scroll;
-  height: 70%;
   padding-left: 5px;
-
+  border-top: 0px;
+  padding-top: 0px;
+  margin-bottom: 40px;
 }
 .ratingsHead {
   display: inline-grid;

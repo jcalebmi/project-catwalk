@@ -85,6 +85,7 @@ function ReviewsBox (props) {
     setResults(resultsStorage);
     setDisplay(sliced);
   };
+
   return (
     <div id="ratingReviewContainer">
       <Ratings
