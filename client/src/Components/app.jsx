@@ -8,9 +8,6 @@ import Overview from '../components/overview/Overview.jsx'
 
 //Review Imports
 import ReviewsBox from './reviews/ReviewsBox.jsx';
-import Reviews from './reviews/Reviews.jsx';
-import sampleData from '../../dist/sampleData.js';
-import Ratings from './reviews/Ratings.jsx';
 
 //Initialization of Products
 import setProduct from './helpers/setProduct.jsx';
@@ -36,10 +33,6 @@ function App() {
           <QAs />
         </div>
       <ReviewsBox />
-      {/* <div id="ratingReviewContainer">
-        <Ratings />
-        <Reviews />
-      </div> */}
     </Provider>
   );
 }
