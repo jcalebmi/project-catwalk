@@ -25,6 +25,6 @@ const App = () => {
       <ReviewsBox />
     </Provider>
   );
-}
+};
 
 export default App;
