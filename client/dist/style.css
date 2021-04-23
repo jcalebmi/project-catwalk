@@ -423,24 +423,33 @@ li.reviews {
 }
 
 .numberOfStars h4 {
+  font-size: 1.5em;
   margin: 2px;
   padding-left: 25px;
 }
-
+.characteristicsRating h6 {
+  font-size: 1.5em;
+  padding-left: 2px;
+  margin: 0px
+}
 .characteristicsRating {
   width: 100%;
 }
-
+.ratingSlider {
+  padding-top: 3px;
+}
 .ratingSlider input[type="range"] {
   -webkit-appearance: none;
-  width: 150px
+  width: 200px;
 }
 .ratingSlider input[type="range"]::-webkit-slider-runnable-track {
   background-color: lightgrey;
   height: .5em;
-  width: 150px;
+  width: 200px;
 }
-
+.reviews.progressBar {
+  width: 200px;
+}
 .reviews.progressBar:hover{
   color: blue;
   background-color: white;
@@ -450,8 +459,9 @@ li.reviews {
 .reviews.characteristics {
   display: inline-grid;
   grid-template-columns: 30% 30% 30%;
-  width: 200px;
-  font-size: .5em;
+  padding-left: 5px;
+  width: 260px;
+  font-size: 1em;
 }
 
 /* Username & Date */

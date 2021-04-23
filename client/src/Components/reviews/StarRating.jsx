@@ -56,7 +56,7 @@ function StarRating(props) {
         <div className="numberOfStars underline">
           <span
             onClick={handleStars}
-            className="reviews progressBar">5 stars </span>
+            className="reviews progressBar">5 stars </span><br></br>
           <progress
             className="reviews progressBar"
             value={props.meta.ratings === undefined ? 0 : props.meta.ratings['5']}
@@ -64,7 +64,7 @@ function StarRating(props) {
           </progress><br></br>
           <span
             onClick={handleStars}
-            className="reviews progressBar">4 stars </span>
+            className="reviews progressBar">4 stars </span><br></br>
           <progress
             className="reviews progressBar"
             value={props.meta.ratings === undefined ? 0 : props.meta.ratings['4']}
@@ -72,7 +72,7 @@ function StarRating(props) {
           </progress><br></br>
           <span
             onClick={handleStars}
-            className="reviews progressBar">3 stars </span>
+            className="reviews progressBar">3 stars </span><br></br>
           <progress
             className="reviews progressBar"
             value={props.meta.ratings === undefined ? 0 : props.meta.ratings['3'] || 0}
@@ -80,7 +80,7 @@ function StarRating(props) {
           </progress><br></br>
           <span
             onClick={handleStars}
-            className="reviews progressBar">2 stars </span>
+            className="reviews progressBar">2 stars </span><br></br>
           <progress
             className="reviews progressBar"
             value={props.meta.ratings === undefined ? 0 : props.meta.ratings['2'] || 0}
@@ -88,7 +88,7 @@ function StarRating(props) {
           </progress><br></br>
           <span
             onClick={handleStars}
-            className="reviews progressBar">1 stars </span>
+            className="reviews progressBar">1 stars </span><br></br>
           <progress
             className="reviews progressBar"
             value={props.meta.ratings === undefined ? 0 : props.meta.ratings['1'] || 0}
