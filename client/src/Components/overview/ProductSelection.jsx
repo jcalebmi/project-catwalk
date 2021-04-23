@@ -6,6 +6,8 @@ import SizeSelector from './SizeSelector.jsx';
 import QuantSelector from './QuantSelector.jsx';
 import AddToCart from './AddToCart.jsx';
 // import Favorite from './Favorite.jsx';
+import RatingStars from '../reviews/RatingStars.jsx';
+import { ave } from '../reviews/helpers/ratings.js';
 
 const ProductSelection = ({
   product,
@@ -29,15 +31,9 @@ const ProductSelection = ({
 
   return (
     <div className='productSelection' >
-      {/* <div className="ratingsHead">
-        <div className="ratingStars">
-          <div className="outerRatingStars">
-            <div className="innerRatingStars"
-            style={{ width: 60 }}>
-            </div>
-          </div>
-        </div>
-      </div> */}
+      <div className='ratingsHead'>
+        <RatingStars starWidth={ave / 5 * 100} />
+      </div><br></br>
       <h5 className='category'>{product.category}</h5>
       <h2 className='name'>{product.name}</h2>
       {priceEl}

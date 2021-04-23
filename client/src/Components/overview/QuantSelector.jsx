@@ -9,13 +9,17 @@ const QuantSelector = ({
   setQuant,
 }) => {
   const style = styles[styleIdx];
-  const quantity = sizeSku ? style.skus[sizeSku].quantity : null;
+  const quantity = style.skus[sizeSku]
+    ? style.skus[sizeSku].quantity
+    : null;
   const handleChange = (e) => {
     e.stopPropagation();
     setQuant(Number(e.target.value));
   };
   const quantOptions = quantity > 0
-    ? <select onChange={handleChange} defaultValue={1} id='quantSelector'>
+    ? <select
+      onChange={handleChange}
+      defaultValue={1} id='quantSelector'>
       {Array(quantity).fill('').slice(0, 15).map((val, idx) => (
         <option
           key={idx + 1}

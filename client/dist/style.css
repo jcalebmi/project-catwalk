@@ -160,6 +160,10 @@ body {
         border: solid 3px aqua;
       }
 
+.floatRight {
+  float: right;
+}
+
 
       /* Scroll Arrows */
       .overview
@@ -409,20 +413,37 @@ li.reviews {
   background-color: rgb(0, 255, 0);
 }
 
+.numberOfStars h4 {
+  margin: 2px;
+  padding-left: 25px;
+}
+
 .characteristicsRating {
   width: 100%;
 }
 
 .ratingSlider input[type="range"] {
   -webkit-appearance: none;
+  width: 150px
 }
 .ratingSlider input[type="range"]::-webkit-slider-runnable-track {
   background-color: lightgrey;
   height: .5em;
+  width: 150px;
 }
 
+.reviews.progressBar:hover{
+  color: blue;
+  background-color: white;
+  cursor: pointer;
+}
 
-
+.reviews.characteristics {
+  display: inline-grid;
+  grid-template-columns: 30% 30% 30%;
+  width: 200px;
+  font-size: .5em;
+}
 
 /* Username & Date */
 span.spanRight {

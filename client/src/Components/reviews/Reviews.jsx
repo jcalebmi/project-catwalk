@@ -1,64 +1,47 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import ReviewItem from './ReviewItem.jsx';
-import getReviews from './helpers/getReviews.js';
 import AddReview from './AddReview.jsx';
+import Search from './Search.jsx';
 
-const selectProductById = (state) => state.product;
-
-function Reviews() {
-  //  Current product state
-  const product = useSelector(selectProductById) || {};
-  //  Review results for current Product
-  const [results, setResults] = useState([]);
-  //  currently displayed results
-  const [display, setDisplay] = useState(results.slice(0, 3));
-  const [currentProduct, setProduct] = useState({});
+function Reviews(props) {
   const [addReview, setAddReview] = useState(false);
-
-  //  Call to Axios GET
-  useEffect(() => {
-    const reviews = () => {
-      if (product.id !== undefined) {
-        setProduct(product);
-        return getReviews(product.id).then((data) => {
-          setResults(data);
-          setDisplay([data[0], data[1]]);
-        });
-      }
-    };
-    reviews();
-  });
-
-  const handleMoreReviews = () => {
-    const length = display.length;
-    setDisplay(results.slice(0, length + 3));
-  };
-
   const handleAddReview = () => {
     setAddReview(true);
   };
+
   return (
       <div className="reviewsContainer">
         <span className="bold">
-          <label htmlFor="sort">{results.length} reviews, sorted by </label>
-          <select name="options" id="options" className="reviewSort useBgColor">
-            <option value="relevance">relevance</option>
-            <option value="helpful">helpful</option>
-            <option value="newest">newest</option>
+          <label htmlFor="sort">{props.results.length} reviews, sorted by </label>
+          <select
+            onChange={props.handleSort}
+            name="options"
+            id="options"
+            className="reviewSort useBgColor">
+            <option
+              value="relevance">relevance</option>
+            <option
+              value="helpful">helpful</option>
+            <option
+              value="newest">newest</option>
           </select>
         </span>
-        <ul className="reviewList">
-          {display.map((item) => <ReviewItem item={item} key={item.review_id}/>)}
-        </ul>
-        <span className="reviewsButtons">
-          {results.length > 2 && display.length < results.length
-            ? <button onClick={handleMoreReviews}>More Reviews</button>
-            : null } <button onClick={handleAddReview}>Add A Review +</button>
+        <span className="floatRight">
+          <Search sendSearch={props.handleSearch}/>
         </span>
-        {addReview === true
-          ? <AddReview className="addReview overlay" product={currentProduct} />
-          : null}
+        <div>
+          <ul className="reviewList">
+            {props.display.map((item, index) => <ReviewItem item={item} key={index}/>)}
+          </ul>
+          <span className="reviewsButtons">
+            {props.results.length > 2 && props.display.length < props.results.length
+              ? <button onClick={props.handleMoreReviews}>More Reviews</button>
+              : null } <button onClick={handleAddReview}>Add A Review +</button>
+          </span>
+          {addReview === true
+            ? <AddReview className="addReview overlay" product={props.currentProduct} />
+            : null}
+        </div>
       </div>
   );
 }

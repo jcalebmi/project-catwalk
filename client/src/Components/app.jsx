@@ -1,38 +1,37 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 /* The provider component makes the Redux store available to any nested
     components that need to access the store */
 import Overview from '../Components/overview/Overview.jsx'
 
 //Review Imports
-import Reviews from './reviews/Reviews.jsx';
-import sampleData from '../../dist/sampleData.js';
-import Ratings from './reviews/Ratings.jsx';
+import ReviewsBox from './reviews/ReviewsBox.jsx';
 
 //Initialization of Products
+// import {setProduct, setQuestions} from './helpers/setProduct.jsx';
 import setProduct from './helpers/setProduct.jsx';
-
+import setQuestions from './helpers/setQuestions.jsx';
 //QAs Import
 import QAs from './qas/QAs.jsx';
 
 function App() {
-  const [isProductLoaded, setProductLoaded] = useState(false);
-  if (!isProductLoaded) {
+  const [isLoaded, setLoaded] = useState(false);
+  if (!isLoaded) {
     setProduct()
       .then(() => {
-        setProductLoaded(true);
+        setLoaded(true);
       });
     return null;
   }
 
   return (
-      <Overview />
-      // <div id="questions-answers-container">
-      //   <QAs />
-      // </div>
-      // <div id="ratingReviewContainer">
-      //   <Ratings />
-      //   <Reviews />
-      // </div>
+      <div id='modules'>
+        <Overview />
+        <div id="questions-answers-container">
+          <QAs />
+        </div>
+        <ReviewsBox />
+      </div>
   );
 }
 

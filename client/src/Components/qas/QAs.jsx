@@ -1,33 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import QAsSearch from './QAsSearch.jsx';
-import QAsItem from './QAsItem.jsx';
+import QAsItems from './main/QAsItems.jsx';
+import sortData from './helpers/sortData';
+import axios from 'axios';
 
-const getQuestions = require('./helpers/getQuestions.js');
-
-const selectSingleProduct = (state) => state.product;
+const getQuestions = (id = 19093) => (
+  axios.get(`qa/questions/${id}`)
+    .then((res) => (res.data))
+    .catch((err) => {
+      console.log('ERROR: ', err);
+    })
+);
 
 const QAs = () => {
-  let productId;
-  const [questionsArray, setProductQuestions] = useState([]);
-
-  const product = useSelector(selectSingleProduct) || [];
-
-  useEffect(() => {
-    if (product !== null && product.id !== undefined) {
-      productId = product.id;
-      getQuestions(productId, (questions) => {
-        setProductQuestions(questions);
+  const [isLoaded, setLoaded] = useState(false);
+  const [questions, setQuestions] = useState();
+  if (!isLoaded) {
+    getQuestions()
+      .then((data) => {
+        setQuestions(data);
+        setLoaded(true);
       });
-    }
-  });
+    return null;
+  }
+
+  // useEffect(() => {
+  //   if (questions !== undefined) {
+  //     sortData(questions, 'question_helpfulness', (sorted) => {
+  //       questions = sorted;
+  //     });
+  //   }
+  //   if (questions === undefined) {
+  //     return (
+  //       <div>Loading...</div>
+  //     );
+  //   }
+  // });
+
 
   return (
-    <div>
-      <div>
-        <QAsSearch />
-        <QAsItem props={questionsArray} />
-      </div>
+    <div className="questions-and-answers">
+      <QAsItems questions={questions} />
     </div>
   );
 };

@@ -9,14 +9,14 @@ const updateHelpful = require('./reviewHelpers/helpfulness.js');
 const getMetaData = require('./reviewHelpers/getMeta.js');
 const getStyles = require('./overviewHelpers/getStyles.js');
 const sendReview = require('./reviewHelpers/sendReview.js');
+const sendReport = require('./reviewHelpers/sendReport.js');
 
 const fetchQuestions = require('./questionsHelpers/fetchQuestions.js');
 const fetchAnswers = require('./questionsHelpers/fetchAnswers.js');
 
-app.use(express.static(path.join(__dirname, 'client', 'dist')));
-
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.static(path.join(__dirname, 'client', 'dist')));
 
 // Takes product ID & calls Axios helper
 // in appHelpers/getProducts.js
@@ -67,6 +67,15 @@ app.put('/reviews/:review_id/helpful', (req, res) => {
   });
 });
 
+app.put('/reviews/:review_id/report', (req, res) => {
+  const id = req.params.review_id;
+  sendReport(id).then((response) => {
+    console.log('success');
+    res.status(204);
+    res.end();
+  });
+});
+
 app.post('/reviews/', (req, res) => {
   const data = req.body;
   sendReview(data);
@@ -74,15 +83,16 @@ app.post('/reviews/', (req, res) => {
 
 app.get('/qa/questions/:product_id', (req, res) => {
   const id = req.params.product_id;
-  fetchQuestions(id, (results) => {
-    res.send(results);
+  fetchQuestions(id, (err, results) => {
+    if (err) throw err;
+    if (results !== undefined) res.send(results);
   });
 });
 
 app.get('/qa/questions/:question_id/answers', (req, res) => {
   const id = req.params.question_id;
   fetchAnswers(id, (results) => {
-    res.send(results);
+    if (results !== undefined) res.send(results);
   });
 });
 
