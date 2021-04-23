@@ -7,9 +7,7 @@ import store from '../store/store.jsx';
 import Overview from '../components/overview/Overview.jsx'
 
 //Review Imports
-import Reviews from './reviews/Reviews.jsx';
-import sampleData from '../../dist/sampleData.js';
-import Ratings from './reviews/Ratings.jsx';
+import ReviewsBox from './reviews/ReviewsBox.jsx';
 
 //Initialization of Products
 import catwalkPromise from './helpers/setProduct.jsx';
@@ -18,18 +16,13 @@ import catwalkPromise from './helpers/setProduct.jsx';
 import QAs from './qas/QAs.jsx';
 
 const App = () => {
-
-
   return (
     <Provider store={store}>
       <Overview />
       <div id="questions-answers-container">
           <QAs />
         </div>
-      <div id="ratingReviewContainer">
-        <Ratings />
-        <Reviews />
-      </div>
+      <ReviewsBox />
     </Provider>
   );
 }

@@ -21,6 +21,7 @@ const QAs = () => {
     }
   });
 
+
   return (
     <div className="questions-and-answers">
       <QAsItems questions={questions} />
