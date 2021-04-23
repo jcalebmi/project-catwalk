@@ -2,3 +2,4 @@ node_modules
 myconfig.js
 client/dist/bundle.js
 coverage/
+package-lock.json

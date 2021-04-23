@@ -5,7 +5,7 @@ import MainOverview from './MainOverview.jsx';
 import ProductOverview from './ProductOverview.jsx';
 
 const Overview = () => (
-  <div className='overview'>
+  <div id='overview'>
     <NavigationBar />
     <Announcements />
     <MainOverview />
