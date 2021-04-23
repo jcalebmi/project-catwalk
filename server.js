@@ -1,7 +1,5 @@
-
 const express = require('express');
 const bodyParser = require('body-parser');
-
 
 const app = express();
 const path = require('path');
@@ -23,20 +21,20 @@ app.use(express.static(path.join(__dirname, 'client', 'dist')));
 // Takes product ID & calls Axios helper
 // in appHelpers/getProducts.js
 // Returns products back to client
-app.get('/products/:product_id', (req, res) => {
+app.get('/product/:product_id', (req, res) => {
   const id = req.params.product_id;
   getProduct(id).then((response) => {
-    console.log('success');
     res.status(200);
     res.send(response);
   });
 });
 
 // Gets styles
-app.get('/products/:product_id/styles', (req, res) => {
+app.get('/styles/:product_id', (req, res) => {
   const id = req.params.product_id;
-  getStyles(id).then((response) => {
-    console.log('success');
+  getStyles(id).then((styles) => {
+    res.status(200);
+    res.send(styles.results);
   });
 });
 
