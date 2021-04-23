@@ -22,7 +22,7 @@ function Ratings() {
     const metaData = () => {
       if (product.id !== undefined) {
         return getMetaData(product.id).then((data) => {
-          setMeta(data);
+          if (data !== undefined) setMeta(data);
         });
       }
     };
@@ -30,8 +30,10 @@ function Ratings() {
     const reviews = () => {
       if (product.id !== undefined) {
         return getReviews(product.id).then((data) => {
-          setResults(data);
-          metaData();
+          if (data !== undefined) {
+            setResults(data);
+            metaData();
+          }
         });
       }
     };
@@ -61,7 +63,7 @@ function Ratings() {
       }
     };
     getRecommend();
-  });
+  }, [product]);
 
   let ratingSum = 0;
   const ratingsTotal = () => {

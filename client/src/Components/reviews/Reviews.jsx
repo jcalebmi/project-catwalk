@@ -22,13 +22,15 @@ function Reviews() {
       if (product.id !== undefined) {
         setProduct(product);
         return getReviews(product.id).then((data) => {
-          setResults(data);
-          setDisplay([data[0], data[1]]);
+          if (data !== undefined) {
+            setResults(data);
+            setDisplay([data[0], data[1]]);
+          }
         });
       }
     };
     reviews();
-  });
+  }, [product]);
 
   const handleMoreReviews = () => {
     const length = display.length;

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 /* The provider component makes the Redux store available to any nested
     components that need to access the store */
 import { Provider } from 'react-redux';
@@ -11,18 +12,13 @@ import sampleData from '../../dist/sampleData.js';
 import Ratings from './reviews/Ratings.jsx';
 
 //Initialization of Products
-import setProduct from './helpers/setProduct.jsx';
+import catwalkPromise from './helpers/setProduct.jsx';
 
 //QAs Import
 import QAs from './qas/QAs.jsx';
 
-function App() {
-  const [once, inc] = useState(0);
-  if (once === 0) {
-    setProduct();
-    console.log('increment', once);
-    inc(once + 1);
-  }
+const App = () => {
+
 
   return (
     <Provider store={store}>
