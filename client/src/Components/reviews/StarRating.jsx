@@ -45,13 +45,14 @@ function StarRating(props) {
       <div className="numberOfStars">
         <h4 className="filters">Rating Breakdown</h4>
         <span
-          className="filters bold">Filters: {filtered}</span><br></br>
+          className="filters bold">
+            Filters: {filtered}</span><br></br>
           {filtered === 'none'
             ? null
             : <span
               onClick={handleStars}
               className="underline"
-              style={ {color: 'blue'} }>Remove All Filters</span>}
+              style={ { color: 'blue', cursor: 'pointer' } }>Remove All Filters</span>}
         <div className="numberOfStars underline">
           <span
             onClick={handleStars}
