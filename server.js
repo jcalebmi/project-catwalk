@@ -1,7 +1,5 @@
-
 const express = require('express');
 const bodyParser = require('body-parser');
-
 
 const app = express();
 const path = require('path');
@@ -11,6 +9,7 @@ const updateHelpful = require('./reviewHelpers/helpfulness.js');
 const getMetaData = require('./reviewHelpers/getMeta.js');
 const getStyles = require('./overviewHelpers/getStyles.js');
 const sendReview = require('./reviewHelpers/sendReview.js');
+const sendReport = require('./reviewHelpers/sendReport.js');
 
 const fetchQuestions = require('./questionsHelpers/fetchQuestions.js');
 const fetchAnswers = require('./questionsHelpers/fetchAnswers.js');
@@ -22,20 +21,20 @@ app.use(express.static(path.join(__dirname, 'client', 'dist')));
 // Takes product ID & calls Axios helper
 // in appHelpers/getProducts.js
 // Returns products back to client
-app.get('/products/:product_id', (req, res) => {
+app.get('/product/:product_id', (req, res) => {
   const id = req.params.product_id;
   getProduct(id).then((response) => {
-    console.log('success');
     res.status(200);
     res.send(response);
   });
 });
 
 // Gets styles
-app.get('/products/:product_id/styles', (req, res) => {
+app.get('/styles/:product_id', (req, res) => {
   const id = req.params.product_id;
-  getStyles(id).then((response) => {
-    console.log('success');
+  getStyles(id).then((styles) => {
+    res.status(200);
+    res.send(styles.results);
   });
 });
 
@@ -62,6 +61,15 @@ app.get('/reviews/meta/:id', (req, res) => {
 app.put('/reviews/:review_id/helpful', (req, res) => {
   const id = req.params.review_id;
   updateHelpful(id).then((response) => {
+    console.log('success');
+    res.status(204);
+    res.end();
+  });
+});
+
+app.put('/reviews/:review_id/report', (req, res) => {
+  const id = req.params.review_id;
+  sendReport(id).then((response) => {
     console.log('success');
     res.status(204);
     res.end();

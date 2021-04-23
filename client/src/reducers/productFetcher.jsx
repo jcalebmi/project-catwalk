@@ -12,10 +12,6 @@ const productFetcher = (state, action) => {
       return {
         questions: action.payload,
       };
-    case 'APP_LOADING':
-      return {
-        status: 'loaded',
-      };
     default:
       return state;
   }

@@ -2,35 +2,36 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 /* The provider component makes the Redux store available to any nested
     components that need to access the store */
-import { Provider } from 'react-redux';
-import store from '../store/store.jsx';
-import Overview from '../components/overview/Overview.jsx'
+import Overview from '../Components/overview/Overview.jsx'
 
 //Review Imports
-import Reviews from './reviews/Reviews.jsx';
-import sampleData from '../../dist/sampleData.js';
-import Ratings from './reviews/Ratings.jsx';
+import ReviewsBox from './reviews/ReviewsBox.jsx';
 
 //Initialization of Products
-import catwalkPromise from './helpers/setProduct.jsx';
-
+// import {setProduct, setQuestions} from './helpers/setProduct.jsx';
+import setProduct from './helpers/setProduct.jsx';
+import setQuestions from './helpers/setQuestions.jsx';
 //QAs Import
 import QAs from './qas/QAs.jsx';
 
-const App = () => {
-
+function App() {
+  const [isLoaded, setLoaded] = useState(false);
+  if (!isLoaded) {
+    setProduct()
+      .then(() => {
+        setLoaded(true);
+      });
+    return null;
+  }
 
   return (
-    <Provider store={store}>
-      <Overview />
-      <div id="questions-answers-container">
+      <div id='modules'>
+        <Overview />
+        <div id="questions-answers-container">
           <QAs />
         </div>
-      <div id="ratingReviewContainer">
-        <Ratings />
-        <Reviews />
+        <ReviewsBox />
       </div>
-    </Provider>
   );
 }
 

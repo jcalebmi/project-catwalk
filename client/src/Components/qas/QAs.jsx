@@ -1,25 +1,42 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import QAsItems from './main/QAsItems.jsx';
 import sortData from './helpers/sortData';
+import axios from 'axios';
 
-const selectQuestions = (state) => state.questions;
+const getQuestions = (id = 19093) => (
+  axios.get(`qa/questions/${id}`)
+    .then((res) => (res.data))
+    .catch((err) => {
+      console.log('ERROR: ', err);
+    })
+);
 
 const QAs = () => {
-  let questions = useSelector(selectQuestions);
-
-  useEffect(() => {
-    if (questions !== undefined) {
-      sortData(questions, 'question_helpfulness', (sorted) => {
-        questions = sorted;
+  const [isLoaded, setLoaded] = useState(false);
+  const [questions, setQuestions] = useState();
+  if (!isLoaded) {
+    getQuestions()
+      .then((data) => {
+        setQuestions(data);
+        setLoaded(true);
       });
-    }
-    if (questions === undefined) {
-      return (
-        <div>Loading...</div>
-      );
-    }
-  });
+    return null;
+  }
+
+  // useEffect(() => {
+  //   if (questions !== undefined) {
+  //     sortData(questions, 'question_helpfulness', (sorted) => {
+  //       questions = sorted;
+  //     });
+  //   }
+  //   if (questions === undefined) {
+  //     return (
+  //       <div>Loading...</div>
+  //     );
+  //   }
+  // });
+
 
   return (
     <div className="questions-and-answers">
