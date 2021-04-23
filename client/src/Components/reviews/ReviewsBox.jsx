@@ -100,6 +100,6 @@ function ReviewsBox (props) {
         currentProduct={currentProduct}
         handleMoreReviews={handleMoreReviews} />
     </div>
-  )
+  );
 }
 export default ReviewsBox;
