@@ -88,4 +88,30 @@ app.get('/qa/questions/:question_id/answers', (req, res) => {
   });
 });
 
+app.get('/qa/questions/:question_id/helpful', (req, res) => {
+  const id = req.params.question_id;
+  fetchAnswers(id, (results) => {
+    if (results !== undefined) res.send(results);
+  });
+});
+
+app.get('/qa/questions/:question_id/report', (req, res) => {
+  const id = req.params.question_id;
+  fetchAnswers(id, (results) => {
+    if (results !== undefined) res.send(results);
+  });
+});
+app.get('/qa/questions/:answer_id/helpful', (req, res) => {
+  const id = req.params.answer_id;
+  fetchAnswers(id, (results) => {
+    if (results !== undefined) res.send(results);
+  });
+});
+app.get('/qa/questions/:answer_id/report', (req, res) => {
+  const id = req.params.answer_id;
+  fetchAnswers(id, (results) => {
+    if (results !== undefined) res.send(results);
+  });
+});
+
 module.exports = app;

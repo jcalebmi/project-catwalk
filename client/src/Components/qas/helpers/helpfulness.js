@@ -24,6 +24,8 @@ const helpfulness = (e) => {
 
   e.target.innerHTML = slice1.concat(num).concat(slice2);
 
+  console.log('event: ', e, 'target: ', e.target, 'id: ', e.target.id)
+
   btn.disabled = true;
 };
 
