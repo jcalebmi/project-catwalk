@@ -15,8 +15,6 @@ import setProduct from './helpers/setProduct.jsx';
 //QAs Import
 import QAs from './qas/QAs.jsx';
 
-
-
 function App() {
   const [product, setCurrentProduct] = useState([]);
   const [once, inc] = useState(0);

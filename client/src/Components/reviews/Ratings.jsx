@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Characteristics from './Characteristics.jsx';
-import StarRating from './StarRating.jsx'
-import ratings from './helpers/ratings.js';
-
+import StarRating from './StarRating.jsx';
+import RatingStars from './RatingStars.jsx';
+import { ratings, ave } from './helpers/ratings.js';
 
 function Ratings(props) {
   const ratingResults = ratings(props.meta, props.results);
@@ -11,13 +11,7 @@ function Ratings(props) {
     <div id="ratings">
       <div className="ratingsHead">
         <div className="ratingAve">{ratingResults.ave}</div>
-        <div className="ratingStars">
-          <div className="outerRatingStars">
-            <div className="innerRatingStars"
-            style={{ width: starWidth }}>
-            </div>
-          </div>
-        </div>
+        <RatingStars starWidth={starWidth} />
       </div><br></br>
       <span>{ratingResults.recommend} of reviews recommend this product</span>
       <StarRating

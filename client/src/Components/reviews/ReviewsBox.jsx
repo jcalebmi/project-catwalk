@@ -8,7 +8,6 @@ import getMetaData from './helpers/getMeta.js';
 
 const selectProductById = (state) => state.product;
 
-
 function ReviewsBox (props) {
   //  Current product state
   const product = useSelector(selectProductById) || {};

@@ -33,4 +33,4 @@ const ratings = (meta, results) => {
   };
 };
 
-export default ratings;
+export {ratings, ave};

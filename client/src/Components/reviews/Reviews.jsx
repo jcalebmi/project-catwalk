@@ -3,7 +3,6 @@ import ReviewItem from './ReviewItem.jsx';
 import AddReview from './AddReview.jsx';
 import Search from './Search.jsx';
 
-
 function Reviews(props) {
   const [addReview, setAddReview] = useState(false);
   const handleAddReview = () => {
