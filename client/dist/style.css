@@ -8,8 +8,6 @@ body {
 
 #toggleMode {
   position: absolute;
-  z-index: 2;
-  margin-left: 150px
 }
 
 body.light {

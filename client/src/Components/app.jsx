@@ -52,7 +52,7 @@ function App() {
       <div id='modules'>
         <button
           id="toggleMode"
-          onClick={handleColor}>Toggle: {toggle} </button>
+          onClick={handleColor}>{toggle} </button>
         <Overview />
         <div id="questions-answers-container">
           <QAs />
