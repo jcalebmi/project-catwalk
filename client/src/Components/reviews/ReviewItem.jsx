@@ -6,7 +6,7 @@ const moment = require('moment');
 
 function ReviewItem(props) {
   const [ishelpfulClicked, setHelpfulClick] = useState(false);
-  const mode = `reviews border-bottom ${props.mode}`
+  const mode = `reviews border-bottom useBgContrast ${props.mode}`;
   const helpfulMode =`helpfulness useBgContrast ${props.mode}`;
   const starsMode = `outerReviewStars ${props.mode}`;
   //  Call helpfulness API

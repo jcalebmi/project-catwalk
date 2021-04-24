@@ -18,20 +18,6 @@ body.dark {
   color: #f4faffe0;
 }
 /* #2Da7FF; */
-li.dark {
-  background-color: #0074C1;
-}
-
-li.light {
-  background-color: #D7ECFF;
-}
-
-p.dark {
-  background-color: #0074C1;
-}
-p.light {
-  background-color: #D7ECFF;
-}
 
 .bold {
   font-weight: bold;
