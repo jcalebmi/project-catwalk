@@ -13,11 +13,11 @@ const ProductOverview = () => {
           <div className='slogan'>
             {product.slogan}
           </div>
-          <div className='description'>
+          <div className='description useBgContrast light'>
             {product.description}
           </div>
         </div>
-        <ul className='tags'>
+        <ul className='tags useBgContrast light'>
           {product.features.map((feature, idx) => (
             <li key={idx}>
               {feature.feature}: {feature.value}
