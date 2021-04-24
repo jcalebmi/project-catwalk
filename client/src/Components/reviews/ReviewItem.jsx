@@ -6,6 +6,9 @@ const moment = require('moment');
 
 function ReviewItem(props) {
   const [ishelpfulClicked, setHelpfulClick] = useState(false);
+  const mode = `reviews border-bottom ${props.mode}`
+  const helpfulMode =`helpfulness useBgContrast ${props.mode}`;
+  const starsMode = `outerReviewStars ${props.mode}`;
   //  Call helpfulness API
 
   const handleHelpfulness = () => {
@@ -26,10 +29,10 @@ function ReviewItem(props) {
 
   if (props.item !== undefined) {
   return (
-    <li className="reviews">
+    <li className={mode}>
       <div className="reviewDate">
         <div className="reviewStars">
-          <div className="outerReviewStars">
+          <div className={starsMode}>
           <div className="innerReviewStars" style={{ width: starWidth }}></div>
           </div>
         </div>
@@ -51,7 +54,7 @@ function ReviewItem(props) {
         : null}
       {props.item.response !== null && props.item.response.length > 0
         ? <p className="sellerResponse"><strong>Response from seller: </strong>{props.item.response}</p> : null}
-      <span>Helpful? <button className="helpfulness useBgColor" onClick={handleHelpfulness}>Yes</button> ({props.item.helpfulness}) | <a className="underline" onClick={report}>Report</a></span>
+      <span>Helpful? <button className={helpfulMode} onClick={handleHelpfulness}>Yes</button> ({props.item.helpfulness}) | <a className="underline" onClick={report}>Report</a></span>
     </li>
   );
 } else {

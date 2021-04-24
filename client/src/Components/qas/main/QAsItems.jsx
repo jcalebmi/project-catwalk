@@ -70,8 +70,8 @@ const QAsItems = ({ questions }) => {
     <div>
       <QAsSearch searchHandler={(e) => handleSearch(e.target.value)}/>
     <div>
-      {display.map((question) => (
-        <div id="questions" key={question.asker_name}>
+      {display.map((question, index) => (
+        <div id="questions" key={index}>
         <p className="bold" key={question.question_id} >Q: {question.question_body} <span> Helpful? <button id={question.question_id} onClick={helpfulness}>Yes({question.question_helpfulness || 0})</button> | <button onClick={reported}>Report</button> </span></p>
         <Answers
           questionId={question.question_id} questionBody={question.question_body}

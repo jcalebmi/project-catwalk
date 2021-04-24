@@ -16,6 +16,8 @@ import QAs from './qas/QAs.jsx';
 
 function App() {
   const [isLoaded, setLoaded] = useState(false);
+  const [mode, setMode] = useState('light');
+  const [toggle, setToggle] = useState('Dark Mode');
   if (!isLoaded) {
     setProduct()
       .then(() => {
@@ -24,13 +26,38 @@ function App() {
     return null;
   }
 
+  const handleColor = () => {
+    const elementsLight = Array.prototype.slice.call(document.getElementsByClassName('light'));
+    const elementsDark = Array.prototype.slice.call(document.getElementsByClassName('dark'));
+    if (elementsLight.length > 0) {
+      for (let i = 0; i < elementsLight.length; i++) {
+        const element = elementsLight[i];
+        element.classList.remove('light');
+        element.classList.add('dark');
+        setMode('dark');
+        setToggle('Light Mode');
+      }
+    } else {
+      for (let i = 0; i < elementsDark.length; i++) {
+        const element = elementsDark[i];
+        element.classList.remove('dark');
+        element.classList.add('light');
+        setMode('light');
+        setToggle('Dark Mode');
+      }
+    }
+  };
+
   return (
       <div id='modules'>
+        <button
+          id="toggleMode"
+          onClick={handleColor}>Toggle: {toggle} </button>
         <Overview />
         <div id="questions-answers-container">
           <QAs />
         </div>
-        <ReviewsBox />
+        <ReviewsBox mode={mode} />
       </div>
   );
 };

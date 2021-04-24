@@ -90,14 +90,16 @@ function ReviewsBox (props) {
       <Ratings
         meta={meta}
         results={resultsStorage}
-        handleStarFilter={handleStarFilter}/>
+        handleStarFilter={handleStarFilter}
+        mode={props.mode}/>
       <Reviews
         handleSearch={handleSearch}
         results={results}
         display={display}
         handleSort={handleSort}
         currentProduct={currentProduct}
-        handleMoreReviews={handleMoreReviews} />
+        handleMoreReviews={handleMoreReviews}
+        mode={props.mode} />
     </div>
   );
 }

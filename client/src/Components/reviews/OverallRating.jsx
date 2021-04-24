@@ -52,7 +52,7 @@ function OverallRating(props) {
   return (
     <div className="overallRating pointer">
       <span className="bold">
-        Overall Rating:
+        Overall Rating: {rating}
       </span><br></br>
       {stars.map((star) =>
         <span
@@ -62,7 +62,6 @@ function OverallRating(props) {
         onClick={handleStarClick}>
         ✭
         </span>)}
-        <span> {rating}</span>
     </div>
   );
 }
