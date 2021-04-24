@@ -30,7 +30,6 @@ function ReviewsBox (props) {
     const sliced = sorted.slice(0, currentLength);
     setResults(resultsStorage);
     setFilter(sortBy);
-    setResults(sorted);
     setDisplay(sliced);
   };
 
