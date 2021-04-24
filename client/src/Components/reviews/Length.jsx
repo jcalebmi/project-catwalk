@@ -35,6 +35,7 @@ function Length(props) {
             {button}
         </label>
         <input
+          required
           type='radio'
           value={button}
           name='length'

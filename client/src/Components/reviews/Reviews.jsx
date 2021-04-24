@@ -6,7 +6,7 @@ import Search from './Search.jsx';
 function Reviews(props) {
   const [addReview, setAddReview] = useState(false);
   const handleAddReview = () => {
-    setAddReview(true);
+    setAddReview(!addReview);
   };
 
   return (
@@ -39,7 +39,11 @@ function Reviews(props) {
               : null } <button onClick={handleAddReview}>Add A Review +</button>
           </span>
           {addReview === true
-            ? <AddReview className="addReview overlay" product={props.currentProduct} />
+            ? <AddReview
+                className="addReview overlay"
+                product={props.currentProduct}
+                closeReview={handleAddReview}
+                />
             : null}
         </div>
       </div>

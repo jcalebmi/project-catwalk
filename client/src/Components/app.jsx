@@ -33,6 +33,6 @@ function App() {
         <ReviewsBox />
       </div>
   );
-}
+};
 
 export default App;
