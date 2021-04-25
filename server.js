@@ -102,30 +102,31 @@ app.get('/qa/questions/:question_id/answers', (req, res) => {
   });
 });
 
-app.put('/qa/questions/:question_id/helpful', (req, res) => {
+app.put('/qa/questions/:question_id/helpful', (req) => {
   const id = req.params.question_id;
   putQuestionsHelpful(id);
 });
 
-app.put('/qa/questions/:question_id/report', (req, res) => {
+app.put('/qa/questions/:question_id/report', (req) => {
   const id = req.params.question_id;
   putQuestionsReported(id);
 });
-app.put('/qa/answers/:answer_id/helpful', (req, res) => {
+app.put('/qa/answers/:answer_id/helpful', (req) => {
   const id = req.params.answer_id;
   putAnswersHelpful(id);
 });
-app.put('/qa/answers/:answer_id/report', (req, res) => {
+app.put('/qa/answers/:answer_id/report', (req) => {
   const id = req.params.answer_id;
   putAnswersReported(id);
 });
 
-app.post('/qa/questions/', (req, res) => {
+app.post('/qa/questions/', (req) => {
   const { body } = req;
   postNewQuestions(body);
 });
 
-app.post('/qa/questions/:question_id/answers', (req, res) => {
+app.post('/qa/questions/:question_id/answers', (req) => {
+  console.log(req.body, req.params.question_id)
   const { body } = req;
   const id = req.params.question_id;
   postNewAnswers(id, body);

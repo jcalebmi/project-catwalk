@@ -32,7 +32,7 @@ const fetchAnswers = (id, callbackAs) => {
 const updateQsHelpful = (id) => {
   axios.put(`/qa/questions/${id}/helpful`)
     .then(() => {
-      console.log('hai')
+      'hi';
     })
     .catch((err) => {
       throw err;
@@ -42,7 +42,7 @@ const updateQsHelpful = (id) => {
 const reportQs = (id) => {
   axios.put(`/qa/questions/${id}/report`)
     .then(() => {
-      console.log('pls2');
+      'return';
     })
     .catch((err) => {
       throw err;
@@ -51,8 +51,8 @@ const reportQs = (id) => {
 // METHOD: PUT - Mark Answer As Helpful
 const updateAsHelpful = (id) => {
   axios.put(`/qa/answers/${id}/helpful`)
-    .then((res) => {
-      console.log(res);
+    .then(() => {
+      'return';
     })
     .catch((err) => {
       throw err;
@@ -74,21 +74,21 @@ const reportAs = (id) => {
 // METHOD: POST - Add Question
 const postQs = (data) => {
   axios.post('/qa/questions', data, { 'Content-type': 'application/json' })
-    .then((res) => {
-      console.log(res);
+    .then(() => {
+      'return';
     })
     .catch((err) => {
-      console.log(err);
+      throw err;
     });
 };
 // METHOD: POST - Add Answer
 const postAs = (id, data) => {
   axios.post(`/qa/questions/${id}/answers`, data, { 'Content-type': 'application/json' })
-    .then((res) => {
-      console.log(res);
+    .then(() => {
+      'what do i need to put here';
     })
     .catch((err) => {
-      console.log(err);
+      throw err;
     });
 };
 
