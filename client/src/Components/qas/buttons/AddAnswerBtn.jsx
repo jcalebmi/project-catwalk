@@ -5,14 +5,15 @@ Modal.setAppElement('#app');
 
 const AddAnswer = (body) => {
   const [modalIsOpen, setOpenModal] = useState(false);
+  // const mode = `dark ${props.mode}`;
 
   return (
   <div>
     <button onClick={() => setOpenModal(true)}>Add Answer</button>
     <Modal isOpen={modalIsOpen} onRequestClose={() => setOpenModal(false)}>
-      <h1>Submit your Answer</h1>
-      <h2>Product Name:{} Question:{body.body}</h2>
-      <form>
+      <h1 className="addQuestion">Submit your Answer</h1>
+      <h2 className="addQuestion">Product Name:{} Question:{body.body}</h2>
+      <form className="addQuestion">
       *Your answer
       <textarea id="modal-body" rows="10" cols="100"></textarea>
       *What is your nickname?:

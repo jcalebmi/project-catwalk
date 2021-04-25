@@ -10,9 +10,9 @@ const AddQuestion = () => {
   <div>
     <button onClick={() => setOpenModal(true)}>Add Question</button>
     <Modal isOpen={modalIsOpen} onRequestClose={() => setOpenModal(false)}>
-      <h1>Ask Your Question</h1>
-      <h3>About the Product:</h3>
-      <form>
+      <h1 className="addQuestion">Ask Your Question</h1>
+      <h3 className="addQuestion">About the Product:</h3>
+      <form className="addQuestion">
       *Your Question:
       <textarea id="modal-body" rows="10" cols="100"></textarea>
       *What is your nickname?:

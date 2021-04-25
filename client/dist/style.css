@@ -41,6 +41,13 @@ body.dark {
   background-color: #D7ECFF;
 }
 
+.useTitleContrast.light {
+  background-color: #A3D4FF
+}
+.useTitleContrast.dark {
+  background-color: #00518A
+}
+
 .border-bottom.light {
   border-bottom: solid #71BDff
 }
@@ -58,6 +65,13 @@ body.dark {
 
 .pointer {
   cursor: pointer;
+}
+
+.addAnswer.dark {
+  color: black;
+}
+.addQuestion {
+  color: black !important;
 }
 
 .magnifier {
@@ -445,7 +459,7 @@ li.reviews {
   display: inline-grid;
   grid-template-columns: 50% 50%;
   position: relative;
-  z-index: 2;
+  z-index: 0;
 }
 .ratingStars {
   padding-left: 25px;
