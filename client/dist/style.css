@@ -33,14 +33,36 @@ body {
 #hidden {
   visibility: hidden;
 }
+
+/* Max Star Styling */
+:root {
+  --star-size: 15px;
+  --star-color: grey;
+  --star-background: gold;
+}
+
+.Stars {
+  --percent: calc(var(--rating) / 5 * 100%);
+  display: inline-block;
+  font-size: var(--star-size);
+  font-family: Times;
+  line-height: 1em;
+}
+.Stars::before {
+  content: '★★★★★';
+  letter-spacing: 0px;
+  background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 /* Overview */
   /* Navigation Bar */
-  .overview {
+  #overview {
     display: flex;
     flex-direction: column;
     width: 100%;
   }
-  .overview
+  #overview
   .navigationBar {
     display: flex;
     padding: 0 100px 0 100px;
@@ -49,32 +71,32 @@ body {
     align-items:center;
     background-color: aqua;
   }
-  .overview
+  #overview
   .navigationBar
   #logo {
     height: 70%;
   }
   /* Announcement */
-  .overview
+  #overview
   .announcement {
     margin: auto;
     padding: 5px 0 5px 0;
   }
   /* Main Overview */
-  .overview
+  #overview
   .main {
     display: flex;
     height: 600px;
   }
     /* Image Gallery */
-    .overview
+    #overview
     .default
     .ImageGallery {
       display: inline-block;
       position: relative;
       width: 70%;
     }
-    .overview
+    #overview
     .expanded
     .ImageGallery {
       display: inline-block;
@@ -82,7 +104,7 @@ body {
       width: 100%;
     }
       /* Scroll Arrows */
-      .overview
+      #overview
       .arrowbox {
         display: flex;
         background-color: white;
@@ -93,13 +115,13 @@ body {
         font-weight: bolder;
         border: solid 3px transparent;
       }
-      .overview
+      #overview
       .ImageGallery
       .arrowbox:hover {
         border: solid 3px aqua;
         opacity: 60%;
       }
-      .overview
+      #overview
       .ImageGallery
       .arrow {
         border: solid black;
@@ -107,28 +129,28 @@ body {
         display: inline-block;
         padding: 3px;
       }
-      .overview
+      #overview
       .ImageGallery
       .left {
         transform: rotate(135deg);
       }
-      .overview
+      #overview
       .ImageGallery
       .right {
         transform: rotate(-45deg);
       }
-      .overview
+      #overview
       .ImageGallery
       .up {
         transform: rotate(225deg);
       }
-      .overview
+      #overview
       .ImageGallery
       .down {
         transform: rotate(45deg);
       }
       /* Main Image */
-      .overview
+      #overview
       .ImageGallery
       .mainImage {
         vertical-align: middle;
@@ -137,7 +159,7 @@ body {
         height: 100%;
       }
       /* Thumbnails */
-      .overview
+      #overview
       .ImageGallery
       .thumbnailContainer {
         position: absolute;
@@ -147,14 +169,14 @@ body {
         display: flex;
         flex-direction: column;
       }
-      .overview
+      #overview
       .ImageGallery
       .thumbnail {
         height: 40px;
         object-fit: cover;
         border: solid 3px transparent;
       }
-      .overview
+      #overview
       .ImageGallery
       .thumbnail:hover {
         border: solid 3px aqua;
@@ -166,7 +188,7 @@ body {
 
 
       /* Scroll Arrows */
-      .overview
+      #overview
       .ImageGallery
       .scrollArrows {
         position: absolute;
@@ -177,31 +199,43 @@ body {
         flex-direction: row;
         justify-content: space-between;
       }
-      .overview
+      #overview
       .ImageGallery
       .scrollArrows
       .arrowbox {
         width: 50px;
         height: 100px;
       }
-      .overview
+      #overview
       .ImageGallery
       .arrowbox:hover {
         border: solid 3px aqua;
         opacity: 60%;
       }
   /* Product Selection */
-  .overview
+  #overview
   .productSelection {
     width: 30%;
     height: 100%;
     overflow: hidden;
   }
-  .overview
+  #overview
+  .reviewLink{
+    display:flex;
+  }
+  #overview
+  .scroll {
+    display: flex;
+    font-size: .7em;
+    align-items: center;
+    padding-left:10px
+  }
+
+  #overview
   .sale {
     color: red;
   }
-  .overview
+  #overview
   .productSelection
   .styleThumbnails {
     margin-top: 20px;
@@ -212,13 +246,13 @@ body {
     align-items: center;
     grid-auto-rows: 40px;
   }
-  .overview
+  #overview
   .productSelection
   .styleThumbnail {
     position: relative;
     height:40px;
   }
-  .overview
+  #overview
   .productSelection
   .styleThumbnail
   img {
@@ -226,7 +260,7 @@ body {
     width: 40px;
     border-radius: 100%;
   }
-  .overview
+  #overview
   .selected {
     position: absolute;
     top:0;
@@ -239,13 +273,13 @@ body {
     font-size:15px;
   }
   /*Product Overview */
-  .overview
+  #overview
   .productOverview {
     display: flex;
     flex-direction: column;
     height: fit-content;
   }
-  .overview
+  #overview
   .productOverview
   .information {
     display: flex;
@@ -253,7 +287,7 @@ body {
     flex-direction: row;
     min-height: 150px;
   }
-  .overview
+  #overview
   .productOverview
   .sloganAndDesc {
     display: flex;
@@ -264,22 +298,22 @@ body {
     padding-left: 30px;
     padding-right: 30px;
   }
-  .overview
+  #overview
   .productOverview
   .slogan {
     text-align: center;
   }
-  .overview
+  #overview
   .productOverview
   .description {
 
   }
-  .overview
+  #overview
   .productOverview
   .tags {
     padding-right: 50px;
   }
-  .overview
+  #overview
   .productOverview
   .shareButtons {
     height: 50px
@@ -295,9 +329,14 @@ body {
   padding-bottom: 0px;
   z-index: 1;
 }
+.reviewsContainer {
+  min-width: 360px;
+  max-width: 500px;
+}
 /* Review List & Items */
 ul.reviewList {
-  height: 300px;
+  min-height: 300px;
+  max-height: 400px;
   overflow-x: hidden;
   overflow-y: auto;
   padding: 0px;
@@ -310,6 +349,7 @@ p.sellerResponse {
 }
 
 li.reviews {
+  flex-direction: column;
   list-style: none;
   border-bottom: solid grey;
   padding: 3px;
@@ -352,10 +392,13 @@ li.reviews {
 
 /* Ratings */
 #ratings {
+  overflow-x: scroll;
   font-size: .75em;
   max-width: 90%;
-  overflow-x: scroll;
-
+  padding-left: 8px;
+  border-top: 0px;
+  padding-top: 0px;
+  margin-bottom: 40px;
 }
 .ratingsHead {
   display: inline-grid;
@@ -414,24 +457,33 @@ li.reviews {
 }
 
 .numberOfStars h4 {
+  font-size: 1.5em;
   margin: 2px;
   padding-left: 25px;
 }
-
+.characteristicsRating h6 {
+  font-size: 1.5em;
+  padding-left: 2px;
+  margin: 0px
+}
 .characteristicsRating {
   width: 100%;
 }
-
+.ratingSlider {
+  padding-top: 3px;
+}
 .ratingSlider input[type="range"] {
   -webkit-appearance: none;
-  width: 150px
+  width: 200px;
 }
 .ratingSlider input[type="range"]::-webkit-slider-runnable-track {
   background-color: lightgrey;
   height: .5em;
-  width: 150px;
+  width: 200px;
 }
-
+.reviews.progressBar {
+  width: 200px;
+}
 .reviews.progressBar:hover{
   color: blue;
   background-color: white;
@@ -441,8 +493,9 @@ li.reviews {
 .reviews.characteristics {
   display: inline-grid;
   grid-template-columns: 30% 30% 30%;
-  width: 200px;
-  font-size: .5em;
+  padding-left: 5px;
+  width: 260px;
+  font-size: 1em;
 }
 
 /* Username & Date */
@@ -484,11 +537,22 @@ select.reviewSort {
 .addReview.overlay h3 {
   padding-top: 0px;
 }
-
+.addReview.container {
+  position: relative;
+  margin: 0% 33%;
+  height: 700px;
+  width: 300px;
+  overflow: scroll;
+}
+#writeReviewContainer  {
+  position: relative;
+  height: 600px;
+  width: 300px;
+}
 .writeReview {
   position: relative;
-  padding-left: 40%;
-  padding-right: 35%;
+  overflow: scroll;
+  background-color: whitesmoke;
 }
 
 .writeReview .summaryContainer {
@@ -506,64 +570,32 @@ select.reviewSort {
   width: 50%;
   height: auto;
 }
-#reviewIMG img:hover {
+/* #reviewIMG img:hover {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 5%;
-  width: 90%;
-  height: 90%;
-}
-/* Questions And Answers */
-#qas-items-container {
-  display: grid;
-  grid-template-columns: 2fr, 1fr, 1fr;
-  grid-template-rows: 0.5 1fr 1fr;
-  /* justify-content: center; */
-}
-.search-field {
-  grid-column: 1 / span 4;
-  grid-row: 1 / span 1;
-  width: 100%;
-  height: 7.5vh;
-  margin-top: 50px;
-}
-#q-a-item {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: 0.3fr 0.7fr;
-  margin-top: 20px;
-  justify-content: center;
-}
-#q-a-item
-  #question {
-    grid-column: 1 / 3;
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-    grid-template-rows: 0.5fr;
-  }
+  margin: 25%;
+  margin-bottom: 50%;
+  width: 50%;
+  height: 50%;
+  z-index: 5;
+} */
 
-.answers {
-  list-style: none;
-  position: relative;
-  align-items: center;
-  display: flex;
-  }
-
-
-#q-a-item
-  .q-feedback {
-    display: inline-flex;
-    justify-content: baseline;
-}
-.feedback-btn {
-  background: none;
-  border: none;
-  padding: 0;
+.addReview.xBorder {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: absolute;
+  top:0;
+  left:0;
+  margin: 0;
+  border: solid black;
+  transform: rotate(45deg);
   cursor: pointer;
+  overflow: scroll;
 }
-#qs-btn-container {
-
+.addReview.closeX {
+  font-size: 5em;
 }

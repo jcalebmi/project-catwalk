@@ -13,7 +13,7 @@ function Recommend(props) {
     <div>
       <label htmlFor="helpful">Yes</label>
       <input
-      type="radio" id="helpful" value="yes" name="helpful" defaultChecked onClick={handleClick}>
+      type="radio" id="helpful" value="yes" name="helpful" defaultChecked onClick={handleClick} required>
       </input>
       <label htmlFor='notHelpful'> No</label>
       <input

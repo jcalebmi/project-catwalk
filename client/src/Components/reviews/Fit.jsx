@@ -35,6 +35,7 @@ function Fit(props) {
             {button}
         </label>
         <input
+          required
           type='radio'
           value={button}
           name='fit'
