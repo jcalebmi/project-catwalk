@@ -12,6 +12,7 @@ const AddAnswer = ({ questionId, questionBody }) => {
   const productName = useSelector(getProductName);
 
   const [modalIsOpen, setOpenModal] = useState(false);
+
   const [question, setQuestion] = useState('');
   const [nickname, setNickname] = useState('');
   const [userEmail, setEmail] = useState('');

@@ -17,7 +17,7 @@ function Reviews(props) {
             onChange={props.handleSort}
             name="options"
             id="options"
-            className="reviewSort useBgColor">
+            className="reviewSort useBgColor light">
             <option
               value="relevance">relevance</option>
             <option
@@ -31,7 +31,10 @@ function Reviews(props) {
         </span>
         <div>
           <ul className="reviewList">
-            {props.display.map((item, index) => <ReviewItem item={item} key={index}/>)}
+            {props.display.map((item, index) => <ReviewItem
+              item={item}
+              key={index}
+              mode={props.mode}/>)}
           </ul>
           <span className="reviewsButtons">
             {props.results.length > 2 && props.display.length < props.results.length
@@ -43,6 +46,7 @@ function Reviews(props) {
                 className="addReview overlay"
                 product={props.currentProduct}
                 closeReview={handleAddReview}
+                mode={props.mode}
                 />
             : null}
         </div>

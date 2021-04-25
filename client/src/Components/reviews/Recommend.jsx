@@ -10,7 +10,8 @@ function Recommend(props) {
   };
 
   return (
-    <div>
+    <div className="addReview helpful">
+      <span className='bold recommend radio'>Do you recommend this product?</span><br></br>
       <label htmlFor="helpful">Yes</label>
       <input
       type="radio" id="helpful" value="yes" name="helpful" defaultChecked onClick={handleClick} required>

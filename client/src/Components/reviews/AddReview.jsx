@@ -26,6 +26,9 @@ function AddReview(props) {
   const [files, setFiles] = useState([]);
   const [filesSRC, setFilesSRC] = useState([]);
   const [error, setError] = useState(false);
+  const overlayMode = `addReview overlay ${props.mode}`;
+  const reviewMode = `writeReview ${props.mode}`;
+  const xBorderMode = `addReview xBorder ${props.mode}`;
 
   const recommended = (boolean) => {
     setIsRecommended(boolean);
@@ -129,9 +132,9 @@ function AddReview(props) {
   };
 console.log(props.product);
   return (
-    <div className='addReview overlay'>
+    <div className={overlayMode}>
       <div
-        className="addReview xBorder"
+        className={xBorderMode}
         onClick={props.closeReview}>
         <span className="addReview closeX">+</span>
       </div>
@@ -140,7 +143,7 @@ console.log(props.product);
         <h3>About the {props.product.name}
         </h3>
         <div id='writeReviewContainer'>
-          <div className='writeReview'>
+          <div className={reviewMode}>
             <form
               onSubmit={onSubmit}
               id='addReview'>
@@ -197,7 +200,6 @@ console.log(props.product);
                     className='reviewMinCharacters'>
                       For authentication reasons, you will not be emailed
                     </span><br></br>
-                <span className='bold'>Do you recommend this product?</span><br></br>
                 <Recommend
                 recommended={recommended}
                 className='pointer' />

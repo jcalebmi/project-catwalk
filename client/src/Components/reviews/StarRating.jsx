@@ -10,6 +10,7 @@ function StarRating(props) {
     { name: '2 stars', value: false },
     { name: '1 stars', value: false },
   ]);
+  const mode = `underline removeFilters ${props.mode}`
   const [filtered, setFiltered] = useState('none');
   const handleStars = (e) => {
     let newStars;
@@ -51,8 +52,8 @@ function StarRating(props) {
             ? null
             : <span
               onClick={handleStars}
-              className="underline"
-              style={ { color: 'blue', cursor: 'pointer' } }>Remove All Filters</span>}
+              className={mode}
+              >Remove All Filters</span>}
         <div className="numberOfStars underline">
           <span
             onClick={handleStars}

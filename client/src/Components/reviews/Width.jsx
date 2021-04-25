@@ -28,20 +28,22 @@ function Width(props) {
         <span className="bold">Width: </span>
         <span>{rating}</span>
       </div>
-      {buttons.map((button) =>
-      <span key={button}>
-        <label
-          htmlFor={button}>
-            {button}
-        </label>
-        <input
-          required
-          type='radio'
-          value={button}
-          name='width'
-          onClick={handleClick}>
-          </input>
-      </span>)}
+      <div className="radioContainer">
+        {buttons.map((button) =>
+        <span key={button} className='addReview radio'>
+          <label
+            htmlFor={button}>
+              {button}
+          </label>
+          <input
+            required
+            type='radio'
+            value={button}
+            name='width'
+            onClick={handleClick}>
+            </input>
+        </span>)}
+      </div>
     </div>
   );
 }
