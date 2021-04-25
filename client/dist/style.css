@@ -67,11 +67,11 @@ body.dark {
   cursor: pointer;
 }
 
-.addAnswer.dark {
+.addQA.dark {
   color: black;
 }
-.addQuestion {
-  color: black !important;
+.addQA.light {
+  color: black;
 }
 
 .magnifier {
