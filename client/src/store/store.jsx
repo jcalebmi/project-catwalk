@@ -23,6 +23,7 @@ const store = createStore(
   productFetcher,
   {
     product: {},
+    cart: [],
     products: [],
     questions: [],
     status: 'loading',

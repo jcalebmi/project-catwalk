@@ -71,11 +71,11 @@ const ProductSelection = ({
         quant={quant}
         style={style}
         product={product}/>
-        {/* <Favorite /> */}
         <div className='fave'>
           {/* Star or Heart */}
         </div>
       </div>
+      {/* <Cart /> */}
     </div>
   );
 };
