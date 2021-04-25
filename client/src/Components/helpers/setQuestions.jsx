@@ -2,7 +2,7 @@ import axios from 'axios';
 import store from '../../store/store.jsx';
 
 // Get questions from Catwalk Server
-const getQuestions = (id = 19093) => (
+const getQuestions = (id = 19098) => (
   axios.get(`qa/questions/${id}`)
     .then((res) => (res.data))
     .catch((err) => {

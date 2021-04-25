@@ -1,81 +1,71 @@
 import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import LoadMoreAnswers from '../buttons/LoadMoreAnswers.jsx';
-import AddAnswer from '../buttons/AddAnswerBtn.jsx';
-import helpfulness from '../helpers/helpfulness';
+import qasView from '../helpers/qasView';
+import AsFeedback from '../buttons/AsFeedback.jsx';
 import { fetchAnswers } from '../helpers/server-requests';
 import sortData from '../helpers/sortData';
-import reported from '../helpers/reported';
+import AddAnswer from '../buttons/AddAnswerBtn.jsx';
 
 const moment = require('moment');
 
 const Answers = ({ questionId, questionBody }) => {
-  const [readyToRender, setReadyToRender] = useState([false, []]);
+  const [readyToRender, setReadyToRender] = useState([]);
   const [display, updateDisplay] = useState([]);
   const pointer = useRef(2);
 
   useEffect(() => {
     fetchAnswers(questionId, (results) => {
-      /** call to helper func that sorts data on component render */
       sortData(results, 'helpfulness', (sorted) => {
-        setReadyToRender([true, sorted]);
+        setReadyToRender([sorted]);
         updateDisplay(sorted.slice(0, 2));
       });
     });
-    /** component need only re-render if
-      questions list has changed */
   }, [questionId]);
 
-  const grabNext2 = (current) => {
-    if (current === undefined) {
-      return;
-    }
-    updateDisplay(readyToRender[1].slice(0, current + 2));
-  };
-
   const loadMore = (e) => {
-    if (e === undefined) {
-      return;
-    }
     if (e.target.innerHTML === 'COLLAPSE ANSWERS') {
       e.target.innerHTML = 'LOAD MORE ANSWERS';
-      pointer.current = 0;
-      grabNext2(pointer.current);
+      pointer.current = 1;
     }
-    /** to be honest, I don't know why this works but
-       * it was intended to be similar to array sort algos
-       * using pointers */
-    if (pointer.current + 2 >= readyToRender[1].length) {
-      e.target.innerHTML = 'COLLAPSE ANSWERS';
-    }
-    grabNext2(pointer.current);
-    pointer.current += 2;
+
+    qasView(readyToRender, pointer, (next2, newPointer) => {
+      pointer.current = newPointer;
+
+      if (next2.length === 1) {
+        e.target.innerHTML = 'COLLAPSE ANSWERS';
+      }
+
+      updateDisplay([...display, ...next2]);
+    });
   };
 
   return (
-      <div className="answers">
-        <ul>
-        {display.map((answer) => (
-          <div id="answers" key={answer.answer_id}>
-          <li key={answer.body}>A: {answer.body}</li>
-          <p key={answer.answerer_name}>{answer.answerer_name}, {moment(answer.date).format('MMMM Do YYYY')}
-          <span key={answer.date}>
-            Helpful?
-            <button
-            id={answer.answer_id} onClick={helpfulness} >Yes({answer.helpfulness || 0})
-            </button> | <button
-             name={answer.answer_id} onClick={(e) => reported(e)()}>Report</button>
-            </span></p>
-          </div>
+      <div id="answers-container">
+        <span className="answers">
+        <h3>A:</h3>{display.map((answer) => (
+          <span id="answer-body" key={answer.answerer_name}>
+          <li key={`${answer.answer_id}/li`}>{answer.body}</li>
+          <span id={answer.answer_id}>{answer.answerer_name}, {moment(answer.date).format('MMMM Do YYYY')}
+            <AsFeedback answerId={answer.answer_id} answerHelpfulness={answer.helpfulness || 0}/>
+            </span>
+        </span>
         ))}
-        </ul>
-        <div>
-          {readyToRender[1].length > 2
+        </span>
+        <div id="answer-btn-container">
+          {readyToRender.length > 2
             ? <LoadMoreAnswers onClick={loadMore} />
             : <></>}
-        </div>
-        <AddAnswer body={questionBody}/>
+        {readyToRender.length === 0
+          ? <AddAnswer questionId={questionId} questionBody={questionBody} /> : <></>}
+          </div>
       </div>
   );
+};
+
+Answers.propTypes = {
+  questionId: PropTypes.number,
+  questionBody: PropTypes.string,
 };
 
 export default Answers;

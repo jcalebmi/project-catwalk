@@ -54,7 +54,6 @@ function App() {
           id="toggleMode"
           onClick={handleColor}>{toggle} </button>
         <Overview />
-        <div id="questions-answers-container">
           <QAs />
         </div>
         <ReviewsBox mode={mode} />
