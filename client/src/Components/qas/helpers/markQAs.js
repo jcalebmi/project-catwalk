@@ -8,15 +8,13 @@ import {
 const helpfulness = (e) => {
   const btn = e.target;
   btn.disabled = true;
-  /* id is on span wrapper el */
-  const id = Number(e.target.parentNode.parentNode.id);
+  const id = Number(e.target.parentNode.id);
 
-  /* user may only vote once */
   if (e.target.id === 'questions-helpful') {
     updateQsHelpful(id);
   }
 
-  if (e.target.id === 'answers-helpful') {
+  if (e.target.id === 'answers-help-btn') {
     updateAsHelpful(id);
   }
 
@@ -25,6 +23,7 @@ const helpfulness = (e) => {
   let numStr = '';
 
   for (let i = 0; i < eachTextEl.length; i += 1) {
+    // eslint-disable-next-line no-restricted-globals
     if (!isNaN(Number(eachTextEl[i]))) {
       numStr += eachTextEl[i];
       indexes.push(i);
@@ -34,9 +33,8 @@ const helpfulness = (e) => {
   const num = Number(numStr) + 1;
 
   const slice1 = eachTextEl.slice(0, indexes[0]).join('');
-  const slice2 = eachTextEl.slice(indexes[indexes.length - 1] + 1).join('');
 
-  e.target.innerHTML = slice1.concat(num).concat(slice2);
+  e.target.innerHTML = slice1.concat(num).concat(')');
 };
 
 const reported = (e) => {
@@ -44,10 +42,10 @@ const reported = (e) => {
   btn.disabled = true;
   e.target.innerHTML = 'REPORTED';
   const id = Number(e.target.parentNode.parentNode.id);
-  if (e.target.id === 'questions-report') {
+  if (e.target.className === 'questions-report') {
     reportQs(id);
   }
-  if (e.target.id === 'answers-report') {
+  if (e.target.className === 'answers-report') {
     reportAs(id);
   }
 };

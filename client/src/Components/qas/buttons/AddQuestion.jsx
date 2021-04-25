@@ -20,6 +20,7 @@ const AddQuestion = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setOpenModal(false);
 
     const requestBody = {
       body: question,
@@ -32,7 +33,7 @@ const AddQuestion = () => {
   };
 
   return (
-  <div>
+  <div id="questions-modal-btn">
     <button className="view-add-more-qs" id="add-question-btn" onClick={() => setOpenModal(true)}>Add Question</button>
     <Modal isOpen={modalIsOpen} onRequestClose={() => setOpenModal(false)}>
       <h1>Ask Your Question</h1>

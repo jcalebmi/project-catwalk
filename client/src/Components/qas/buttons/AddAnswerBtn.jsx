@@ -21,6 +21,7 @@ const AddAnswer = ({ questionId, questionBody }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setOpenModal(false);
 
     const requestBody = {
       body: question,

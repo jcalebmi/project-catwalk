@@ -46,6 +46,7 @@ const Answers = ({ questionId, questionBody }) => {
         <h3>A:</h3>{display.map((answer) => (
           <span id="answer-body" key={answer.answerer_name}>
           <li key={`${answer.answer_id}/li`}>{answer.body}</li>
+            <br></br>
           <span id={answer.answer_id}>{answer.answerer_name}, {moment(answer.date).format('MMMM Do YYYY')}
             <AsFeedback answerId={answer.answer_id} answerHelpfulness={answer.helpfulness || 0}/>
             </span>

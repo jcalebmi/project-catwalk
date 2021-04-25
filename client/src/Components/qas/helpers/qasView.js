@@ -19,43 +19,4 @@ const viewMore = (current, oldPointer, callback) => {
   callback(grabNext2, oldPointer + 1);
 };
 
-
-// pointer = 0
-// pointer should represent the current position in the array
-
-// since we need to display 2 at a time, maybe we should combine every two array elements
-
-// so let's take our display array and couple them up
-
-//  [[1, 1], [a, a], [2, 2],...]
-// to do this, we'll take the array el,
-
-// if the pointer number is greater than
-
-// const grabNext2 = (current) => {
-//   if (current === undefined) {
-//     return;
-//   }
-//   updateDisplay(readyToRender[1].slice(0, current + 2));
-// };
-
-// const loadMore = (e) => {
-//   if (e === undefined) {
-//     return;
-//   }
-//   if (e.target.innerHTML === 'COLLAPSE ANSWERS') {
-//     e.target.innerHTML = 'LOAD MORE ANSWERS';
-//     pointer.current = 0;
-//     grabNext2(pointer.current);
-//   }
-//   /** to be honest, I don't know why this works but
-//      * it was intended to be similar to array sort algos
-//      * using pointers */
-//   if (pointer.current + 2 >= readyToRender[1].length) {
-//     e.target.innerHTML = 'COLLAPSE ANSWERS';
-//   }
-//   grabNext2(pointer.current);
-//   pointer.current += 2;
-// };
-
 module.exports = viewMore;
