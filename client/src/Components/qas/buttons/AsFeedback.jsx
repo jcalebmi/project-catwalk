@@ -4,10 +4,10 @@ import { helpfulness, reported } from '../helpers/markQAs';
 
 const AsFeedback = ({ answerId, answerHelpfulness }) => (
   <span className="a-feedback" id={answerId}> Helpful?
-    <button className="feedback-btn" id="answers-help-btn"
+    <button className="useBgContrast light feedback-btn" id="answers-help-btn"
      onClick={(e) => helpfulness(e)}>
        Yes({answerHelpfulness})</button> |
-    <button className="feedback-btn" id="answers-report-btn"
+    <button className="useBgContrast light feedback-btn" id="answers-report-btn"
     onClick={(e) => reported(e)}>Report</button></span>
 );
 

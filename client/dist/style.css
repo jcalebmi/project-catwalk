@@ -67,11 +67,11 @@ body.dark {
   cursor: pointer;
 }
 
-.addAnswer.dark {
+.addQA.dark {
   color: black;
 }
-.addQuestion {
-  color: black !important;
+.addQA.light {
+  color: black;
 }
 
 .magnifier {
@@ -751,10 +751,16 @@ select.reviewSort {
   border: none;
   padding: 0!important;
   font-family: arial, sans-serif;
-  color: rgb(5, 53, 77);
   text-decoration: underline;
   cursor: pointer;
 }
+.feedback-btn.light,
+#more-answers-btn.light,
+#load-more-questions-btn.light,
+#add-question-btn.light{
+    color: rgb(5, 53, 77);
+}
+
 .q-feedback {
   /* grid-column-start: 2; */
   display: inline-flex;
@@ -770,7 +776,8 @@ select.reviewSort {
   margin-top: 1.2px;
 }
 #qs-btns-container {
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
 }
 #questions-report:disabled,
   #questions-helpful:disabled,

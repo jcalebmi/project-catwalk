@@ -33,11 +33,13 @@ const AddQuestion = () => {
 
   return (
   <div>
-    <button className="view-add-more-qs" id="add-question-btn" onClick={() => setOpenModal(true)}>Add Question</button>
+    <button className="useBgContrast light view-add-more-qs" id="add-question-btn" onClick={() => setOpenModal(true)}>Add Question</button>
     <Modal isOpen={modalIsOpen} onRequestClose={() => setOpenModal(false)}>
-      <h1>Ask Your Question</h1>
-      <h3>About the Product:</h3>
-      <form onSubmit={(e) => handleSubmit(e)}>
+      <h1 className="addQA light">Ask Your Question</h1>
+      <h3 className="addQA light">About the Product:</h3>
+      <form
+        className="addQA light"
+        onSubmit={(e) => handleSubmit(e)}>
       *Your Question:
       <textarea onChange={handleBodyChange} id="modal-body" rows="10" cols="100"></textarea>
       *What is your nickname?:
@@ -47,7 +49,7 @@ const AddQuestion = () => {
       <h6>For authentication reasons, you will not be emailed</h6>
       <button type="submit">Submit Answer</button>
       </form>
-    <button onClick={() => setOpenModal(false)}>Close</button>
+    <button className='useBgContrast light' onClick={() => setOpenModal(false)}>Close</button>
     </Modal>
   </div>
   );
