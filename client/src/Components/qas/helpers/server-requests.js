@@ -26,44 +26,69 @@ const fetchAnswers = (id, callbackAs) => {
     });
 };
 
-// helpful Qs
+/** PUT REQUESTS */
+
+// METHOD: PUT - Mark Question As Helpful
 const updateQsHelpful = (id) => {
   axios.put(`/qa/questions/${id}/helpful`)
     .then(() => {
-      'do not break the code';
+      console.log('hai')
     })
     .catch((err) => {
       throw err;
     });
 };
-// reported Qs
+// METHOD: PUT - Report Question
 const reportQs = (id) => {
-  axios.put(`/qa/questions/:${id}/report`)
+  axios.put(`/qa/questions/${id}/report`)
     .then(() => {
-      'simply exist';
+      console.log('pls2');
     })
     .catch((err) => {
       throw err;
     });
 };
-// helpful As
+// METHOD: PUT - Mark Answer As Helpful
 const updateAsHelpful = (id) => {
-  axios.put(`/qa/answers/:${id}/helpful`)
-    .then(() => {
-      'wave your hands in the air';
+  axios.put(`/qa/answers/${id}/helpful`)
+    .then((res) => {
+      console.log(res);
     })
     .catch((err) => {
       throw err;
     });
 };
-// reported As
+// METHOD: PUT - Report Answer
 const reportAs = (id) => {
-  axios.put(`/qa/answers/:${id}/report`)
+  axios.put(`/qa/answers/${id}/report`)
     .then(() => {
       'scold the answerer for being inapropriate';
     })
     .catch((err) => {
       throw err;
+    });
+};
+
+/** POST REQUESTS */
+
+// METHOD: POST - Add Question
+const postQs = (data) => {
+  axios.post('/qa/questions', data, { 'Content-type': 'application/json' })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+// METHOD: POST - Add Answer
+const postAs = (id, data) => {
+  axios.post(`/qa/questions/${id}/answers`, data, { 'Content-type': 'application/json' })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
     });
 };
 
@@ -74,4 +99,6 @@ module.exports = {
   reportQs,
   updateAsHelpful,
   reportAs,
+  postQs,
+  postAs,
 };

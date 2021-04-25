@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const QAsSearch = ({ searchHandler }) => (
-        <div>
-          <form id="search-field">
-          <input name="search" type="text" placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..." onChange={searchHandler}></input>
+        <div className="qas-search">
+          <form id="searchForm">
+          <input className="search-field" type="text" placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..." onChange={(e) => searchHandler(e)}></input>
           </form>
         </div>
 );
