@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
-const NavigationBar = () => {
+const NavigationBar = ({handleColor, toggle}) => {
   const [searchVal, setSearchVal] = useState('');
   return (
-    <div className='useBgContrast light navigationBar'>
+    <div onClick={handleColor} className='useBgContrast light' id='navigationBar'>
     <img id='logo'
-      src='https://bear.org/wp-content/uploads/2008/01/Polar-Bears-standing-playing.jpg'>
+      src='/assets/Taiga.png'>
     </img>
     <form
       onSubmit={(e) => {

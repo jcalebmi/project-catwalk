@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 /* The provider component makes the Redux store available to any nested
     components that need to access the store */
-import Overview from './overview/Overview.jsx'
+import NavigationBar from './navBar/NavigationBar.jsx';
+import Overview from './overview/Overview.jsx';
 
 //Review Imports
 import ReviewsBox from './reviews/ReviewsBox.jsx';
@@ -50,15 +51,12 @@ function App() {
 
   return (
       <div id='modules'>
-        <button
-          id="toggleMode"
-          onClick={handleColor}>{toggle} </button>
+        <NavigationBar handleColor={handleColor} toggle={toggle}/>
         <Overview />
-          <QAs />
-        </div>
+        <QAs />
         <ReviewsBox mode={mode} />
       </div>
   );
-};
+}
 
 export default App;
