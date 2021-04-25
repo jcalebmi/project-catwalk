@@ -4,12 +4,12 @@ import Modal from 'react-modal';
 
 const { postQs } = require('../helpers/server-requests');
 
-const getProductId = (state) => state.product.id;
+// const getProductId = (state) => state.product.id;
 
 Modal.setAppElement('#app');
 const AddQuestion = () => {
-  const productId = useSelector(getProductId);
-
+  // const productId = useSelector(getProductId);
+  // console.log(productId)
   const [modalIsOpen, setOpenModal] = useState(false);
   const [question, setQuestion] = useState('');
   const [nickname, setNickname] = useState('');
@@ -26,20 +26,14 @@ const AddQuestion = () => {
       body: question,
       name: nickname,
       email: userEmail,
-      product_id: productId,
+      product_id: 19099,
     };
-
     postQs(requestBody);
   };
 
   return (
-<<<<<<< HEAD
-  <div id="questions-modal-btn">
-    <button className="view-add-more-qs" id="add-question-btn" onClick={() => setOpenModal(true)}>Add Question</button>
-=======
   <div>
     <button className="useBgContrast light view-add-more-qs" id="add-question-btn" onClick={() => setOpenModal(true)}>Add Question</button>
->>>>>>> main
     <Modal isOpen={modalIsOpen} onRequestClose={() => setOpenModal(false)}>
       <h1 className="addQA light">Ask Your Question</h1>
       <h3 className="addQA light">About the Product:</h3>

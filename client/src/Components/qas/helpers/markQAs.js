@@ -31,10 +31,8 @@ const helpfulness = (e) => {
   }
 
   const num = Number(numStr) + 1;
-
   const slice1 = eachTextEl.slice(0, indexes[0]).join('');
-
-  e.target.innerHTML = slice1.concat(num).concat(')');
+  btn.innerHTML = slice1.concat(num).concat(')');
 };
 
 const reported = (e) => {

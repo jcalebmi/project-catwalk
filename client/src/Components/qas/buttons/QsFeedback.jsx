@@ -4,11 +4,8 @@ import { helpfulness, reported } from '../helpers/markQAs';
 import AddAnswer from './AddAnswerBtn.jsx';
 
 const QsFeedback = ({ questionId, questionHelpfulness }) => (
-  <span className="q-feedback" id={questionId}>
-  <button className="feedback-btn" id="questions-helpful"
-      onClick={(e) => helpfulness(e)}>
-      Yes({questionHelpfulness}) </button> {' '}  <div id="vertical"></div>
-    <button className="feedback-btn"id="questions-report" key={`${questionId}/report`} onClick={(e) => reported(e)}>Report</button>{' '} <div id="vertical">{' '}</div><AddAnswer /></span>
+  <span className="q-feedback" id={questionId}><button className="useBgContrast light feedback-btn " id="questions-helpful" onClick={(e) => helpfulness(e)}>Yes({questionHelpfulness}) </button><div id="vertical"></div> <button className="useBgContrast light feedback-btn"id="questions-report" key={`${questionId}/report`} onClick={(e) => reported(e)}>Report</button> <AddAnswer questionId={questionId} /></span>
+
 );
 
 QsFeedback.propTypes = {

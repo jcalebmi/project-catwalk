@@ -10,6 +10,7 @@ const getProductName = (state) => state.product.name;
 Modal.setAppElement('#app');
 const AddAnswer = ({ questionId, questionBody }) => {
   const productName = useSelector(getProductName);
+  console.log(questionId)
 
   const [modalIsOpen, setOpenModal] = useState(false);
 
