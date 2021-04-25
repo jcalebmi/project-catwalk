@@ -11,7 +11,6 @@ import filter from '../helpers/filter';
 import qasView from '../helpers/qasView';
 
 const QAsItems = ({ questions }) => {
-  console.log(questions)
   if (questions.length === 0) {
     return (
       <div>
@@ -61,9 +60,9 @@ const QAsItems = ({ questions }) => {
             <p className="bold">Q: {question.question_body}</p>
             <span id="helpTxt">Helpful?</span>
             <QsFeedback questionId={question.question_id}
-            questionHelpfulness={question.question_helpfulness || 0} />
-          </div>
+            questionHelpfulness= {question.question_helpfulness || 0} />
             <Answers questionId={question.question_id} questionBody={question.question_body}/>
+          </div><hr></hr>
           </div>
       ))}
       <div id="qs-btns-container">

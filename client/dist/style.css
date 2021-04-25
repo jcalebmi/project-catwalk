@@ -707,23 +707,33 @@ select.reviewSort {
   display: grid;
   grid-template-columns: 2fr;
   grid-template-rows: 1fr min-content;
-
+  height: 600px;
+  overflow-y: scroll;
 }
+
+  /* SEARCH */
 .search-field {
   grid-column-start: 1 / span 2;
   grid-row-start: 0.5  / span 1;
   width: 99.2%;
   height: 5vh;
 }
+/* QUESTIONS */
 #question {
   grid-column-start: 1 / span 1;
   display: grid;
   grid-template-columns: 3fr 0.2fr 1fr;
 }
-#question
-  p {
-    font-size: 1.2em;
-  }
+.q-feedback {
+  /* grid-column-start: 2; */
+  display: inline-flex;
+  justify-content: space-evenly;
+  align-items: baseline;
+}
+#qs-btn-container {
+  display: inline flex;
+}
+  /* ANSWERS */
 .answers {
   display: grid;
   grid-template-columns: 50px 0.5fr;
@@ -737,18 +747,26 @@ select.reviewSort {
   h3 {
   grid-column-start: 1;
   }
+
 #answer-body {
+  grid-column-start: 2;
   align-self: center;
   display: inline-block;
   margin-top: 20px;
 }
+
+#add-answer-btn {
+  margin-top: 10px;
+}
+
+/* FEEDBACK */
 .feedback-btn,
   #more-answers-btn,
   #load-more-questions-btn,
   #add-question-btn {
   background: none!important;
   border: none;
-  padding: 0!important;
+  /* padding: 0!important; */
   font-family: arial, sans-serif;
   text-decoration: underline;
   cursor: pointer;
@@ -758,20 +776,10 @@ select.reviewSort {
 }
 .feedback-btn.light,
 #more-answers-btn.light,
-#load-more-questions-btn.light,
-#add-question-btn.light{
+#load-more-questions-btn.light {
     color: rgb(5, 53, 77);
 }
 
-.q-feedback {
-  /* grid-column-start: 2; */
-  display: inline-flex;
-  justify-content: space-evenly;
-  align-items: baseline;
-}
-#add-answer-btn {
-  margin-top: 10px;
-}
 
 #vertical {
   border-left: 1px solid black;
@@ -780,11 +788,7 @@ select.reviewSort {
 #helpful {
   margin-top: 1.2px;
 }
-#qs-btns-container {
-  display: flex;
-  flex-direction: inline-flex;
-  margin-top: 25px;
-}
+
 #questions-report:disabled,
   #questions-helpful:disabled,
   #answer-help-btn:disabled,
@@ -794,13 +798,23 @@ select.reviewSort {
     cursor: default;
     font-style: none;
 }
+/* RANDOM STUFF THAT HELPS */
 #helpTxt {
   font-size: 0.8em;
-  margin-top: 9px;
+  margin-top: 8px;
 }
 #helpTxtA {
   font-size: 0.8em;
 }
 .answerer {
   font-size: 0.9em;
+}
+
+#add-question-btn.light,
+#load-more-questions-btn.light {
+  margin-top: 10px;
+  border-style: solid;
+  border-color: rgb(0, 17, 255);
+  padding: 10px;
+  width: 25%;
 }
