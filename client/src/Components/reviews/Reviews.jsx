@@ -31,7 +31,10 @@ function Reviews(props) {
         </span>
         <div>
           <ul className="reviewList">
-            {props.display.map((item, index) => <ReviewItem item={item} key={index} mode={props.mode}/>)}
+            {props.display.map((item, index) => <ReviewItem
+              item={item}
+              key={index}
+              mode={props.mode}/>)}
           </ul>
           <span className="reviewsButtons">
             {props.results.length > 2 && props.display.length < props.results.length
