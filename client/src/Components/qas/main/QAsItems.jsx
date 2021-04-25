@@ -65,9 +65,10 @@ const QAsItems = ({ questions }) => {
           </div>
       ))}
       <div id="qs-btns-container">
-      {questions.length > 4 ? <LoadMoreQuestions handler={loadMore}/>
-        : <></>} </div>
-      <AddQuestion />
+        {questions.length > 4 ? <LoadMoreQuestions handler={loadMore}/>
+          : <></>}
+        <AddQuestion />
+      </div>
     </div>
   );
 };

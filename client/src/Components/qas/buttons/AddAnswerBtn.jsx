@@ -35,7 +35,7 @@ const AddAnswer = ({ questionId, questionBody }) => {
 
   return (
   <div>
-    <button className="feedback-btn" id="add-answer-btn" onClick={() => setOpenModal(true)}>Add Answer</button>
+    <button className="useBgContrast light feedback-btn" id="add-answer-btn" onClick={() => setOpenModal(true)}>Add Answer</button>
     <Modal isOpen={modalIsOpen} onRequestClose={() => setOpenModal(false)}>
       <h1 className="addQA light">Submit your Answer</h1>
       <h2 className="addQA light">Product Name:{productName} Question:{questionBody}</h2>

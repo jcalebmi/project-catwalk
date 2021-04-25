@@ -6,7 +6,6 @@ import ProductOverview from './ProductOverview.jsx';
 
 const Overview = () => (
   <div id='overview'>
-    <NavigationBar />
     <Announcements />
     <MainOverview />
     <ProductOverview />
