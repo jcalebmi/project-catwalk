@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import LoadMoreAnswers from '../buttons/LoadMoreAnswers.jsx';
 import qasView from '../helpers/qasView';
@@ -10,26 +11,27 @@ import AddAnswer from '../buttons/AddAnswerBtn.jsx';
 const moment = require('moment');
 
 const Answers = ({ questionId, questionBody }) => {
-  const [readyToRender, setReadyToRender] = useState([]);
+  const [answers, setAnswers] = useState([]);
   const [display, updateDisplay] = useState([]);
   const pointer = useRef(2);
 
   useEffect(() => {
     fetchAnswers(questionId, (results) => {
       sortData(results, 'helpfulness', (sorted) => {
-        setReadyToRender([sorted]);
+        setAnswers([...sorted]);
         updateDisplay(sorted.slice(0, 2));
       });
     });
   }, [questionId]);
 
   const loadMore = (e) => {
+    console.log(e);
     if (e.target.innerHTML === 'COLLAPSE ANSWERS') {
       e.target.innerHTML = 'LOAD MORE ANSWERS';
       pointer.current = 1;
     }
 
-    qasView(readyToRender, pointer, (next2, newPointer) => {
+    qasView(answers, pointer, (next2, newPointer) => {
       pointer.current = newPointer;
 
       if (next2.length === 1) {
@@ -45,20 +47,23 @@ const Answers = ({ questionId, questionBody }) => {
         <span className="answers">
         <h3>A:</h3>{display.map((answer) => (
           <span id="answer-body" key={answer.answerer_name}>
+
           <li key={`${answer.answer_id}/li`}>{answer.body}</li>
-          <span id={answer.answer_id}>{answer.answerer_name}, {moment(answer.date).format('MMMM Do YYYY')}
+            <br></br><span className="answerer">by{' '}{answer.answerer_name}, {moment(answer.date).format('MMMM Do YYYY')}</span>
+          {' '}<span id="helpTxtA">Helpful?{' '}</span>
+            <span id={answer.answer_id}>
             <AsFeedback answerId={answer.answer_id} answerHelpfulness={answer.helpfulness || 0}/>
             </span>
         </span>
         ))}
         </span>
         <div id="answer-btn-container">
-          {readyToRender.length > 2
-            ? <LoadMoreAnswers onClick={loadMore} />
-            : <></>}
-        {readyToRender.length === 0
+        {answers.length > 2 ? <LoadMoreAnswers handler={loadMore} />
+          : <></>}
+        {answers.length === 0
           ? <AddAnswer questionId={questionId} questionBody={questionBody} /> : <></>}
           </div>
+          <br></br>
       </div>
   );
 };

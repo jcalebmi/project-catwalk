@@ -22,6 +22,7 @@ const AddAnswer = ({ questionId, questionBody }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setOpenModal(false);
 
     const requestBody = {
       body: question,
@@ -38,6 +39,7 @@ const AddAnswer = ({ questionId, questionBody }) => {
     <button className="useBgContrast light feedback-btn" id="add-answer-btn" onClick={() => setOpenModal(true)}>Add Answer</button>
     <Modal isOpen={modalIsOpen} onRequestClose={() => setOpenModal(false)}>
       <h1 className="addQA light">Submit your Answer</h1>
+      {' '}
       <h2 className="addQA light">Product Name:{productName} Question:{questionBody}</h2>
       <form
         className="addQA light"

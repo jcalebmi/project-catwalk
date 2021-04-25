@@ -57,11 +57,12 @@ const QAsItems = ({ questions }) => {
       {display.map((question) => (
          <div key={question.question_id} id="q-a-item">
          <div id="question">
-            <span className="bold">Q: {question.question_body}</span>
+            <p className="bold">Q: {question.question_body}</p>
+            <span id="helpTxt">Helpful?</span>
             <QsFeedback questionId={question.question_id}
-            questionHelpfulness={question.question_helpfulness || 0} />
-          </div>
+            questionHelpfulness= {question.question_helpfulness || 0} />
             <Answers questionId={question.question_id} questionBody={question.question_body}/>
+          </div><hr></hr>
           </div>
       ))}
       <div id="qs-btns-container">
