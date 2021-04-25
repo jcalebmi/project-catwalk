@@ -1,5 +1,4 @@
 const viewMore = (current, oldPointer, callback) => {
-  console.log(current)
   const arr = current.slice();
   const map = new Map();
 
@@ -16,9 +15,7 @@ const viewMore = (current, oldPointer, callback) => {
     map.set(count, [display1, display2]);
     count += 1;
   }
-console.log(map)
   const grabNext2 = map.get(oldPointer);
-  console.log(grabNext2)
   callback(grabNext2, oldPointer + 1);
 };
 
