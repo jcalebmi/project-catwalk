@@ -328,6 +328,31 @@ body.dark {
     width: 15px;
     font-size:15px;
   }
+  #overview
+  .selectors {
+    display:flex;
+    flex-direction: row;
+    justify-content:space-between;
+    height: 30px;
+    margin-top:50px;
+  }
+  #quantSelector {
+    width: 50px;
+  }
+  #overview
+  .add {
+    display: flex;
+    margin-top:50px;
+    align-items: center;
+    font-size:large;
+  }
+  #overview
+  .add
+  span:hover {
+    border-radius: 100%;
+    background: radial-gradient(circle at center, aqua, transparent);
+
+  }
   /*Product Overview */
   #overview
   .productOverview {
