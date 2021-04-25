@@ -6,81 +6,68 @@ import Answers from './Answers.jsx';
 import LoadMoreQuestions from '../buttons/LoadMoreQuestions.jsx';
 import AddQuestion from '../buttons/AddQuestion.jsx';
 import QAsSearch from './QAsSearch.jsx';
-import helpfulness from '../helpers/helpfulness';
+import QsFeedback from '../buttons/QsFeedback.jsx';
 import filter from '../helpers/filter';
-import reported from '../helpers/reported';
+import qasView from '../helpers/qasView';
 
 const QAsItems = ({ questions }) => {
-  /* if the data is undefined, do not render component */
-  if (questions === undefined) {
+  if (questions.length === 0) {
     return (
-      <div>Loading...</div>
+      <div>
+        <AddQuestion />
+        </div>
     );
   }
-  /* copy of questions array to avoid input mutations */
-  let display = questions.slice();
 
-  const [searchResults, setSearchResults] = useState([]);
-  const [isLoading, setLoading] = useState(false);
-  const [isSearching, setIsSearching] = useState(false);
-  const pointer = useRef(2);
+  const [display, updateDisplay] = useState(questions.slice(0, 4));
+  const pointer = useRef(3);
 
   /** handling searching state */
   const handleSearch = (searchVal) => {
     if (searchVal.length >= 3) {
       filter(searchVal, questions, (matchedResults) => {
-        setSearchResults(matchedResults);
-        setIsSearching(true);
+        updateDisplay(matchedResults);
       });
     }
     if (searchVal.length < 3) {
-      setIsSearching(false);
+      updateDisplay(questions.slice(0, 4));
     }
   };
-  /** handling loading state */
+
   const loadMore = (e) => {
-    if (e === undefined) {
+    if (e.target.innerHTML === 'COLLAPSE QUESTIONS') {
+      e.target.innerHTML = 'SEE MORE QUESTIONS';
+      pointer.current = 3;
+      updateDisplay(questions.slice(0, 4));
       return;
     }
-    if (e.target.innerHTML === 'COLLAPSE QUESTIONS') {
-      e.target.innerHTML = 'LOAD MORE QUESTIONS';
-      pointer.current = 0;
-      setLoading(false);
-    }
-    if (pointer.current + 2 >= display.length) {
-      e.target.innerHTML = 'COLLAPSE QUESTIONS';
-      display = questions.slice();
-    }
-    pointer.current += 2;
-  };
-    /* else statement is meant to assert data that still needs to be loaded */
-  display = (!isLoading && !isSearching)
-    ? questions.slice(0, 4) : questions.slice(0, pointer.current + 2);
 
-  /** if questions are being searched */
-  if (isSearching) {
-    if (searchResults < 1) {
-      display = searchResults;
-      setIsSearching(false);
-    }
-    display = searchResults;
-  }
+    qasView(questions, pointer.current, (next2, newPointer) => {
+      pointer.current = newPointer;
+      if (next2.length === 1) {
+        e.target.innerHTML = 'COLLAPSE QUESTIONS';
+      }
+      updateDisplay([...display, ...next2]);
+    });
+  };
 
   return (
-    <div>
-      <QAsSearch searchHandler={(e) => handleSearch(e.target.value)}/>
-    <div>
+    <div id="qas-items-container">
+        <QAsSearch searchHandler={(e) => handleSearch(e.target.value)}/>
       {display.map((question) => (
-        <div id="questions" key={question.asker_name}>
-        <p className="bold" key={question.question_id} >Q: {question.question_body} <span> Helpful? <button id={question.question_id} onClick={helpfulness}>Yes({question.question_helpfulness || 0})</button> | <button onClick={reported}>Report</button> </span></p>
-        <Answers
-          questionId={question.question_id} questionBody={question.question_body}
-        />
-        </div>
+         <div key={question.question_id} id="q-a-item">
+         <div id="question">
+            <span className="bold">Q: {question.question_body}</span>
+            <QsFeedback questionId={question.question_id}
+            questionHelpfulness={question.question_helpfulness || 0} />
+          </div>
+            <Answers questionId={question.question_id} questionBody={question.question_body}/>
+          </div>
       ))}
-      <LoadMoreQuestions onClick={(e) => loadMore(e)}/>
-    </div>
-    <AddQuestion />
+      <div id="qs-btns-container">
+      {questions.length > 4 ? <LoadMoreQuestions handler={loadMore}/>
+        : <></>} </div>
+      <AddQuestion />
     </div>
   );
 };

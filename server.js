@@ -1,5 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const axios = require('axios');
+const apiToken = require('./myconfig');
 
 const app = express();
 const path = require('path');
@@ -13,6 +15,10 @@ const sendReport = require('./reviewHelpers/sendReport.js');
 
 const fetchQuestions = require('./questionsHelpers/fetchQuestions.js');
 const fetchAnswers = require('./questionsHelpers/fetchAnswers.js');
+const { putQuestionsHelpful, putQuestionsReported } = require('./questionsHelpers/putQuestions.js');
+const { putAnswersHelpful, putAnswersReported } = require('./questionsHelpers/putAnswers.js');
+const postNewQuestions = require('./questionsHelpers/postQuestions.js');
+const postNewAnswers = require('./questionsHelpers/postAnswers.js');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -96,30 +102,33 @@ app.get('/qa/questions/:question_id/answers', (req, res) => {
   });
 });
 
-app.get('/qa/questions/:question_id/helpful', (req, res) => {
+app.put('/qa/questions/:question_id/helpful', (req, res) => {
   const id = req.params.question_id;
-  fetchAnswers(id, (results) => {
-    if (results !== undefined) res.send(results);
-  });
+  putQuestionsHelpful(id);
 });
 
-app.get('/qa/questions/:question_id/report', (req, res) => {
+app.put('/qa/questions/:question_id/report', (req, res) => {
   const id = req.params.question_id;
-  fetchAnswers(id, (results) => {
-    if (results !== undefined) res.send(results);
-  });
+  putQuestionsReported(id);
 });
-app.get('/qa/questions/:answer_id/helpful', (req, res) => {
+app.put('/qa/answers/:answer_id/helpful', (req, res) => {
   const id = req.params.answer_id;
-  fetchAnswers(id, (results) => {
-    if (results !== undefined) res.send(results);
-  });
+  putAnswersHelpful(id);
 });
-app.get('/qa/questions/:answer_id/report', (req, res) => {
+app.put('/qa/answers/:answer_id/report', (req, res) => {
   const id = req.params.answer_id;
-  fetchAnswers(id, (results) => {
-    if (results !== undefined) res.send(results);
-  });
+  putAnswersReported(id);
+});
+
+app.post('/qa/questions/', (req, res) => {
+  const { body } = req;
+  postNewQuestions(body);
+});
+
+app.post('/qa/questions/:question_id/answers', (req, res) => {
+  const { body } = req;
+  const id = req.params.question_id;
+  postNewAnswers(id, body);
 });
 
 module.exports = app;

@@ -1,45 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import QAsItems from './main/QAsItems.jsx';
+import { fetchQuestions } from './helpers/server-requests';
 import sortData from './helpers/sortData';
-import axios from 'axios';
 
-const getQuestions = (id = 19093) => (
-  axios.get(`qa/questions/${id}`)
-    .then((res) => (res.data))
-    .catch((err) => {
-      console.log('ERROR: ', err);
-    })
-);
+const selectSingleProduct = (state) => state.product;
 
 const QAs = () => {
-  const [isLoaded, setLoaded] = useState(false);
-  const [questions, setQuestions] = useState();
-  if (!isLoaded) {
-    getQuestions()
-      .then((data) => {
-        setQuestions(data);
-        setLoaded(true);
+  const [questions, setQuestions] = useState([]);
+  const [questionsLoaded, setQuestionsLoaded] = useState(false);
+
+  const product = useSelector(selectSingleProduct) || [];
+
+  useEffect(() => {
+    if (product.id !== undefined) {
+      // fetch questions helper
+      fetchQuestions(product.id, (results) => {
+        // data sort helper
+        sortData(results.data, 'question_helpfulness', (sorted) => {
+          setQuestions(sorted);
+          setQuestionsLoaded(true);
+        });
       });
-    return null;
+    }
+  }, []);
+
+  if (!questionsLoaded) {
+    return (
+      <div>Loading...</div>
+    );
   }
 
-  // useEffect(() => {
-  //   if (questions !== undefined) {
-  //     sortData(questions, 'question_helpfulness', (sorted) => {
-  //       questions = sorted;
-  //     });
-  //   }
-  //   if (questions === undefined) {
-  //     return (
-  //       <div>Loading...</div>
-  //     );
-  //   }
-  // });
-
-
   return (
-    <div className="questions-and-answers">
+    <div id="q-as-container">
       <QAsItems questions={questions} />
     </div>
   );

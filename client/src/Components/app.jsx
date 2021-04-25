@@ -27,9 +27,7 @@ function App() {
   return (
       <div id='modules'>
         <Overview />
-        <div id="questions-answers-container">
           <QAs />
-        </div>
         <ReviewsBox />
       </div>
   );
