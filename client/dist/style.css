@@ -1,13 +1,59 @@
-/* Global Styles */
 
 body {
-  background-color:aliceblue;
+  /* background-color:aliceblue; */
+  /* background-color: #002347; */
   max-width: 1000px;
   margin: auto;
 }
 
+#toggleMode {
+  position: absolute;
+}
+
+body.light {
+  background-color:aliceblue;
+}
+body.dark {
+  background-color: #002347;
+  color: #f4faffe0;
+}
+/* #2Da7FF; */
+
 .bold {
   font-weight: bold;
+}
+
+.useBgColor.dark{
+  background-color: #002347;
+  color: #F4FAFF;
+}
+
+.useBgColor.light {
+  background-color: aliceblue;
+}
+
+.useBgContrast.dark {
+  background-color: #0074C1;
+  color: #F4FAFF;
+}
+
+.useBgContrast.light {
+  background-color: #D7ECFF;
+}
+
+.useTitleContrast.light {
+  background-color: #A3D4FF
+}
+.useTitleContrast.dark {
+  background-color: #00518A
+}
+
+.border-bottom.light {
+  border-bottom: solid #71BDff
+}
+
+.border-bottom.dark {
+  border-bottom: solid #F4FaFF
 }
 
 .underline {
@@ -16,12 +62,16 @@ body {
 .strikethrough {
   text-decoration: line-through;
 }
-.useBgColor {
-  background-color: aliceblue;
-}
 
 .pointer {
   cursor: pointer;
+}
+
+.addAnswer.dark {
+  color: black;
+}
+.addQuestion {
+  color: black !important;
 }
 
 .magnifier {
@@ -322,7 +372,9 @@ body {
 
 /* Container */
 #ratingReviewContainer {
+  border-width: 5px;
   display: inline-grid;
+  margin-top: 20px;
   grid-template-columns: 30% 65%;
   width: 100%;
   border-bottom: 0px;
@@ -351,7 +403,6 @@ p.sellerResponse {
 li.reviews {
   flex-direction: column;
   list-style: none;
-  border-bottom: solid grey;
   padding: 3px;
   position: relative;
 }
@@ -374,7 +425,11 @@ li.reviews {
   width: 100%;
   padding: 0;
 }
-.outerReviewStars::before {
+.outerReviewStars.dark::before {
+  content: "\272D \272D \272D \272D \272D";
+  color: #f4faffe0;
+}
+.outerReviewStars.light::before {
   content: "\272D \272D \272D \272D \272D";
   color: grey;
 }
@@ -404,6 +459,7 @@ li.reviews {
   display: inline-grid;
   grid-template-columns: 50% 50%;
   position: relative;
+  z-index: 0;
 }
 .ratingStars {
   padding-left: 25px;
@@ -416,7 +472,13 @@ li.reviews {
   width: 100%;
   padding: 0;
 }
-.outerRatingStars::before {
+.outerRatingStars.dark::before {
+  content: "\272D \272D \272D \272D \272D";
+  color: #f4faffe0;
+  margin: 0;
+  padding: 0;
+}
+.outerRatingStars.light::before {
   content: "\272D \272D \272D \272D \272D";
   color: grey;
   margin: 0;
@@ -460,6 +522,15 @@ li.reviews {
   font-size: 1.5em;
   margin: 2px;
   padding-left: 25px;
+}
+
+.removeFilters.light {
+  color: blue;
+  cursor: pointer;
+}
+.removeFilters.dark {
+  color: aqua;
+  cursor: pointer;
 }
 .characteristicsRating h6 {
   font-size: 1.5em;
@@ -526,10 +597,17 @@ select.reviewSort {
   right: 0;
   bottom: 0;
   padding-top: 0px;
-  background-color: white;
   opacity: .95;
   z-index: 2;
   overflow: scroll;
+}
+
+.addReview.overlay.light {
+  background-color: white;
+}
+.addReview.overlay.dark{
+  background-color: rgb(90, 90, 90);
+  color: whitesmoke;
 }
 .addReview.overlay h1 {
   padding-bottom: 0px;
@@ -540,18 +618,22 @@ select.reviewSort {
 .addReview.container {
   position: relative;
   margin: 0% 33%;
-  height: 700px;
+  height: fit-content;
   width: 300px;
-  overflow: scroll;
 }
 #writeReviewContainer  {
   position: relative;
   height: 600px;
   width: 300px;
 }
-.writeReview {
+.writeReview.light {
   position: relative;
-  overflow: scroll;
+  background-color: whitesmoke;
+}
+
+.writeReview.dark {
+  color: black;
+  position: relative;
   background-color: whitesmoke;
 }
 
@@ -563,7 +645,7 @@ select.reviewSort {
   font-size: .6em;
 }
 .overallRating {
-  text-align: left;
+  text-align: center;
 }
 
 #reviewIMG img {
@@ -584,97 +666,32 @@ select.reviewSort {
 } */
 
 .addReview.xBorder {
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   position: absolute;
   top:0;
   left:0;
   margin: 0;
-  border: solid black;
   transform: rotate(45deg);
   cursor: pointer;
-  overflow: scroll;
+}
+.addReview.xBorder.light {
+  border: solid black;
+}
+.addReview.xBorder.dark {
+  border: solid whitesmoke;
 }
 .addReview.closeX {
-  font-size: 5em;
+  font-size: 2.5em;
 }
-/** QUESTIONS AND ANSWERS CONTAINER */
-#qas-items-container {
-  display: grid;
-  grid-template-columns: 2fr;
-  grid-template-rows: 0.5fr 1fr 0.5fr;
-
+.addReview .radioContainer {
+  text-align: center;
 }
-.search-field {
-  grid-column-start: 1 / span 2;
-  grid-row-start: 0.5  / span 1;
-  width: 100%;
-  height: 10vh;
+.addReview.radio {
+  padding: 5px;
 }
-#question {
-  grid-column-start: 1 / span 1;
-  display: grid;
-  grid-template-columns: 3fr 0.2fr 1fr;
-  margin-top: 10px;
-}
-#question
-  p {
-    font-size: 1.3em;
-  }
-.answers {
-  display: grid;
-  grid-template-columns: 50px 0.5fr;
-  grid-template-rows: 1fr;
-}
-#answer-body
-  li {
-  list-style: none;
-}
-#answer-body
-  h3 {
-  grid-column-start: 1;
-  }
-#answer-body {
-  align-self: center;
-  display: inline-block;
-  margin-top: 20px;
-}
-.feedback-btn,
-  #more-answers-btn,
-  #load-more-questions-btn,
-  #add-question-btn {
-  background: none!important;
-  border: none;
-  padding: 0!important;
-  font-family: arial, sans-serif;
-  color: rgb(5, 53, 77);
-  text-decoration: underline;
-  cursor: pointer;
-}
-.q-feedback {
-  /* grid-column-start: 2; */
-  display: inline-flex;
-  justify-content: space-evenly;
-  align-items: baseline;
-}
-
-#vertical {
-  border-left: 1px solid black;
-  height: 11px;
-}
-#helpful {
-  margin-top: 1.2px;
-}
-#qs-btns-container {
-  display: inline-flex;
-}
-#questions-report:disabled,
-  #questions-helpful:disabled,
-  #answer-help-btn:disabled,
-  #answer-report:disabled {
-    background-color: #cccccc;
-    color: #666666;
-    cursor: default;
-    font-style: none;
+.addReview
+.helpful {
+  text-align: center;
 }
