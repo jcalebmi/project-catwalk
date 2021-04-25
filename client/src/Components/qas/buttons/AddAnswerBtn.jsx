@@ -36,11 +36,13 @@ const AddAnswer = ({ questionId, questionBody }) => {
 
   return (
   <div>
-    <button className="feedback-btn" id="add-answer-btn" onClick={() => setOpenModal(true)}>Add Answer</button>
+    <button className="useBgContrast light feedback-btn" id="add-answer-btn" onClick={() => setOpenModal(true)}>Add Answer</button>
     <Modal isOpen={modalIsOpen} onRequestClose={() => setOpenModal(false)}>
-      <h1>Submit your Answer</h1>
-      <h2>Product Name:{productName} Question:{questionBody}</h2>
-      <form onSubmit={handleSubmit}>
+      <h1 className="addQA light">Submit your Answer</h1>
+      <h2 className="addQA light">Product Name:{productName} Question:{questionBody}</h2>
+      <form
+        className="addQA light"
+        onSubmit={handleSubmit}>
       *Your answer
       <textarea inputs="body" id="modal-body" rows="10" cols="100" onChange={handleBodyChange}></textarea>
       *What is your nickname?:
