@@ -269,10 +269,12 @@ body.dark {
         opacity: 60%;
       }
   /* Product Selection */
+  /* Product Selection */
   #overview
   .productSelection {
-    width: 30%;
-    height: 100%;
+    margin: 10px;
+    width: calc(30% - 20px);
+    height: calc(100% - 20px);;
     overflow: hidden;
   }
   #overview
@@ -336,22 +338,26 @@ body.dark {
     height: 30px;
     margin-top:50px;
   }
+  #sizeSelector {
+    width: 90px;
+  }
   #quantSelector {
-    width: 50px;
+    width: 90px;
   }
   #overview
   .add {
     display: flex;
-    margin-top:50px;
+    margin-top:30px;
     align-items: center;
     font-size:large;
+    width: fit-content;
+    border: solid 3px;
+    padding:5px;
   }
-  #overview
-  .add
-  span:hover {
-    border-radius: 100%;
-    background: radial-gradient(circle at center, aqua, transparent);
 
+  #overview
+  .add:hover {
+    border: solid aqua 3px;
   }
   /*Product Overview */
   #overview
@@ -364,7 +370,6 @@ body.dark {
   .productOverview
   .information {
     display: flex;
-    justify-content: space-between;
     flex-direction: row;
     min-height: 150px;
   }
@@ -375,9 +380,9 @@ body.dark {
     justify-content: space-between;
     flex-direction: column;
     align-content: center;
-    width: 70%;
-    padding-left: 30px;
-    padding-right: 30px;
+    width: 60%;
+    margin-left: 5%;
+    margin-right: 5%;
   }
   #overview
   .productOverview
@@ -388,12 +393,20 @@ body.dark {
   #overview
   .productOverview
   .description {
-
+    margin-bottom:16px;
+    padding: 10px 2% 10px 2%;
   }
   #overview
   .productOverview
   .tags {
-    padding-right: 50px;
+    display: flex;
+    flex-direction: column;
+    border-left: solid 1px black;
+    padding: 10px 0 10px 5%;
+    list-style: square;
+    width:25%;
+    margin-right: 0px;
+    justify-content: space-between;
   }
   #overview
   .productOverview
@@ -733,7 +746,7 @@ select.reviewSort {
   display: grid;
   grid-template-columns: 2fr;
   grid-template-rows: 1fr min-content;
-  height: 600px;
+  height: fit-content;
   overflow-y: scroll;
 }
 

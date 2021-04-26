@@ -26,7 +26,7 @@ const ProductOverview = () => {
         </ul>
       </div>
       <div className='shareButtons'>
-        Share buttons go here
+        {/* Share buttons go here */}
       </div>
     </div>
   );
