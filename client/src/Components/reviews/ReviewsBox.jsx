@@ -69,8 +69,7 @@ function ReviewsBox (props) {
 
   // Handles searchbar filter
   const handleSearch = (text) => {
-    setSearch(text);
-    const sorted = sortReviews(filter, results, search, starFilter);
+    const sorted = sortReviews(filter, results, text, starFilter);
     const sliced = sorted.slice(0, currentLength);
     setResults(resultsStorage);
     setDisplay(sliced);
