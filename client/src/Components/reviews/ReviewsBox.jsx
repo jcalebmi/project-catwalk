@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import Reviews from './Reviews.jsx';
 import Ratings from './Ratings.jsx';
@@ -22,6 +22,7 @@ function ReviewsBox (props) {
   const [currentLength, setLength] = useState(2);
   const [starFilter, setStars] = useState([]);
   const [meta, setMeta] = useState({});
+  const [showModal, setModal] = useState(false);
 
   // calls sort helper and sorts filter
   const handleSort = (e) => {
@@ -34,30 +35,30 @@ function ReviewsBox (props) {
   };
 
   //  Call to Axios GET
+  const metaData = () => {
+    if (product.id !== undefined) {
+      getMetaData(product.id).then((data) => {
+        setMeta(data);
+      });
+    }
+  };
+
+  // gets initial reviews and sets meta data
+  const reviews = () => {
+    if (product.id !== undefined) {
+      // setProduct(product);
+      getReviews(product.id).then((data) => {
+        const sorted = sortReviews(filter, data, search, starFilter);
+        const sliced = sorted.slice(0, currentLength);
+        setDisplay(sliced);
+        setResults(data);
+        metaData();
+        setResultsStorage(data);
+      });
+    }
+  };
   useEffect(() => {
     // gets meta data for reviews
-    const metaData = () => {
-      if (product.id !== undefined) {
-        getMetaData(product.id).then((data) => {
-          setMeta(data);
-        });
-      }
-    };
-
-    // gets initial reviews and sets meta data
-    const reviews = () => {
-      if (product.id !== undefined) {
-        setProduct(product);
-        getReviews(product.id).then((data) => {
-          setResults(data);
-          metaData();
-          setResultsStorage(data);
-          const sorted = sortReviews(filter, data, search, starFilter);
-          const sliced = sorted.slice(0, currentLength);
-          setDisplay(sliced);
-        });
-      }
-    };
     reviews();
   }, [product]);
 
@@ -93,11 +94,12 @@ function ReviewsBox (props) {
         handleStarFilter={handleStarFilter}
         mode={props.mode}/>
       <Reviews
+        reviews={reviews}
         handleSearch={handleSearch}
-        results={results}
+        results={resultsStorage}
         display={display}
         handleSort={handleSort}
-        currentProduct={currentProduct}
+        currentProduct={product}
         handleMoreReviews={handleMoreReviews}
         mode={props.mode} />
     </div>

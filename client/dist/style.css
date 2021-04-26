@@ -575,6 +575,19 @@ li.reviews {
   font-size: 1em;
 }
 
+.reviewsPhotos {
+  display: inline-block;
+  width: 50px;
+  height: auto;
+}
+.reviewsPhotos.modal {
+  width: 100%;
+  height: auto;
+  float: center;
+  position: absolute;
+  z-index: 1;
+}
+
 /* Username & Date */
 span.spanRight {
   float: right;

@@ -129,8 +129,8 @@ function AddReview(props) {
 
   // axios.post('/reviews', data, auth)
     // }
+    props.reviews();
   };
-console.log(props.product);
   return (
     <div className={overlayMode}>
       <div

@@ -14,11 +14,29 @@ import setProduct from './helpers/setProduct.jsx';
 import setQuestions from './helpers/setQuestions.jsx';
 //QAs Import
 import QAs from './qas/QAs.jsx';
+import Analytics from './Analytics.jsx';
 
 function App() {
   const [isLoaded, setLoaded] = useState(false);
   const [mode, setMode] = useState('light');
   const [toggle, setToggle] = useState('Dark Mode');
+  const [analytics, setAnalytics] = useState(false);
+  const [stats, setStats] = useState({});
+  let clicks = {
+    totalClicks: 0,
+    navigationBar: {
+      clicks: 0,
+    },
+    overview: {
+      clicks: 0,
+    },
+    'q-as-container': {
+      clicks: 0,
+    },
+    ratingReviewContainer: {
+      clicks: 0,
+    },
+  };
   if (!isLoaded) {
     setProduct()
       .then(() => {
@@ -48,14 +66,46 @@ function App() {
       }
     }
   };
+  const handleClick = (e) => {
+    const path = e.nativeEvent.path.slice();
+    const pathElements = e.nativeEvent.path.map((element) => element.id).filter((element) => element === 'overview'
+    || element === 'ratingReviewContainer'
+    || element === 'q-as-container'
+    || element === 'navigationBar');
+    const module = pathElements[0];
+    const element = path[0];
+    if (module !== undefined) {
+      clicks[module].clicks += 1;
+      if (clicks[module][element] === undefined) {
+        clicks[module][element] = {clicks: 1, date: new Date(e.timeStamp)}
+      } else {
+        clicks[module][element].clicks += 1;
+      }
+      clicks.totalClicks += 1;
+      console.log(clicks);
+    }
+  };
+
+  const handleStats = () => {
+    setStats(clicks);
+    setAnalytics(!analytics);
+  };
 
   return (
-      <div id='modules'>
-        <NavigationBar handleColor={handleColor} toggle={toggle}/>
-        <Overview />
-        <QAs />
-        <ReviewsBox mode={mode} />
+        analytics
+        ?
+        <div id='analytics' onClick={handleStats}>
+          <Analytics stats={stats} />
+        </div>
+        :
+      <div id='modules'onClick={handleClick}>
+          <button onClick={handleStats}>Stats</button>
+          <NavigationBar handleColor={handleColor} toggle={toggle}/>
+          <Overview />
+          <QAs />
+          <ReviewsBox mode={mode} />
       </div>
+
   );
 }
 
