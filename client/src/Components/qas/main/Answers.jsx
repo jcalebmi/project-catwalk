@@ -13,7 +13,7 @@ const moment = require('moment');
 const Answers = ({ questionId, questionBody }) => {
   const [answers, setAnswers] = useState([]);
   const [display, updateDisplay] = useState([]);
-  const pointer = useRef(2);
+  const pointer = useRef(1);
 
   useEffect(() => {
     fetchAnswers(questionId, (results) => {
@@ -22,13 +22,14 @@ const Answers = ({ questionId, questionBody }) => {
         updateDisplay(sorted.slice(0, 2));
       });
     });
-  }, [questionId]);
+  }, []);
 
   const loadMore = (e) => {
-    console.log(e);
     if (e.target.innerHTML === 'COLLAPSE ANSWERS') {
       e.target.innerHTML = 'LOAD MORE ANSWERS';
       pointer.current = 1;
+      updateDisplay(answers.slice(0, 2));
+      return;
     }
 
     qasView(answers, pointer, (next2, newPointer) => {
