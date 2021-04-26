@@ -18,7 +18,7 @@ const QAsItems = ({ questions }) => {
         </div>
     );
   }
-
+  const [isSearching, setIsSearching] = useState(false);
   const [display, updateDisplay] = useState(questions.slice(0, 4));
   const pointer = useRef(3);
 
@@ -26,15 +26,20 @@ const QAsItems = ({ questions }) => {
   const handleSearch = (searchVal) => {
     if (searchVal.length >= 3) {
       filter(searchVal, questions, (matchedResults) => {
+        setIsSearching(true);
         updateDisplay(matchedResults);
       });
     }
     if (searchVal.length < 3) {
+      setIsSearching(false);
       updateDisplay(questions.slice(0, 4));
     }
   };
 
   const loadMore = (e) => {
+    if (isSearching) {
+      return;
+    }
     if (e.target.innerHTML === 'COLLAPSE QUESTIONS') {
       e.target.innerHTML = 'SEE MORE QUESTIONS';
       pointer.current = 3;
