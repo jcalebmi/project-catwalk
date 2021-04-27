@@ -414,7 +414,9 @@ li.reviews {
   flex-direction: column;
   list-style: none;
   padding: 3px;
+  min-width: 275px;
   position: relative;
+  overflow:visible;
 }
 
 .helpfulness {
