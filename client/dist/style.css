@@ -818,3 +818,22 @@ select.reviewSort {
   padding: 10px;
   width: 25%;
 }
+#portal
+  .answerForm
+  h1,
+  h2 {
+  color: rgb(39, 39, 180)
+}
+
+#portal
+  .answerForm {
+    display: grid;
+    grid-gap: 1em;
+}
+#portal
+  .modal-nickname,
+  .modal-email,
+  .modalSubmit,
+  .modalImage {
+    padding: 10px;
+  }

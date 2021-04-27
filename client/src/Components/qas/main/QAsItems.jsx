@@ -41,19 +41,17 @@ const QAsItems = ({ questions }) => {
       return;
     }
     if (e.target.innerHTML === 'COLLAPSE QUESTIONS') {
-      e.target.innerHTML = 'SEE MORE QUESTIONS';
       pointer.current = 3;
       updateDisplay(questions.slice(0, 4));
+      e.target.innerHTML = 'SEE MORE QUESTIONS';
       return;
     }
-
-    qasView(questions, pointer.current, (next2, newPointer) => {
-      pointer.current = newPointer;
-      if (next2.length === 1) {
-        e.target.innerHTML = 'COLLAPSE QUESTIONS';
-      }
-      updateDisplay([...display, ...next2]);
-    });
+    if (pointer.current >= questions.length - 2) {
+      updateDisplay(questions.slice());
+      e.target.innerHTML = 'COLLAPSE QUESTIONS';
+    }
+    pointer.current += 2;
+    updateDisplay(questions.slice(0, pointer.current));
   };
 
   return (

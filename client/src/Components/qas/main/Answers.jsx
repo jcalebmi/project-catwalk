@@ -13,34 +13,29 @@ const moment = require('moment');
 const Answers = ({ questionId, questionBody }) => {
   const [answers, setAnswers] = useState([]);
   const [display, updateDisplay] = useState([]);
-  const pointer = useRef(1);
+  const pointer = useRef(2);
 
   useEffect(() => {
     fetchAnswers(questionId, (results) => {
       sortData(results, 'helpfulness', (sorted) => {
         setAnswers([...sorted]);
-        updateDisplay(sorted.slice(0, 2));
+        updateDisplay(sorted.slice(0, pointer.current));
       });
     });
   }, []);
 
   const loadMore = (e) => {
     if (e.target.innerHTML === 'COLLAPSE ANSWERS') {
-      e.target.innerHTML = 'LOAD MORE ANSWERS';
-      pointer.current = 1;
-      updateDisplay(answers.slice(0, 2));
-      return;
+      e.target.innerHTML = 'SEE MORE ANSWERS';
+      pointer.current = 2;
+      return updateDisplay(answers.slice(0, 2));
     }
-
-    qasView(answers, pointer, (next2, newPointer) => {
-      pointer.current = newPointer;
-
-      if (next2.length === 1) {
-        e.target.innerHTML = 'COLLAPSE ANSWERS';
-      }
-
-      updateDisplay([...display, ...next2]);
-    });
+    if (pointer.current >= answers.length - 2) {
+      e.target.innerHTML = 'COLLAPSE ANSWERS';
+      return updateDisplay(answers.slice());
+    }
+    pointer.current += 2;
+    updateDisplay(answers.slice(0, pointer.current));
   };
 
   return (
@@ -60,9 +55,7 @@ const Answers = ({ questionId, questionBody }) => {
         </span>
         <div id="answer-btn-container">
         {answers.length > 2 ? <LoadMoreAnswers handler={loadMore} />
-          : <></>}
-        {answers.length === 0
-          ? <AddAnswer questionId={questionId} questionBody={questionBody} /> : <></>}
+          : <AddAnswer questionId={questionId} questionBody={questionBody} /> }
           </div>
           <br></br>
       </div>
