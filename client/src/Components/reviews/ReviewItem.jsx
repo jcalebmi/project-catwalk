@@ -13,6 +13,7 @@ function ReviewItem(props) {
   const preview = props.item.body.slice(0, 250);
   //  Call helpfulness API
   const [helpfulness, setHelpfulness] = useState(props.item.helpfulness);
+  const [reported, setReported] = useState(false);
   const handleHelpfulness = () => {
     if (!ishelpfulClicked) {
       updateHelpfulness(props.item.review_id);
@@ -23,6 +24,7 @@ function ReviewItem(props) {
   };
   const report = () => {
     sendReport(props.item.review_id);
+    setReport(true);
   };
   const showBody = () => {
     const body = document.getElementById('reviewBody');

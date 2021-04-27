@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import Reviews from './Reviews2.jsx';
+import Reviews from './Reviews.jsx';
 import Ratings from './Ratings.jsx';
 import getReviews from './helpers/getReviews.js';
 import sortReviews from './helpers/sortReviews.js';
@@ -71,7 +71,7 @@ function ReviewsBox (props) {
   // Handles searchbar filter
   const handleSearch = (text) => {
     setSearch(text);
-    const sorted = sortReviews(filter, results, search, starFilter);
+    const sorted = sortReviews(filter, results, text, starFilter);
     const sliced = sorted.slice(0, currentLength);
     setResults(resultsStorage);
     setDisplay(sliced);

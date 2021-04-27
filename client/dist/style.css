@@ -550,20 +550,23 @@ li.reviews {
 .characteristicsRating {
   width: 100%;
 }
+.voteCount {
+
+}
 .ratingSlider {
   padding-top: 3px;
 }
 .ratingSlider input[type="range"] {
   -webkit-appearance: none;
-  width: 200px;
+  width: 100%;
 }
 .ratingSlider input[type="range"]::-webkit-slider-runnable-track {
   background-color: lightgrey;
   height: .5em;
-  width: 200px;
+  width: 100%;
 }
 .reviews.progressBar {
-  width: 200px;
+  width: 100%;
 }
 .reviews.progressBar:hover{
   color: blue;

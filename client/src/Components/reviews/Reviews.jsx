@@ -43,7 +43,8 @@ function Reviews(props) {
               ? <button onClick={props.handleMoreReviews}>More Reviews</button>
               : null } <button onClick={handleAddReview}>Add A Review +</button>
           </span>
-          {addReview === true
+        </div>
+        {addReview === true
             ? <AddReview
                 reviews={props.reviews}
                 className="addReview overlay"
@@ -52,7 +53,6 @@ function Reviews(props) {
                 mode={props.mode}
                 />
             : null}
-        </div>
       </div>
   );
 }
