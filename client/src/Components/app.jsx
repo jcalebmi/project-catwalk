@@ -27,15 +27,19 @@ function App() {
     moduleClicks: {
       navigationBar: {
         clicks: 0,
+        elements: [],
       },
       overview: {
         clicks: 0,
+        elements: [],
       },
       'q-as-container': {
         clicks: 0,
+        elements: [],
       },
       ratingReviewContainer: {
         clicks: 0,
+        elements: [],
       },
     },
   };
@@ -75,15 +79,15 @@ function App() {
     || element === 'q-as-container'
     || element === 'navigationBar');
     const module = pathElements[0];
-    const element = path[0];
+    const element = path[0].toString();
+    clicks.totalClicks += 1;
     if (module !== undefined) {
       clicks.moduleClicks[module].clicks += 1;
-      if (clicks[module][element] === undefined) {
-        clicks.moduleClicks[module][element] = {clicks: 1, date: new Date(e.timeStamp)}
+      if (clicks.moduleClicks[module].elements[element] === undefined) {
+        clicks.moduleClicks[module].elements[element] = {clicks: 1, date: new Date(e.timeStamp)}
       } else {
-        clicks.moduleClicks[module][element].clicks += 1;
+        clicks.moduleClicks[module].elements[element].clicks += 1;
       }
-      clicks.totalClicks += 1;
       console.log(clicks);
     }
   };
@@ -94,18 +98,18 @@ function App() {
   };
 
   return (
-        analytics
-        ?
+    analytics
+      ?
         <div id='analytics' onClick={handleStats}>
           <Analytics stats={stats} />
         </div>
-        :
+      :
       <div id='modules'onClick={handleClick}>
-          <button onClick={handleStats}>Stats</button>
           <NavigationBar handleColor={handleColor} toggle={toggle}/>
           <Overview />
           <QAs />
           <ReviewsBox mode={mode} />
+          <button onClick={handleStats}>Stats</button>
       </div>
 
   );
