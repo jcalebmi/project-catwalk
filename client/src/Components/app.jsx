@@ -24,17 +24,19 @@ function App() {
   const [stats, setStats] = useState({});
   let clicks = {
     totalClicks: 0,
-    navigationBar: {
-      clicks: 0,
-    },
-    overview: {
-      clicks: 0,
-    },
-    'q-as-container': {
-      clicks: 0,
-    },
-    ratingReviewContainer: {
-      clicks: 0,
+    moduleClicks: {
+      navigationBar: {
+        clicks: 0,
+      },
+      overview: {
+        clicks: 0,
+      },
+      'q-as-container': {
+        clicks: 0,
+      },
+      ratingReviewContainer: {
+        clicks: 0,
+      },
     },
   };
   if (!isLoaded) {
@@ -75,11 +77,11 @@ function App() {
     const module = pathElements[0];
     const element = path[0];
     if (module !== undefined) {
-      clicks[module].clicks += 1;
+      clicks.moduleClicks[module].clicks += 1;
       if (clicks[module][element] === undefined) {
-        clicks[module][element] = {clicks: 1, date: new Date(e.timeStamp)}
+        clicks.moduleClicks[module][element] = {clicks: 1, date: new Date(e.timeStamp)}
       } else {
-        clicks[module][element].clicks += 1;
+        clicks.moduleClicks[module][element].clicks += 1;
       }
       clicks.totalClicks += 1;
       console.log(clicks);

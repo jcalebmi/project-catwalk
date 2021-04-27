@@ -23,6 +23,10 @@ body.dark {
   font-weight: bold;
 }
 
+.noDec {
+  text-decoration: none;
+}
+
 .useBgColor.dark{
   background-color: #002347;
   color: #F4FAFF;

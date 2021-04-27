@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import Reviews from './Reviews.jsx';
+import Reviews from './Reviews2.jsx';
 import Ratings from './Ratings.jsx';
 import getReviews from './helpers/getReviews.js';
 import sortReviews from './helpers/sortReviews.js';
