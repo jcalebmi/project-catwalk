@@ -394,6 +394,8 @@ body.dark {
 .reviewsContainer {
   min-width: 360px;
   max-width: 500px;
+  max-height: 410px;
+  min-height: 100px;
 }
 /* Review List & Items */
 ul.reviewList {
