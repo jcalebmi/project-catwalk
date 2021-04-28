@@ -629,7 +629,7 @@ li.reviews {
   display: inline-grid;
   grid-template-columns: 30% 30% 30%;
   padding-left: 5px;
-  width: 260px;
+  width: 375px;
   font-size: 1em;
 }
 
