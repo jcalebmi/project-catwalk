@@ -647,7 +647,7 @@ select.reviewSort {
 }
 .addReview.container {
   position: relative;
-  margin: 0% 33%;
+  margin: auto;
   height: fit-content;
   width: 300px;
 }

@@ -2,7 +2,6 @@ import React from 'react';
 
 function Characteristics(props) {
   if (props.meta.characteristics !== undefined) {
-    console.log(props.meta.characteristics)
     return (
       <div className="characteristicsRating">
         {props.meta.characteristics.Size

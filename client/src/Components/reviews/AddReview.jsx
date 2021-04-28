@@ -94,7 +94,7 @@ function AddReview(props) {
       }
     }
   };
-
+console.log(filesSRC)
   const onSubmit = (e) => {
     e.preventDefault();
     // const data = new FormData();

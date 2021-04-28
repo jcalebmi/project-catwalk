@@ -7,6 +7,7 @@ import Overview from './overview/Overview.jsx';
 
 //Review Imports
 import ReviewsBox from './reviews/ReviewsBox.jsx';
+import ReviewsBox2 from './reviews/ReviewsBox2.jsx';
 
 //Initialization of Products
 // import {setProduct, setQuestions} from './helpers/setProduct.jsx';
@@ -27,19 +28,23 @@ function App() {
     moduleClicks: {
       navigationBar: {
         clicks: 0,
-        elements: [],
+        elements: {
+        },
       },
       overview: {
         clicks: 0,
-        elements: [],
+        elements: {
+        },
       },
       'q-as-container': {
         clicks: 0,
-        elements: [],
+        elements: {
+        },
       },
       ratingReviewContainer: {
         clicks: 0,
-        elements: [],
+        elements: {
+        },
       },
     },
   };
@@ -79,16 +84,26 @@ function App() {
     || element === 'q-as-container'
     || element === 'navigationBar');
     const module = pathElements[0];
-    const element = path[0].toString();
+    const nodeName = path[0].nodeName;
+    const id = path[0].id;
+    const className = path[0].className;
+    const element = nodeName + id + className;
+    const date = new Date(e.timeStamp);
     clicks.totalClicks += 1;
     if (module !== undefined) {
       clicks.moduleClicks[module].clicks += 1;
       if (clicks.moduleClicks[module].elements[element] === undefined) {
-        clicks.moduleClicks[module].elements[element] = {clicks: 1, date: new Date(e.timeStamp)}
+        clicks.moduleClicks[module].elements[element] = {clicks: 1};
+        clicks.moduleClicks[module].elements[element].time = {
+          [date]: date,
+        }
       } else {
         clicks.moduleClicks[module].elements[element].clicks += 1;
+        clicks.moduleClicks[module].elements[element].time[date] = date;
       }
-      //console.log(clicks);
+      // console.log(path);
+      // console.log(element);
+      console.log(clicks);
     }
   };
 
