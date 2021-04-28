@@ -6,7 +6,7 @@ import getReviews from './helpers/getReviews.js';
 import sortReviews from './helpers/sortReviews.js';
 import getMetaData from './helpers/getMeta.js';
 
-const selectProductById = (state) => state.product;
+const selectProductById = (state) => state.product.product;
 
 function ReviewsBox (props) {
   const [isLoaded, setLoaded] = useState(false);
@@ -31,9 +31,8 @@ function ReviewsBox (props) {
     const sorted = sortReviews(sortBy, results, search, starFilter);
     const sliced = sorted.slice(0, currentLength);
     setDisplay(sliced);
-    console.log(sliced);
-    // setResults(resultsStorage);
-    // setFilter(sortBy);
+    setResults(resultsStorage);
+    setFilter(sortBy);
   };
 
   //  Call to Axios GET

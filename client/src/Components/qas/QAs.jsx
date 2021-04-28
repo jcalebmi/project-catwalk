@@ -4,7 +4,7 @@ import QAsItems from './main/QAsItems.jsx';
 import AddQuestion from './buttons/AddQuestion.jsx';
 import { fetchQuestions } from './helpers/server-requests';
 
-const selectSingleProduct = (state) => state.product;
+const selectSingleProduct = (state) => state.product.product;
 
 const QAs = () => {
   const [questions, setQuestions] = useState([]);

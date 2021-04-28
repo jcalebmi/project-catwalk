@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Element, Link } from 'react-scroll';
+import { Link } from 'react-scroll';
 import StyleThumbnails from './StyleThumbnails.jsx';
 import SizeSelector from './SizeSelector.jsx';
 import QuantSelector from './QuantSelector.jsx';
 import AddToCart from './AddToCart.jsx';
+
 // import Favorite from './Favorite.jsx';
 import { ave } from '../reviews/helpers/ratings.js';
 
@@ -14,10 +14,11 @@ const ProductSelection = ({
   styles,
   styleIdx,
   setStyleIdx,
+  cart,
+  setCart,
 }) => {
   const [sizeSku, setSize] = useState(null);
   const [quant, setQuant] = useState(1);
-  const [cart, setCart] = useState([]);
 
   const style = styles[styleIdx];
   const price = style.original_price;
@@ -71,7 +72,6 @@ const ProductSelection = ({
         quant={quant}
         style={style}
         product={product}/>
-        {/* <Favorite /> */}
         <div className='fave'>
           {/* Star or Heart */}
         </div>

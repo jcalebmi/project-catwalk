@@ -17,9 +17,9 @@ function Analytics(props) {
           {Object.keys(overviewElements).map((element, index) => {
             return <li key={index}>
                 <span>{element}:</span><br></br>
-                <span class="bold">Clicks: {overviewElements[element].clicks}</span><br></br>
+                <span className="bold">Clicks: {overviewElements[element].clicks}</span><br></br>
                 <div><br></br>
-                  <span class="bold">Time:</span><br></br>
+                  <span className="bold">Time:</span><br></br>
                   {Object.keys(overviewElements[element].time).map((date, index) => {
                     return <p><span>{date}</span><br></br></p>
                   })}
