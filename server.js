@@ -12,6 +12,7 @@ const getMetaData = require('./reviewHelpers/getMeta.js');
 const getStyles = require('./overviewHelpers/getStyles.js');
 const sendReview = require('./reviewHelpers/sendReview.js');
 const sendReport = require('./reviewHelpers/sendReport.js');
+const sortData = require('./questionsHelpers/sortData.js');
 
 const fetchQuestions = require('./questionsHelpers/fetchQuestions.js');
 const fetchAnswers = require('./questionsHelpers/fetchAnswers.js');
@@ -87,40 +88,45 @@ app.post('/reviews/', (req, res) => {
   sendReview(data);
 });
 
-app.get('/qa/questions/:product_id', (req, res) => {
-  const id = req.params.product_id;
-  fetchQuestions(id, (err, results) => {
-    if (err) throw err;
-    if (results !== undefined) res.send(results);
+app.get('/qa/questions/:productId/', (req, res) => {
+  const { productId } = req.params;
+  fetchQuestions(productId, (questions) => {
+    sortData(questions, 'question_helpfulness', (sorted) => {
+      res.send(sorted);
+    });
   });
 });
 
 app.get('/qa/questions/:question_id/answers', (req, res) => {
   const id = req.params.question_id;
-  fetchAnswers(id, (results) => {
-    if (results !== undefined) res.send(results);
+  fetchAnswers(id, (answers) => {
+    sortData(answers, 'answer_helpfulness', (sorted) => {
+      res.send(sorted);
+    });
   });
 });
 
-app.put('/qa/questions/:question_id/helpful', (req) => {
+app.put('/qa/questions/:question_id/helpful', (req, res) => {
   const id = req.params.question_id;
   putQuestionsHelpful(id);
 });
 
-app.put('/qa/questions/:question_id/report', (req) => {
+app.put('/qa/questions/:question_id/report', (req, res) => {
   const id = req.params.question_id;
-  putQuestionsReported(id);
+  putQuestionsReported(id, (helpNum) => {
+    res.send(helpNum);
+  });
 });
-app.put('/qa/answers/:answer_id/helpful', (req) => {
+app.put('/qa/answers/:answer_id/helpful', (req, res) => {
   const id = req.params.answer_id;
   putAnswersHelpful(id);
 });
-app.put('/qa/answers/:answer_id/report', (req) => {
+app.put('/qa/answers/:answer_id/report', (req, res) => {
   const id = req.params.answer_id;
   putAnswersReported(id);
 });
 
-app.post('/qa/questions/', (req) => {
+app.post('/qa/questions/', (req, res) => {
   const { body } = req;
   postNewQuestions(body);
 });

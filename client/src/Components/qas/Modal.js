@@ -34,6 +34,6 @@ export default function Modal({ open, onClose, children }) {
         {children}
       </div>
      </>,
-    document.getElementById('portal')
+    document.getElementById('portal'),
   );
 }
