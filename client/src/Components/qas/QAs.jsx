@@ -1,39 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import QAsItems from './main/QAsItems.jsx';
+import AddQuestion from './buttons/AddQuestion.jsx';
 import { fetchQuestions } from './helpers/server-requests';
-import sortData from './helpers/sortData';
 
 const selectSingleProduct = (state) => state.product;
 
 const QAs = () => {
   const [questions, setQuestions] = useState([]);
-  const [questionsLoaded, setQuestionsLoaded] = useState(false);
-
   const product = useSelector(selectSingleProduct) || [];
 
   useEffect(() => {
-    if (product.id !== undefined) {
-      // fetch questions helper
-      fetchQuestions(product.id, (results) => {
-        // data sort helper
-        sortData(results.data, 'question_helpfulness', (sorted) => {
-          setQuestions(sorted);
-          setQuestionsLoaded(true);
-        });
-      });
-    }
+    fetchQuestions(product.id, (qs) => {
+      console.log(qs.data)
+      setQuestions(qs.data);
+      // setHasMore(qs.data.length > 0);
+    });
   }, []);
 
-  if (!questionsLoaded) {
-    return (
-      <div>Loading...</div>
-    );
-  }
+  const updateQuestions = () => {
+    fetchQuestions(product.id, (qs) => {
+      setQuestions(qs);
+    });
+  };
 
   return (
     <div id="q-as-container">
       <QAsItems questions={questions} />
+      <AddQuestion updateQs={() => updateQuestions()} />
     </div>
   );
 };

@@ -1,62 +1,84 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import Modal from 'react-modal';
+// import Modal from 'react-modal';
 import PropTypes from 'prop-types';
+import Modal from '../Modal';
 
 const { postAs } = require('../helpers/server-requests');
 
+const BUTTON_WRAPPER_STYLES = {
+  position: 'relative',
+  zIndex: 1,
+};
+
 const getProductName = (state) => state.product.name;
 
-Modal.setAppElement('#app');
-const AddAnswer = ({ questionId, questionBody }) => {
+// Modal.setAppElement('#app');
+const AddAnswer = ({ questionId }) => {
   const productName = useSelector(getProductName);
-
-  const [modalIsOpen, setOpenModal] = useState(false);
-
-  const [question, setQuestion] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+  const [answer, setAnswer] = useState('');
   const [nickname, setNickname] = useState('');
   const [userEmail, setEmail] = useState('');
-  const handleBodyChange = (e) => setQuestion(e.target.value);
+  const [images, setImages] = useState([]);
+  const [validated, setValidated] = useState(true);
+
+  const handleBodyChange = (e) => setAnswer(e.target.value);
   const handleNameChange = (e) => setNickname(e.target.value);
   const handleEmailChange = (e) => setEmail(e.target.value);
+  const fileSelected = (e) => setImages(e.target.files[0]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setOpenModal(false);
+
+    if (answer === '' || nickname === '' || userEmail === '' || !userEmail.includes('@')) {
+      return setValidated(false);
+    }
 
     const requestBody = {
-      body: question,
+      body: answer,
       name: nickname,
       email: userEmail,
-      photos: ['https://fakeimg.pl/300/'],
+      photos: images,
     };
 
     postAs(questionId, requestBody);
+
+    setValidated(true);
+    setAnswer('');
+    setNickname('');
+    setEmail('');
+    setImages('');
   };
 
   return (
-  <div>
-    <button className="useBgContrast light feedback-btn" id="add-answer-btn" onClick={() => setOpenModal(true)}>Add Answer</button>
-    <Modal isOpen={modalIsOpen} onRequestClose={() => setOpenModal(false)}>
-      <h1 className="addQA light">Submit your Answer</h1>
-      {' '}
-      <h2 className="addQA light">Product Name:{productName} Question:{questionBody}</h2>
-      <form
-        className="addQA light"
-        onSubmit={handleSubmit}>
-      *Your answer
-      <textarea inputs="body" id="modal-body" rows="10" cols="100" onChange={handleBodyChange}></textarea>
-      *What is your nickname?:
-      <input onChange={handleNameChange} inputs="nickname" type="text" placeholder="Example: jack543!" id="answerers-nickname"></input>
+  <>
+  <div style={BUTTON_WRAPPER_STYLES}>
+    <button onClick={() => setIsOpen(true)} className="useBgContrast light feedback-btn" id="add-answer-btn">Add Answer</button>
+    <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+      {/** FORM DATA FROM UI */}
+      <form className="answerForm">
+      <h1 className="addQA light">Submit Your Answer</h1>
+      <h2 className="addQA light">Product Name: {productName}</h2>
+      *Your answer {/** UI RESPONSE BODY */}
+      <textarea className="answer-modal" rows="10" cols="100" onChange={handleBodyChange}></textarea>
+      *What is your nickname? {/** USERNAME INPUT */}
+      <input onChange={handleNameChange} className="modal-nickname" height="48px" type="text" placeholder="Example: jack543!" id="answerers-nickname"></input>
       <h6>For privacy reasons, do not use your full name or email address</h6>
-      <input onChange={handleEmailChange} input="email" type="text" id="answerers-email" placeholder="Example: jack@email.com"></input>
+      {/** EMAIL INPUT */}
+      <input onChange={handleEmailChange} input="email" type="text" className="modal-email" placeholder="Example: jack@email.com"></input>
       <h6>For authentication reasons, you will not be emailed</h6>
-      <button>Upload Image</button>
-      <button type="submit">Submit Answer</button>
+      {/** IMAGE INPUT */}
+      <input type="file" onChange={fileSelected}></input>
+      {!validated ? <div className="invalid">INVALID RESPONSE</div> : <div>*Required Fields</div>}
+      {/** SUBMIT BUTTONS */}
+      <button className="modalSubmit" type="submit">Upload</button>
+      <button onClick={handleSubmit} className="modalSubmit" type="submit">Submit Answer</button>
       </form>
-    <button onClick={() => setOpenModal(false)}>Close</button>
     </Modal>
   </div>
+  </>
+
   );
 };
 
