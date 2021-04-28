@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const NavigationBar = ({ handleColor, setPage }) => {
+const NavigationBar = ({ handleColor, setPage, handleStats }) => {
   const [searchVal, setSearchVal] = useState('');
 
   const handleClick = (e) => {
@@ -9,6 +9,9 @@ const NavigationBar = ({ handleColor, setPage }) => {
       setPage('modules');
     } else if (e.target.id === 'checkout') {
       setPage('cart');
+    } else if (e.target.id === 'stats') {
+      handleStats();
+      setPage('stats');
     } else {
       handleColor();
     }
@@ -19,6 +22,7 @@ const NavigationBar = ({ handleColor, setPage }) => {
       <img onClick={handleClick} id='logo'
         src='/assets/Taiga.png'>
       </img>
+      <button id='stats' onClick={handleClick}>Stats</button>
       <form
         onSubmit={(e) => {
           e.preventDefault();

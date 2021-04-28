@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios');
 const apiToken = require('./myconfig');
+const multer = require('multer');
 
 const app = express();
 const path = require('path');

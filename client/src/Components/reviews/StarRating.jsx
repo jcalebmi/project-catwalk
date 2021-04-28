@@ -10,6 +10,18 @@ function StarRating(props) {
     { name: '2 stars', value: false },
     { name: '1 stars', value: false },
   ]);
+  let five;
+  let four;
+  let three;
+  let two;
+  let one;
+  if (props.meta.ratings !== undefined) {
+    five = props.meta.ratings['5'];
+    four = props.meta.ratings['4'];
+    three = props.meta.ratings['3'];
+    two = props.meta.ratings['2'] || 0;
+    one = props.meta.ratings['1'];
+  }
   const mode = `underline removeFilters ${props.mode}`
   const [filtered, setFiltered] = useState('none');
   const handleStars = (e) => {
@@ -41,7 +53,6 @@ function StarRating(props) {
       props.handleStarFilter(filter);
     }
   };
-
   return (
       <div className="numberOfStars">
         <h4 className="filters">Rating Breakdown</h4>
@@ -57,7 +68,7 @@ function StarRating(props) {
         <div className="numberOfStars underline">
           <span
             onClick={handleStars}
-            className="reviews progressBar">5 stars </span><br></br>
+            className="reviews progressBar">5 stars</span><span className="floatRight voteCount"> {five} votes</span><br></br>
           <progress
             className="reviews progressBar"
             value={props.meta.ratings === undefined ? 0 : props.meta.ratings['5']}
@@ -65,7 +76,7 @@ function StarRating(props) {
           </progress><br></br>
           <span
             onClick={handleStars}
-            className="reviews progressBar">4 stars </span><br></br>
+            className="reviews progressBar">4 stars</span><span className="floatRight voteCount"> {four} votes</span><br></br>
           <progress
             className="reviews progressBar"
             value={props.meta.ratings === undefined ? 0 : props.meta.ratings['4']}
@@ -73,7 +84,7 @@ function StarRating(props) {
           </progress><br></br>
           <span
             onClick={handleStars}
-            className="reviews progressBar">3 stars </span><br></br>
+            className="reviews progressBar">3 stars</span><span className="floatRight voteCount"> {three} votes</span><br></br>
           <progress
             className="reviews progressBar"
             value={props.meta.ratings === undefined ? 0 : props.meta.ratings['3'] || 0}
@@ -81,7 +92,7 @@ function StarRating(props) {
           </progress><br></br>
           <span
             onClick={handleStars}
-            className="reviews progressBar">2 stars </span><br></br>
+            className="reviews progressBar">2 stars</span><span className="floatRight voteCount"> {two} votes</span><br></br>
           <progress
             className="reviews progressBar"
             value={props.meta.ratings === undefined ? 0 : props.meta.ratings['2'] || 0}
@@ -89,7 +100,7 @@ function StarRating(props) {
           </progress><br></br>
           <span
             onClick={handleStars}
-            className="reviews progressBar">1 stars </span><br></br>
+            className="reviews progressBar">1 stars</span><span className="floatRight voteCount"> {one} votes</span><br></br>
           <progress
             className="reviews progressBar"
             value={props.meta.ratings === undefined ? 0 : props.meta.ratings['1'] || 0}
