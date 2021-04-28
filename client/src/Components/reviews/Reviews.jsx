@@ -32,6 +32,7 @@ function Reviews(props) {
         <div>
           <ul className="reviewList">
             {props.display.map((item, index) => <ReviewItem
+              reviews={props.reviews}
               item={item}
               key={index}
               mode={props.mode}/>)}
@@ -43,6 +44,7 @@ function Reviews(props) {
           </span>
           {addReview === true
             ? <AddReview
+                reviews={props.reviews}
                 className="addReview overlay"
                 product={props.currentProduct}
                 closeReview={handleAddReview}

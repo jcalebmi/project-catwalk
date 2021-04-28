@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import Reviews from './Reviews.jsx';
 import Ratings from './Ratings.jsx';
@@ -9,6 +9,7 @@ import getMetaData from './helpers/getMeta.js';
 const selectProductById = (state) => state.product;
 
 function ReviewsBox (props) {
+  const [isLoaded, setLoaded] = useState(false);
   //  Current product state
   const product = useSelector(selectProductById) || {};
   //  Review results for current Product
@@ -22,45 +23,53 @@ function ReviewsBox (props) {
   const [currentLength, setLength] = useState(2);
   const [starFilter, setStars] = useState([]);
   const [meta, setMeta] = useState({});
+  const [showModal, setModal] = useState(false);
 
   // calls sort helper and sorts filter
   const handleSort = (e) => {
     const sortBy = e.target.value;
     const sorted = sortReviews(sortBy, results, search, starFilter);
     const sliced = sorted.slice(0, currentLength);
-    setResults(resultsStorage);
-    setFilter(sortBy);
     setDisplay(sliced);
+    console.log(sliced);
+    // setResults(resultsStorage);
+    // setFilter(sortBy);
   };
 
   //  Call to Axios GET
+  const metaData = () => {
+    if (product.id !== undefined) {
+      getMetaData(product.id).then((data) => {
+        setMeta(data);
+      });
+    }
+  };
+
+  // gets initial reviews and sets meta data
+  const reviews = () => {
+    if (product.id !== undefined) {
+      // setProduct(product);
+      getReviews(product.id).then((data) => {
+        const sorted = sortReviews(filter, data, search, starFilter);
+        const sliced = sorted.slice(0, currentLength);
+        setDisplay(sliced);
+        setResults(data);
+        metaData();
+        setResultsStorage(data);
+      });
+    }
+  };
+
   useEffect(() => {
     // gets meta data for reviews
-    const metaData = () => {
-      if (product.id !== undefined) {
-        getMetaData(product.id).then((data) => {
-          setMeta(data);
-        });
-      }
-    };
-
-    // gets initial reviews and sets meta data
-    const reviews = () => {
-      if (product.id !== undefined) {
-        setProduct(product);
-        getReviews(product.id).then((data) => {
-          setResults(data);
-          metaData();
-          setResultsStorage(data);
-          const sorted = sortReviews(filter, data, search, starFilter);
-          const sliced = sorted.slice(0, currentLength);
-          setDisplay(sliced);
-        });
-      }
-    };
     reviews();
   }, [product]);
-
+  if (!isLoaded) {
+    if (results.length > 0) {
+      setLoaded(true);
+    }
+    return null;
+  }
   // adds 2 to review list
   const handleMoreReviews = () => {
     setDisplay(results.slice(0, currentLength + 2));
@@ -70,7 +79,7 @@ function ReviewsBox (props) {
   // Handles searchbar filter
   const handleSearch = (text) => {
     setSearch(text);
-    const sorted = sortReviews(filter, results, search, starFilter);
+    const sorted = sortReviews(filter, results, text, starFilter);
     const sliced = sorted.slice(0, currentLength);
     setResults(resultsStorage);
     setDisplay(sliced);
@@ -93,11 +102,12 @@ function ReviewsBox (props) {
         handleStarFilter={handleStarFilter}
         mode={props.mode}/>
       <Reviews
+        reviews={reviews}
         handleSearch={handleSearch}
-        results={results}
+        results={resultsStorage}
         display={display}
         handleSort={handleSort}
-        currentProduct={currentProduct}
+        currentProduct={product}
         handleMoreReviews={handleMoreReviews}
         mode={props.mode} />
     </div>

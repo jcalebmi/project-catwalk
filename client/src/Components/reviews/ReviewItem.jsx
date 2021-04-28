@@ -11,17 +11,21 @@ function ReviewItem(props) {
   const helpfulMode =`helpfulness useBgContrast ${props.mode}`;
   const starsMode = `outerReviewStars ${props.mode}`;
   const preview = props.item.body.slice(0, 250);
-  //  Call helpfulness API
-  const photos = props.item.photos;
 
+  //  Call helpfulness API
+  const [helpfulness, setHelpfulness] = useState(props.item.helpfulness);
+  const [reported, setReported] = useState(false);
   const handleHelpfulness = () => {
     if (!ishelpfulClicked) {
       updateHelpfulness(props.item.review_id);
       setHelpfulClick(true);
+      props.reviews();
+      setHelpfulness(props.item.helpfulness + 1);
     }
   };
   const report = () => {
     sendReport(props.item.review_id);
+    setReport(true);
   };
   const showBody = () => {
     const body = document.getElementById('reviewBody');
@@ -56,10 +60,10 @@ function ReviewItem(props) {
       {props.item.recommend ?
       <p>&#10003; I recommend this product</p> :
         null}
-      {/* <ReviewThumbnails photos={photos}/> */}
+      <ReviewThumbnails photos={props.item.photos}/>
       {props.item.response !== null && props.item.response.length > 0
         ? <p className="sellerResponse"><strong>Response from seller: </strong>{props.item.response}</p> : null}
-      <span>Helpful? <button className={helpfulMode} onClick={handleHelpfulness}>Yes</button> ({props.item.helpfulness}) | <a className="underline" onClick={report}>Report</a></span>
+      <span>Helpful? <button className={helpfulMode} onClick={handleHelpfulness}>Yes</button> ({helpfulness}) | <a className="underline" onClick={report}>Report</a></span>
     </li>
   );
 } else {
