@@ -30,10 +30,10 @@ function ReviewsBox (props) {
     const sortBy = e.target.value;
     const sorted = sortReviews(sortBy, results, search, starFilter);
     const sliced = sorted.slice(0, currentLength);
-    setResults(resultsStorage);
-    setFilter(sortBy);
     setDisplay(sliced);
     console.log(sliced);
+    // setResults(resultsStorage);
+    // setFilter(sortBy);
   };
 
   //  Call to Axios GET
@@ -65,7 +65,7 @@ function ReviewsBox (props) {
     reviews();
   }, [product]);
   if (!isLoaded) {
-    if (results.length > 1) {
+    if (results.length > 0) {
       setLoaded(true);
     }
     return null;
