@@ -23,7 +23,10 @@ function ReviewsBox (props) {
   const [currentLength, setLength] = useState(2);
   const [starFilter, setStars] = useState([]);
   const [meta, setMeta] = useState({});
-  const [showModal, setModal] = useState(false);
+  const [sorting, setSorting] = useState(false);
+  const [searching, setSearching] = useState(false);
+  const [filtering, setFiltering] = useState(false);
+
 
   // calls sort helper and sorts filter
   const handleSort = (e) => {
@@ -33,6 +36,7 @@ function ReviewsBox (props) {
     setDisplay(sliced);
     setResults(resultsStorage);
     setFilter(sortBy);
+    setSorting(true);
   };
 
   //  Call to Axios GET
@@ -71,12 +75,20 @@ function ReviewsBox (props) {
   }
   // adds 2 to review list
   const handleMoreReviews = () => {
-    setDisplay(results.slice(0, currentLength + 2));
-    setLength(currentLength + 2);
+    if (!sorting && !searching && !filtering) {
+      setDisplay(results.slice(0, currentLength + 2));
+      setLength(currentLength + 2);
+    }
   };
 
   // Handles searchbar filter
   const handleSearch = (text) => {
+    if (text.length > 2) {
+      setSearching(true);
+    }
+    if (text.length < 3) {
+      setSearching(false);
+    }
     setSearch(text);
     const sorted = sortReviews(filter, results, text, starFilter);
     const sliced = sorted.slice(0, currentLength);
@@ -86,6 +98,12 @@ function ReviewsBox (props) {
 
   // Handles star rating search filter
   const handleStarFilter = (arr) => {
+    if (arr.length > 0) {
+      setFiltering(true);
+    }
+    if (arr.length < 1) {
+      setFiltering(false);
+    }
     setStars(arr);
     const sorted = sortReviews(filter, results, search, arr);
     const sliced = sorted.slice(0, currentLength);
