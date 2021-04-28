@@ -41,7 +41,7 @@ function Reviews(props) {
   return (
       <div className="reviewsContainer">
         <span className="bold">
-          <label htmlFor="sort">{props.results.length} reviews, sorted by </label>
+          <label htmlFor="options">{props.results.length} reviews, sorted by
           <select
             onChange={props.handleSort}
             name="options"
@@ -54,6 +54,7 @@ function Reviews(props) {
             <option
               value="newest">newest</option>
           </select>
+          </label>
         </span>
         <span className="floatRight">
           <Search sendSearch={props.handleSearch}/>

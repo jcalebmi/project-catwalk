@@ -6,11 +6,15 @@ const Search = (props) => {
     props.sendSearch(text.toLowerCase());
   };
   return (
-    <input
-      type='text'
-      placeholder="search"
-      onChange={handleSearch}>
-      </input>
+    <label htmlFor="reviewSearch">
+      <span style={{'display': 'none'}}>Search: </span>
+      <input
+        id="reviewSearch"
+        type='text'
+        placeholder="search"
+        onChange={handleSearch}>
+        </input>
+    </label>
   );
 };
 
