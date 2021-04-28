@@ -9,6 +9,7 @@ import getMetaData from './helpers/getMeta.js';
 const selectProductById = (state) => state.product;
 
 function ReviewsBox (props) {
+  const [isLoaded, setLoaded] = useState(false);
   //  Current product state
   const product = useSelector(selectProductById) || {};
   //  Review results for current Product
@@ -57,11 +58,17 @@ function ReviewsBox (props) {
       });
     }
   };
+
   useEffect(() => {
     // gets meta data for reviews
     reviews();
   }, [product]);
-
+  if (!isLoaded) {
+    if (results.length > 1) {
+      setLoaded(true);
+    }
+    return null;
+  }
   // adds 2 to review list
   const handleMoreReviews = () => {
     setDisplay(results.slice(0, currentLength + 2));

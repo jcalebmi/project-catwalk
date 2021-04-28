@@ -88,7 +88,7 @@ function App() {
       } else {
         clicks.moduleClicks[module].elements[element].clicks += 1;
       }
-      console.log(clicks);
+      //console.log(clicks);
     }
   };
 
