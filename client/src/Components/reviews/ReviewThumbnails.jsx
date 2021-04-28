@@ -9,7 +9,8 @@ function ReviewThumbnails (props) {
     setImg(e.target.src);
   };
   const handleError = (e) => {
-    e.target.src = '';
+
+    e.target.src = "https://via.placeholder.com/150"
   }
   return (
     <div>
@@ -18,7 +19,7 @@ function ReviewThumbnails (props) {
           <img className="reviewsPhotos modal" src={img} onClick={handleClick}/>
         </div>
         : null}
-      {props.photos.map((photo, index) => <img className="reviewsPhotos" src={photo.url} key={index} onClick={handleClick} onError={handleError}/>)}
+      {props.photos.map((photo, index) => <img className="reviewsPhotos" src={photo.url} key={index} onClick={handleClick} onError={handleError} alt="User Image"/>)}
     </div>
   );
 }
