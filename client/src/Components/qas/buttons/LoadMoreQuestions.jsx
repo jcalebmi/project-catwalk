@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const LoadMoreQuestions = ({ handler }) => (
   <div>
-    <button className="useBgContrast light view-add-more-qs" id="load-more-questions-btn" onClick={handler}>LOAD MORE QUESTIONS</button>
+    <button className="useBgContrast light view-add-more-qs" id="load-more-questions-btn" onClick={handler}>SEE MORE QUESTIONS</button>
   </div>
 );
 

@@ -10,8 +10,8 @@
 // export default store;
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import productFetcher from '../reducers/productFetcher.jsx';
+// import { composeWithDevTools } from 'redux-devtools-extension';
+import reducer from '../reducers/index.jsx';
 // import overviewReducer from '../client/src/components/overview/overviewSlice';
 // import qasReducer from '../client/src/components/qas/qasSlice';
 // import ratingsReviewReducer from '../client/src/components/ratingsReview/ratingsReviewSlice';
@@ -20,15 +20,9 @@ import productFetcher from '../reducers/productFetcher.jsx';
 const middleware = [thunk];
 
 const store = createStore(
-  productFetcher,
-  {
-    product: {},
-    cart: [],
-    products: [],
-    questions: [],
-    status: 'loading',
-  },
-  composeWithDevTools(applyMiddleware(...middleware)),
+  reducer,
+  applyMiddleware(...middleware),
+  // composeWithDevTools(applyMiddleware(...middleware)),
 );
 
 export default store;

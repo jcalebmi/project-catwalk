@@ -5,11 +5,12 @@ import getStyles from './helpers/getStyles.jsx';
 import ProductSelection from './ProductSelection.jsx';
 
 const MainOverview = () => {
-  const [product, setProduct] = useState(useSelector((state) => state.product) || {});
+  const product = useSelector((state) => state.product.product);
   const [isExpanded, setExpanded] = useState(false);
   const [styles, setStyles] = useState([]);
   const [styleIdx, setStyleIdx] = useState(0);
-
+  const [cart, setCart] = useState([]);
+  // console.log(product);
   useEffect(() => {
     if (product.id) {
       getStyles(product.id)
@@ -35,7 +36,9 @@ const MainOverview = () => {
         product={product}
         styles={styles}
         styleIdx={styleIdx}
-        setStyleIdx={setStyleIdx}/>
+        setStyleIdx={setStyleIdx}
+        cart={cart}
+        setCart={setCart}/>
     </div>
     );
   }

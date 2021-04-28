@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 // const selectAllProducts = (state) => state.products;
 
 const ProductOverview = () => {
-  const [product, setProduct] = useState(useSelector((state) => state.product) || {});
+  const product = useSelector((state) => state.product.product);
   return (
     <div className='productOverview'>
       <div className='information'>

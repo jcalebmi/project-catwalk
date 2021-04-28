@@ -1,5 +1,5 @@
 let ratingSum = 0;
-let recommend = '0%'
+let recommend = '0%';
 let ave = 0;
 const ratings = (meta, results) => {
   let sum = 0;
@@ -33,4 +33,4 @@ const ratings = (meta, results) => {
   };
 };
 
-export {ratings, ave};
+export { ratings, ave };

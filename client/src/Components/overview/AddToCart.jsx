@@ -10,22 +10,39 @@ const AddToCart = ({
   product
 }) => {
   const handleClick = (e) => {
+    // console.log(product);
+    // console.log(style);
     if (quant > 0 && sizeSku) {
+      const price = style.sale_price || style.original_price;
       const newItem = {
         product_id: product.id,
+        product_name: product.name,
         style_id: style.style_id,
+        style_name: style.name,
         sizeSku,
+        size: style.skus[sizeSku].size,
+        price,
         quantity: quant,
       };
-      const newCart = cart.concat(newItem);
+      const newCart = cart.slice();
+      if (cart.some((item) => (newItem.sizeSku === item.sizeSku))) {
+        newCart.map((item) => {
+          if (newItem.sizeSku === item.sizeSku) {
+            item.quantity += newItem.quantity;
+          }
+          return item;
+        }, []);
+      } else {
+        newCart.push(newItem);
+      }
       setCart(newCart);
       console.log(newCart);
     }
   };
   return (
-    <div className='add'>
+    <div onClick={ handleClick } className='add'>
       Add To Cart
-      <span onClick={ handleClick } className="material-icons">
+      <span className="material-icons">
         add
       </span>
     </div>

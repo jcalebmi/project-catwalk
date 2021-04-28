@@ -7,6 +7,7 @@ import Overview from './overview/Overview.jsx';
 
 //Review Imports
 import ReviewsBox from './reviews/ReviewsBox.jsx';
+import Cart from './cart/Cart.jsx';
 
 //Initialization of Products
 // import {setProduct, setQuestions} from './helpers/setProduct.jsx';
@@ -15,10 +16,14 @@ import setQuestions from './helpers/setQuestions.jsx';
 //QAs Import
 import QAs from './qas/QAs.jsx';
 
+//Import handleColor
+import cssMode from './helpers/cssMode.jsx';
+
 function App() {
   const [isLoaded, setLoaded] = useState(false);
   const [mode, setMode] = useState('light');
-  const [toggle, setToggle] = useState('Dark Mode');
+  const [page, setPage] = useState('modules');
+
   if (!isLoaded) {
     setProduct()
       .then(() => {
@@ -26,36 +31,29 @@ function App() {
       });
     return null;
   }
+  const handleColor = cssMode.bind(null, setMode);
 
-  const handleColor = () => {
-    const elementsLight = Array.prototype.slice.call(document.getElementsByClassName('light'));
-    const elementsDark = Array.prototype.slice.call(document.getElementsByClassName('dark'));
-    if (elementsLight.length > 0) {
-      for (let i = 0; i < elementsLight.length; i += 1) {
-        const element = elementsLight[i];
-        element.classList.remove('light');
-        element.classList.add('dark');
-        setMode('dark');
-        setToggle('Light Mode');
-      }
-    } else {
-      for (let i = 0; i < elementsDark.length; i += 1) {
-        const element = elementsDark[i];
-        element.classList.remove('dark');
-        element.classList.add('light');
-        setMode('light');
-        setToggle('Dark Mode');
-      }
-    }
-  };
-
-  return (
+  if (page === 'modules') {
+    return (
       <div id='modules'>
-        <NavigationBar handleColor={handleColor} toggle={toggle}/>
+        <NavigationBar handleColor={handleColor} setPage={setPage} />
         <Overview />
         <QAs />
         <ReviewsBox mode={mode} />
       </div>
+    );
+  }
+  if (page === 'cart') {
+    return (
+      <div id='cart'>
+        <NavigationBar setPage={setPage} handleColor={handleColor} />
+        <Cart />
+      </div>
+    );
+  }
+  return (
+    // Site Analytics
+    null
   );
 }
 

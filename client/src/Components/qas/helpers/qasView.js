@@ -8,8 +8,7 @@ const viewMore = (current, oldPointer, callback) => {
     const display2 = arr[i + 1];
 
     if (display2 === undefined) {
-      map.set(count, [display1]);
-      break;
+      return callback([display1], oldPointer + 1);
     }
 
     map.set(count, [display1, display2]);

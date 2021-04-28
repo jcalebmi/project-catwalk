@@ -6,7 +6,7 @@ import getReviews from './helpers/getReviews.js';
 import sortReviews from './helpers/sortReviews.js';
 import getMetaData from './helpers/getMeta.js';
 
-const selectProductById = (state) => state.product;
+const selectProductById = (state) => state.product.product;
 
 function ReviewsBox (props) {
   //  Current product state
