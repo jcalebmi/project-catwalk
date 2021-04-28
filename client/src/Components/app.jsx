@@ -12,7 +12,6 @@ import Cart from './cart/Cart.jsx';
 //Initialization of Products
 // import {setProduct, setQuestions} from './helpers/setProduct.jsx';
 import setProduct from './helpers/setProduct.jsx';
-import setQuestions from './helpers/setQuestions.jsx';
 //QAs Import
 import QAs from './qas/QAs.jsx';
 

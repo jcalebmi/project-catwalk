@@ -1,59 +1,72 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import Modal from 'react-modal';
+import Modal from '../Modal';
 
 const { postQs } = require('../helpers/server-requests');
 
-// const getProductId = (state) => state.product.id;
+const BUTTON_WRAPPER_STYLES = {
+  position: 'relative',
+  zIndex: 1,
+};
 
-Modal.setAppElement('#app');
-const AddQuestion = () => {
-  // const productId = useSelector(getProductId);
-  // console.log(productId)
-  const [modalIsOpen, setOpenModal] = useState(false);
-  const [question, setQuestion] = useState('');
-  const [nickname, setNickname] = useState('');
-  const [userEmail, setEmail] = useState('');
-  const handleBodyChange = (e) => setQuestion(e.target.value);
-  const handleNameChange = (e) => setNickname(e.target.value);
-  const handleEmailChange = (e) => setEmail(e.target.value);
+const getProduct = (state) => state.product;
 
+const AddQuestion = ({ updateQs }) => {
+  const product = useSelector(getProduct);
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [userQuestion, setUserQuestion] = useState('');
+  const [userName, setUserName] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+
+  const handleUserQuestion = (e) => setUserQuestion(e.target.value);
+  const handleUserName = (e) => setUserName(e.target.value);
+  const handleUserEmail = (e) => setUserEmail(e.target.value);
+
+  if ((userQuestion.length && userName.length) > 0 && userEmail.includes('@')) {
+    document.getElementById('submitBtn').removeAttribute('disabled');
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
-    setOpenModal(false);
 
     const requestBody = {
-      body: question,
-      name: nickname,
+      body: userQuestion,
+      name: userName,
       email: userEmail,
-      product_id: 19099,
+      product_id: product.id,
     };
     postQs(requestBody);
+
+    setIsOpen(false);
+    // updateQs();
   };
 
   return (
-  <div>
-    <button className="useBgContrast light view-add-more-qs" id="add-question-btn" onClick={() => setOpenModal(true)}>Add Question</button>
-    <Modal isOpen={modalIsOpen} onRequestClose={() => setOpenModal(false)}>
-      <h1 className="addQA light">Ask Your Question</h1>
-      <h3 className="addQA light">About the Product:</h3>
-      <form
-        className="addQA light"
-        onSubmit={(e) => handleSubmit(e)}>
-      *Your Question:
-      <textarea onChange={handleBodyChange} id="modal-body" rows="10" cols="100"></textarea>
+    <>
+  <div style={BUTTON_WRAPPER_STYLES}>
+    <button onClick={() => setIsOpen(true)} className="useBgContrast light feedback-btn" id="add-question-btn">Add A Question</button>
+    <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+      <form className="answerForm">
+      <h1 className="addQA light">Submit Your Question</h1>
+      <h2 className="addQA light">Product Name: {product.name}</h2>
+      *Your answer
+      <textarea name="body" className="answer-modal" rows="10" cols="100" onChange={handleUserQuestion}></textarea>
       *What is your nickname?:
-      <input onChange={handleNameChange} placeholder="Example: jackson11!" id="askers-nickname"></input>
+      <input name="name" onChange={handleUserName} className="modal-nickname" type="text" placeholder="Example: jack543!" id="answerers-nickname"></input>
       <h6>For privacy reasons, do not use your full name or email address</h6>
-      <input onChange={handleEmailChange} type="text" id="askers-email" placeholder="Example: jack@email.com"></input>
+      <input name="email" onChange={handleUserEmail} type="text" className="modal-email" placeholder="Example: jack@email.com"></input>
       <h6>For authentication reasons, you will not be emailed</h6>
-      <button type="submit">Submit Answer</button>
+      <span>* Required fields</span>
+      <button className="modalImage">Upload Image</button>
+      <button id="submitBtn" onClick={handleSubmit} type="submit" disabled={true}>Submit Answer</button>
       </form>
-    <button className='useBgContrast light' onClick={() => setOpenModal(false)}>Close</button>
     </Modal>
   </div>
+  </>
+
   );
 };
 
 export default AddQuestion;
 // TODO: MODAL
+

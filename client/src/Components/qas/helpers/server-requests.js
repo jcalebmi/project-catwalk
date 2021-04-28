@@ -3,10 +3,10 @@
 const axios = require('axios');
 
 // questions GET request
-const fetchQuestions = (id, callbackQs) => {
-  axios.get(`/qa/questions/${id}`)
-    .then((data) => {
-      callbackQs(data);
+const fetchQuestions = (productId, callback) => {
+  axios.get(`/qa/questions/${productId}`)
+  .then((data) => {
+      callback(data);
     })
     .catch((err) => {
       throw err;
@@ -14,12 +14,10 @@ const fetchQuestions = (id, callbackQs) => {
 };
 
 // answers GET request
-const fetchAnswers = (id, callbackAs) => {
-  axios.get(`/qa/questions/${id}/answers`)
+const fetchAnswers = (questionId, callback) => {
+  axios.get(`/qa/questions/${questionId}/answers`)
     .then((res) => {
-      if (res.data.length > 0) {
-        callbackAs(res.data);
-      }
+      callback(res.data);
     })
     .catch((err) => {
       throw err;
@@ -31,8 +29,8 @@ const fetchAnswers = (id, callbackAs) => {
 // METHOD: PUT - Mark Question As Helpful
 const updateQsHelpful = (id) => {
   axios.put(`/qa/questions/${id}/helpful`)
-    .then(() => {
-      'hi';
+    .then((res) => {
+      console.log(res)
     })
     .catch((err) => {
       throw err;
