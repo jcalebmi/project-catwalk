@@ -1,6 +1,5 @@
 
 const sortReviews = (sortBy, reviews, search, starFilter) => {
-  const reviewsArr = reviews.slice();
   if (sortBy === 'newest') {
     reviews.sort((a, b) => new Date(b.date) - new Date(a.date));
   }
@@ -15,11 +14,10 @@ const sortReviews = (sortBy, reviews, search, starFilter) => {
       return new Date(b.date) - new Date(a.date);
     });
   }
-  let filtered = [];
+
+  let filtered = reviews;
   if (search.length >= 2) {
     filtered = reviews.filter((review) => review.body.toLowerCase().includes(search));
-  } else {
-    filtered = reviews;
   }
   if (starFilter.length > 0) {
     const starRating = starFilter.map((star) => {

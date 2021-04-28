@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import Reviews from './Reviews.jsx';
+import Reviews from './Reviews2.jsx';
 import Ratings from './Ratings.jsx';
 import getReviews from './helpers/getReviews.js';
 import sortReviews from './helpers/sortReviews.js';
@@ -8,7 +8,7 @@ import getMetaData from './helpers/getMeta.js';
 
 const selectProductById = (state) => state.product;
 
-function ReviewsBox (props) {
+function ReviewsBox2 (props) {
   const [isLoaded, setLoaded] = useState(false);
   //  Current product state
   const product = useSelector(selectProductById) || {};
@@ -17,23 +17,24 @@ function ReviewsBox (props) {
   const [resultsStorage, setResultsStorage] = useState([]);
   //  currently displayed results
   const [display, setDisplay] = useState(results.slice(0, 3));
-  const [currentProduct, setProduct] = useState({});
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('relevance');
   const [currentLength, setLength] = useState(2);
   const [starFilter, setStars] = useState([]);
   const [meta, setMeta] = useState({});
-  const [showModal, setModal] = useState(false);
+  const [sorting, setSorting] = useState(false);
+  const [searching, setSearching] = useState(false);
+  const [filtering, setFiltering] = useState(false);
 
   // calls sort helper and sorts filter
   const handleSort = (e) => {
+    setSorting(true);
     const sortBy = e.target.value;
     const sorted = sortReviews(sortBy, results, search, starFilter);
     const sliced = sorted.slice(0, currentLength);
     setResults(resultsStorage);
     setFilter(sortBy);
     setDisplay(sliced);
-    console.log(sliced);
   };
 
   //  Call to Axios GET
@@ -72,12 +73,17 @@ function ReviewsBox (props) {
   }
   // adds 2 to review list
   const handleMoreReviews = () => {
-    setDisplay(results.slice(0, currentLength + 2));
-    setLength(currentLength + 2);
+    if (!sorting && !searching && !filtering) {
+      setDisplay(results.slice(0, currentLength + 2));
+      setLength(currentLength + 2);
+    }
   };
 
   // Handles searchbar filter
   const handleSearch = (text) => {
+    if (text.length > 2) {
+      setSearching(true);
+    }
     setSearch(text);
     const sorted = sortReviews(filter, results, text, starFilter);
     const sliced = sorted.slice(0, currentLength);
@@ -87,6 +93,9 @@ function ReviewsBox (props) {
 
   // Handles star rating search filter
   const handleStarFilter = (arr) => {
+    if (arr.length > 0) {
+      setFiltering(true);
+    }
     setStars(arr);
     const sorted = sortReviews(filter, results, search, arr);
     const sliced = sorted.slice(0, currentLength);
@@ -113,4 +122,4 @@ function ReviewsBox (props) {
     </div>
   );
 }
-export default ReviewsBox;
+export default ReviewsBox2;

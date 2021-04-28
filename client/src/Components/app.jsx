@@ -7,7 +7,6 @@ import Overview from './overview/Overview.jsx';
 
 //Review Imports
 import ReviewsBox from './reviews/ReviewsBox.jsx';
-import ReviewsBox2 from './reviews/ReviewsBox2.jsx';
 
 //Initialization of Products
 // import {setProduct, setQuestions} from './helpers/setProduct.jsx';
@@ -103,7 +102,7 @@ function App() {
       }
       // console.log(path);
       // console.log(element);
-      console.log(clicks);
+      // console.log(clicks);
     }
   };
 

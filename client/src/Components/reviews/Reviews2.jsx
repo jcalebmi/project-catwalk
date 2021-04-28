@@ -1,13 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import ReviewItem from './ReviewItem.jsx';
 import AddReview from './AddReview.jsx';
 import Search from './Search.jsx';
 
-function Reviews(props) {
+function Reviews2(props) {
   const [addReview, setAddReview] = useState(false);
+  const loader = useRef(null);
+  const [addedMore, setAdded] = useState(false);
+
   const handleAddReview = () => {
     setAddReview(!addReview);
   };
+
+  const addMore = () => {
+    setAdded(true);
+  };
+
+  const loadMore = useCallback((entries) => {
+    const target = entries[0];
+    if (target.isIntersecting && props.display.length !== props.results.length) {
+      props.handleMoreReviews();
+    }
+  }, [props.display]);
+
+  useEffect(() => {
+    if (addedMore) {
+      const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: .25,
+      };
+      const observer = new IntersectionObserver(loadMore, options);
+
+      if (loader && loader.current) {
+        observer.observe(loader.current);
+      }
+      return () => observer.unobserve(loader.current);
+    }
+  }, [loader, loadMore, addedMore]);
 
   return (
       <div className="reviewsContainer">
@@ -33,12 +63,14 @@ function Reviews(props) {
           <ul className="reviewList">
             {props.display.map((item, index) => <ReviewItem
               reviews={props.reviews}
+              useEffect={props.useEffect}
               item={item}
               key={index}
               mode={props.mode}/>)}
+              {addedMore ? <div ref={loader}></div> : null}
           </ul>
           <span className="reviewsButtons">
-            {props.results.length > 2 && props.display.length < props.results.length
+            {props.results.length > 2 && props.display.length < props.results.length && !addedMore
               ? <button onClick={props.handleMoreReviews}>More Reviews</button>
               : null } <button onClick={handleAddReview}>Add A Review +</button>
           </span>
@@ -56,4 +88,4 @@ function Reviews(props) {
   );
 }
 
-export default Reviews;
+export default Reviews2;

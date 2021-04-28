@@ -11,6 +11,7 @@ function ReviewItem(props) {
   const helpfulMode =`helpfulness useBgContrast ${props.mode}`;
   const starsMode = `outerReviewStars ${props.mode}`;
   const preview = props.item.body.slice(0, 250);
+
   //  Call helpfulness API
   const [helpfulness, setHelpfulness] = useState(props.item.helpfulness);
   const [reported, setReported] = useState(false);

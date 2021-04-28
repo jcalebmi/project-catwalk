@@ -15,7 +15,7 @@ function ReviewThumbnails (props) {
           <img className="reviewsPhotos modal" src={img} onClick={handleClick}/>
         </div>
         : null}
-      {props.photos.map((photo, index) => <img className="reviewsPhotos" key={index} src={photo.url} onClick={handleClick}/>)}
+      {props.photos.map((photo, index) => <img className="reviewsPhotos" key={index}  onClick={handleClick}/>)}
     </div>
   );
 }
