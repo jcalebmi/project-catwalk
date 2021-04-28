@@ -130,6 +130,7 @@ function AddReview(props) {
   // axios.post('/reviews', data, auth)
     // }
     props.reviews();
+    props.closeReview();
   };
 
   return (
