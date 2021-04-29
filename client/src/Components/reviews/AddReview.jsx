@@ -24,7 +24,7 @@ function AddReview(props) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [files, setFiles] = useState([]);
-  const [filesSRC, setFilesSRC] = useState([]);
+  const [filesSRC, setFilesSRC] = useState(['https://mymodernmet.com/wp/wp-content/uploads/2020/10/cooper-baby-corgi-dogs-8.jpg']);
   const [error, setError] = useState(false);
   const overlayMode = `addReview overlay ${props.mode}`;
   const reviewMode = `writeReview ${props.mode}`;
@@ -110,7 +110,7 @@ function AddReview(props) {
       recommend: isRecommended,
       name: name,
       email: email,
-      photos: ['https://mymodernmet.com/wp/wp-content/uploads/2020/10/cooper-baby-corgi-dogs-8.jpg'],
+      photos: filesSRC,
       characteristics: {
         64742: Number(fit),
         64744: Number(comfort),
