@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { addToCart } from '../../actions/index.jsx';
 
 const AddToCart = ({
+  setSize,
   sizeSku,
   quant,
   style,
@@ -24,6 +25,7 @@ const AddToCart = ({
         quantity: quant,
       };
       addToCart(sizeSku, quant, newItem);
+      setSize(null);
     }
   };
   return (

@@ -6,7 +6,16 @@ body {
   min-width: 600px;
   margin: auto;
 }
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+  display: none;
+}
 
+/* Hide scrollbar for IE, Edge and Firefox */
+body {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
 #toggleMode {
   position: absolute;
 }
@@ -113,9 +122,9 @@ body.dark {
 }
 /* Navigation Bar */
 #navigationBar {
-  width: 100%;
+  width: 94%;
   display: flex;
-  padding: 0 50px 0 10px;
+  padding: 0 5% 0 1%;
   justify-content: space-between;
   height: 70px;
   align-items:center;
@@ -334,6 +343,7 @@ span{
     width: calc(40% - 20px);
     height: calc(100% - 20px);;
     overflow: hidden;
+    font-size:1.5em;
   }
   #overview
   .reviewLink{
@@ -398,10 +408,12 @@ span{
     margin-top:50px;
   }
   #sizeSelector {
-    width: 90px;
+    width: 40%;
+    font-size:.7em;
   }
   #quantSelector {
-    width: 90px;
+    width: 30%;
+    font-size:.7em;
   }
   #overview
   .add {
@@ -409,6 +421,7 @@ span{
     margin-top:30px;
     align-items: center;
     font-size:large;
+    font-weight: bold;
     width: fit-content;
     border: solid 3px;
     padding:5px;
@@ -972,6 +985,8 @@ select.reviewSort {
 #portal
   .answerForm
   h1,
+#portal
+  .answerForm
   h2 {
   color: rgb(39, 39, 180)
 }

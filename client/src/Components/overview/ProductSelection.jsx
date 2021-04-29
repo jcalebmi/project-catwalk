@@ -67,6 +67,7 @@ const ProductSelection = ({
       </div>
       <div className='addFave'>
         <AddToCart
+        setSize={setSize}
         sizeSku={sizeSku}
         quant={quant}
         style={style}

@@ -26,7 +26,8 @@ const NavigationBar = ({ handleColor, setPage, handleStats }) => {
   return (
     <div onClick={handleClick} className='useBgContrast light' id='navigationBar'>
       <img onClick={handleClick} id='logo'
-        src='/assets/Taiga.png'>
+        src='/assets/Taiga.png'
+        alt='Taiga Logo'>
       </img>
       <button id='stats' onClick={handleClick}>Stats</button>
       <form
