@@ -10,7 +10,7 @@ function ReviewThumbnails (props) {
   };
   const handleError = (e) => {
 
-    e.target.src = "https://via.placeholder.com/150"
+    e.target.src = "https://mymodernmet.com/wp/wp-content/uploads/2020/10/cooper-baby-corgi-dogs-8.jpg"
   }
   return (
     <div>
