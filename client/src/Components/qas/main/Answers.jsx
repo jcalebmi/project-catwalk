@@ -36,9 +36,11 @@ const Answers = ({ questionId, questionBody }) => {
   return (
     <div id="answersContainer">
   {display.map((answer) => (
-          <span className="answerElement" key={answer.answerer_name}>
+          <span className="answerElement" key={answer.answer_id}>
           <span key={`${answer.answer_id}/span`} className="answerBody">{answer.body}</span>
-            <br></br><span className="answerer">by{' '}{answer.answerer_name}, {moment(answer.date).format('MMMM Do YYYY')}</span>
+          <br></br>
+            by{' '}{answer.answerer_name === 'Seller' ? <span className="bold answerer">{answer.answerer_name}</span> : <span className="answerer">{answer.answerer_name}</span>}
+            <span className="answerer">,{' '}{moment(answer.date).format('MMMM Do YYYY')}</span>
           {' '}<span id="helpTxtA">Helpful?{' '}</span>
             <span id={answer.answer_id}>
             <AsFeedback answerId={answer.answer_id} answerHelpfulness={answer.helpfulness || 0}/>

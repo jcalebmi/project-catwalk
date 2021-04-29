@@ -3,7 +3,6 @@ const viewMore = (current, oldPointer, callback) => {
   const arr = current.slice();
   const map = new Map();
 
-
   let count = 1;
   for (let i = 0; i < arr.length; i += 2) {
     const display1 = arr[i];
@@ -22,7 +21,6 @@ const viewMore = (current, oldPointer, callback) => {
   }
 
   grabNext2 = map.get(oldPointer);
-  console.log(grabNext2)
   callback(grabNext2, oldPointer + 1);
 };
 

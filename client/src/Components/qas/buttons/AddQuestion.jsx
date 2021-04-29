@@ -11,7 +11,7 @@ const BUTTON_WRAPPER_STYLES = {
 
 const getProduct = (state) => state.product;
 
-const AddQuestion = ({ updateQs }) => {
+const AddQuestion = () => {
   const product = useSelector(getProduct);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +24,7 @@ const AddQuestion = ({ updateQs }) => {
   const handleUserEmail = (e) => setUserEmail(e.target.value);
 
   if ((userQuestion.length && userName.length) > 0 && userEmail.includes('@')) {
-    document.getElementById('submitBtn').removeAttribute('disabled');
+    document.getElementById('questionSubmitBtn').removeAttribute('disabled');
   }
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,14 +38,13 @@ const AddQuestion = ({ updateQs }) => {
     postQs(requestBody);
 
     setIsOpen(false);
-    // updateQs();
   };
 
   return (
     <>
   <div style={BUTTON_WRAPPER_STYLES}>
-    <button onClick={() => setIsOpen(true)} className="useBgContrast light feedback-btn" id="add-question-btn">Add A Question</button>
-    <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+    <button onClick={() => setIsOpen(true)} className="useBgContrast light feedback-btn" id="add-question-btn">Add A Question +</button>
+    <Modal id="questionsModal" open={isOpen} onClose={() => setIsOpen(false)}>
       <form className="answerForm">
       <h1 className="addQA light">Submit Your Question</h1>
       <h2 className="addQA light">Product Name: {product.name}</h2>
@@ -54,11 +53,11 @@ const AddQuestion = ({ updateQs }) => {
       *What is your nickname?:
       <input name="name" onChange={handleUserName} className="modal-nickname" type="text" placeholder="Example: jack543!" id="answerers-nickname"></input>
       <h6>For privacy reasons, do not use your full name or email address</h6>
+      *What is your email address?
       <input name="email" onChange={handleUserEmail} type="text" className="modal-email" placeholder="Example: jack@email.com"></input>
       <h6>For authentication reasons, you will not be emailed</h6>
       <span>* Required fields</span>
-      <button className="modalImage">Upload Image</button>
-      <button id="submitBtn" onClick={handleSubmit} type="submit" disabled={true}>Submit Answer</button>
+      <button id="questionSubmitBtn" onClick={handleSubmit} type="submit" disabled={true}>Submit Answer</button>
       </form>
     </Modal>
   </div>
@@ -69,4 +68,3 @@ const AddQuestion = ({ updateQs }) => {
 
 export default AddQuestion;
 // TODO: MODAL
-
