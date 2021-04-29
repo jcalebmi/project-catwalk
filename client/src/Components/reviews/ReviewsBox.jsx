@@ -72,7 +72,9 @@ function ReviewsBox (props) {
   // adds 2 to review list
   const handleMoreReviews = () => {
     if (!searching && !filtering) {
-      setDisplay(results.slice(0, currentLength + 2));
+      const sorted = sortReviews(filter, results, search, starFilter);
+      const sliced = sorted.slice(0, currentLength + 2);
+      setDisplay(sliced);
       setLength(currentLength + 2);
     }
   };

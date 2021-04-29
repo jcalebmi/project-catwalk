@@ -89,9 +89,9 @@ function AddReview(props) {
       if (files.length < 5) {
         setFiles(files.concat(e.target.files[i]));
       }
-      if (filesSRC.length < 5) {
-        setFilesSRC(filesSRC.concat(img.src));
-      }
+      // if (filesSRC.length < 5) {
+      //   setFilesSRC(filesSRC.concat(img.src));
+      // }
     }
   };
 
