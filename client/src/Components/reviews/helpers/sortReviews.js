@@ -40,7 +40,6 @@ const sortReviews = (sortBy, results, search, starFilter) => {
       index = remainingText.toLowerCase().indexOf(search.toLowerCase());
     }
     result.push(remainingText);
-    console.log(result)
     return result;
     //returns a split array of indices Ex:[‘th’, ‘is’, ' ’, ‘is’, ' a really good f’, ‘Is’, ‘h’]
   };
