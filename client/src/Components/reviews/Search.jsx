@@ -2,8 +2,8 @@ import React from 'react';
 
 const Search = (props) => {
   const handleSearch = (e) => {
-    const text = e.target.value.toLowerCase();
-    props.sendSearch(text.toLowerCase());
+    const text = e.target.value;
+    props.sendSearch(text);
   };
   return (
     <label htmlFor="reviewSearch">

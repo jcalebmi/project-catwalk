@@ -14,7 +14,6 @@ function ReviewsBox (props) {
   const product = useSelector(selectProductById) || {};
   //  Review results for current Product
   const [results, setResults] = useState([]);
-  const [resultsStorage, setResultsStorage] = useState([]);
   //  currently displayed results
   const [display, setDisplay] = useState(results.slice(0, 3));
   const [currentProduct, setProduct] = useState({});
@@ -34,9 +33,7 @@ function ReviewsBox (props) {
     const sorted = sortReviews(sortBy, results, search, starFilter);
     const sliced = sorted.slice(0, currentLength);
     setDisplay(sliced);
-    setResults(resultsStorage);
     setFilter(sortBy);
-    setSorting(true);
   };
 
   //  Call to Axios GET
@@ -58,7 +55,6 @@ function ReviewsBox (props) {
         setDisplay(sliced);
         setResults(data);
         metaData();
-        setResultsStorage(data);
       });
     }
   };
@@ -81,21 +77,6 @@ function ReviewsBox (props) {
     }
   };
 
-  const highlight = (text) => {
-    const reviews = document.getElementsByClassName('reviewBody');
-    const reviewsArr = Array.prototype.slice.call(reviews);
-    if (text.length > 2) {
-      reviewsArr.map((review) => {
-        const inner = review.innerHTML;
-        const index = inner.toLowerCase().indexOf(text.toLowerCase());
-        if (index !== -1) {
-          review.innerHTML = `${inner.substring(0, index)}<span id="highlight">${inner.substring(index, index + text.length)}</span>${inner.substring(index + text.length)}`;
-          return review;
-        }
-      });
-    }
-  };
-
   // Handles searchbar filter
   const handleSearch = (text) => {
     if (text.length > 2) {
@@ -107,9 +88,7 @@ function ReviewsBox (props) {
     setSearch(text);
     const sorted = sortReviews(filter, results, text, starFilter);
     const sliced = sorted.slice(0, currentLength);
-    setResults(resultsStorage);
     setDisplay(sliced);
-    highlight(text);
   };
 
   // Handles star rating search filter
@@ -123,7 +102,6 @@ function ReviewsBox (props) {
     setStars(arr);
     const sorted = sortReviews(filter, results, search, arr);
     const sliced = sorted.slice(0, currentLength);
-    setResults(resultsStorage);
     setDisplay(sliced);
   };
 
@@ -131,13 +109,13 @@ function ReviewsBox (props) {
     <div id="ratingReviewContainer">
       <Ratings
         meta={meta}
-        results={resultsStorage}
+        results={results}
         handleStarFilter={handleStarFilter}
         mode={props.mode}/>
       <Reviews
         reviews={reviews}
         handleSearch={handleSearch}
-        results={resultsStorage}
+        results={results}
         display={display}
         handleSort={handleSort}
         currentProduct={product}

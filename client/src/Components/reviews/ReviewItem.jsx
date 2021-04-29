@@ -18,7 +18,6 @@ function ReviewItem(props) {
       updateHelpfulness(props.item.review_id);
       setHelpfulClick(true);
       props.reviews();
-      setHelpfulness(props.item.helpfulness + 1);
     }
   };
   const report = () => {
@@ -57,7 +56,7 @@ function ReviewItem(props) {
         {props.item.recommend ?
         <p>&#10003; I recommend this product</p> :
           null}
-        <ReviewThumbnails photos={props.item.photos}/>
+        {/* <ReviewThumbnails photos={props.item.photos}/> */}
         {props.item.response !== null && props.item.response.length > 0
           ? <p className="sellerResponse"><strong>Response from seller: </strong>{props.item.response}</p> : null}
         <span>Helpful? <button className={helpfulMode} onClick={handleHelpfulness}>Yes</button> ({props.item.helpfulness}) | <a className="underline" onClick={report}>Report</a></span>
