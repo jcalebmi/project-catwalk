@@ -9,7 +9,6 @@ const MainOverview = () => {
   const [isExpanded, setExpanded] = useState(false);
   const [styles, setStyles] = useState([]);
   const [styleIdx, setStyleIdx] = useState(0);
-  const [cart, setCart] = useState([]);
   // console.log(product);
   useEffect(() => {
     if (product.id) {
@@ -37,8 +36,7 @@ const MainOverview = () => {
         styles={styles}
         styleIdx={styleIdx}
         setStyleIdx={setStyleIdx}
-        cart={cart}
-        setCart={setCart}/>
+        />
     </div>
     );
   }

@@ -1,3 +1,5 @@
+import store from '../store/store.jsx';
+
 const types = {
   UPDATE_CURRENT_PRODUCT: 'UPDATE_CURRENT_PRODUCT',
   ADD_TO_CART: 'ADD_TO_CART',
@@ -5,8 +7,8 @@ const types = {
   CHECKOUT_FAILURE: 'CHECKOUT_FAILURE',
 };
 
-export const addToCart = (skuId, quantity, item) => (dispatch) => {
-  dispatch({
+export const addToCart = (skuId, quantity, item) => {
+  store.dispatch({
     type: types.ADD_TO_CART,
     skuId,
     quantity,
@@ -14,8 +16,8 @@ export const addToCart = (skuId, quantity, item) => (dispatch) => {
   });
 };
 
-export const checkout = () => (dispatch) => {
-  dispatch({
+export const checkout = () => {
+  store.dispatch({
     type: types.CHECKOUT_REQUEST,
   });
   // shop.buyProducts(products, () => {

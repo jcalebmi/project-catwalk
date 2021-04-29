@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import {useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
-import {getTotal, getCartProducts} from '../../reducers/index.jsx';
+import {getTotal, getCartProducts } from '../../reducers/index.jsx';
 import { checkout } from '../../actions/index.jsx';
 
 const Cart = () => {
   const cart = useSelector(getCartProducts);
-  if ( cart.length === 0 ) {
-    return null;
-  }
+  console.log(cart);
+  const total = useSelector(getTotal);
+  const handleCheckout = (e) => {
+    e.preventDefault();
+    checkout();
+  };
   return (
-    <div className='cart'>
+    <div id='cart'>
       <div className='products'>
-        <div className='titles'>
+        <div className='gridItem titles'>
           <span>Product</span>
           <span>Style</span>
           <span>Size</span>
@@ -20,18 +23,29 @@ const Cart = () => {
           <span>Quantity</span>
           <span>Total Price</span>
         </div>
-        {cart.map((item) => (
-          <div key={item.sizeSku} className='items'>
-            <span>{item.product_name}</span>
-            <span>{item.style_name}</span>
-            <span>{item.size}</span>
-            <span>{item.price}</span>
-            <span>{item.quantity}</span>
-            <span>{item.price * item.quantity}</span>
-          </div>
-        ))}
+        {cart.map((sku) => {
+          const { item } = sku;
+          return (
+            <div key={item.sizeSku} className='gridItem product'>
+              <span>{item.product_name}</span>
+              <span>{item.style_name}</span>
+              <span>{item.size}</span>
+              <span>{item.price}</span>
+              <span>{sku.quantity}</span>
+              <span>{item.price * sku.quantity}</span>
+            </div>
+          );
+        })}
+        <div className='gridItem totalPrice'>
+          <span>Total Price</span>
+          <span>-</span>
+          <span>-</span>
+          <span>-</span>
+          <span>-</span>
+          <span>{total}</span>
+        </div>
+      <button className='checkout' onClick={handleCheckout}>Checkout</button>
       </div>
-      <button className='checkout' onClick={checkout}>Checkout</button>
     </div>
   );
 };

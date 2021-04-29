@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { getCartProducts } from '../../reducers/index.jsx';
 
 const NavigationBar = ({ handleColor, setPage, handleStats }) => {
   const [searchVal, setSearchVal] = useState('');
-
+  const numberOfProducts = useSelector(getCartProducts)
+    .reduce((acc, prod) => (
+      acc + prod.quantity
+    ),
+    0);
   const handleClick = (e) => {
     e.preventDefault();
     if (e.target.id === 'logo') {
@@ -34,7 +40,16 @@ const NavigationBar = ({ handleColor, setPage, handleStats }) => {
         value={searchVal}
         onChange={(e) => { setSearchVal(e.target.value); }}/>
       </form>
-      <span onClick={handleClick} id='checkout' className='checkout'> Checkout <i className='material-icons'>shopping_cart</i> </span>
+      <div
+        onClick={handleClick}
+        id='checkout'
+        className='checkout'>
+          Checkout
+          <i className='material-icons'>
+            shopping_cart
+          </i>
+          {numberOfProducts}
+      </div>
     </div>
   );
 };

@@ -96,7 +96,7 @@ function App() {
 
   if (page === 'modules') {
     return (
-      <div onClick={handleClick} id='modules'>
+      <div onClick={handleClick} id='modules container'>
         <NavigationBar handleStats={handleStats} handleColor={handleColor} setPage={setPage} />
         <Overview />
         {/* <QAs /> */}
@@ -106,7 +106,7 @@ function App() {
   }
   if (page === 'cart') {
     return (
-      <div id='cart'>
+      <div id='cartPage container'>
         <NavigationBar handleStats={handleStats} setPage={setPage} handleColor={handleColor} />
         <Cart />
       </div>

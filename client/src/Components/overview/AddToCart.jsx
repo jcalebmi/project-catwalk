@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { addToCart } from '../../actions/index.jsx';
 
 const AddToCart = ({
-  cart,
-  setCart,
   sizeSku,
   quant,
   style,
@@ -24,19 +23,7 @@ const AddToCart = ({
         price,
         quantity: quant,
       };
-      const newCart = cart.slice();
-      if (cart.some((item) => (newItem.sizeSku === item.sizeSku))) {
-        newCart.map((item) => {
-          if (newItem.sizeSku === item.sizeSku) {
-            item.quantity += newItem.quantity;
-          }
-          return item;
-        }, []);
-      } else {
-        newCart.push(newItem);
-      }
-      setCart(newCart);
-      console.log(newCart);
+      addToCart(sizeSku, quant, newItem);
     }
   };
   return (
