@@ -81,6 +81,21 @@ function ReviewsBox (props) {
     }
   };
 
+  const highlight = (text) => {
+    if (text.length > 2) {
+      const reviews = document.getElementsByClassName('reviewBody');
+      const reviewsArr = Array.prototype.slice.call(reviews);
+      reviewsArr.map((review) => {
+        const inner = review.innerHTML;
+        const index = inner.toLowerCase().indexOf(text.toLowerCase());
+        if (index !== -1) {
+          review.innerHTML = `${inner.substring(0, index)}<span id="highlight">${inner.substring(index, index + text.length)}</span>${inner.substring(index + text.length)}`;
+          return review;
+        }
+      });
+    };
+  };
+
   // Handles searchbar filter
   const handleSearch = (text) => {
     if (text.length > 2) {
@@ -89,6 +104,7 @@ function ReviewsBox (props) {
     if (text.length < 3) {
       setSearching(false);
     }
+    highlight(text);
     setSearch(text);
     const sorted = sortReviews(filter, results, text, starFilter);
     const sliced = sorted.slice(0, currentLength);

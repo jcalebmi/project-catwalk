@@ -101,9 +101,7 @@ function AddReview(props) {
     // files.forEach(file => {
     //   data.append('file', file);
     // });
-    const photos = files.map(file => {
-      return `urlplaceholder/${file.name}`;
-    });
+
     const info = {
       product_id: props.product.id,
       rating: Number(starRating),

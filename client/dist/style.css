@@ -10,7 +10,9 @@ body {
 #toggleMode {
   position: absolute;
 }
-
+#highlight {
+  background-color: yellow;
+}
 body.light {
   background-color:aliceblue;
 }

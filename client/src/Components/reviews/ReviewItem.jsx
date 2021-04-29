@@ -49,11 +49,11 @@ function ReviewItem(props) {
         <p
         className="bold">{props.item.summary}</p>
         {props.item.body.length >= 250
-          ? <p id='reviewBody'>{preview}
+          ? <p className='reviewBody'>{preview}
               <br></br>
               <span onClick={showBody}>Show More</span>
             </p>
-          : <p>{props.item.body}</p> }
+          : <p className='reviewBody'>{props.item.body}</p> }
         {props.item.recommend ?
         <p>&#10003; I recommend this product</p> :
           null}
