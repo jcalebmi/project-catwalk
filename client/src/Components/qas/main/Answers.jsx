@@ -5,6 +5,7 @@ import AsFeedback from '../buttons/AsFeedback.jsx';
 import { fetchAnswers } from '../helpers/server-requests';
 import AddAnswer from '../buttons/AddAnswerBtn.jsx';
 
+const axios = require('axios');
 const moment = require('moment');
 
 const Answers = ({ questionId, questionBody }) => {
@@ -39,7 +40,8 @@ const Answers = ({ questionId, questionBody }) => {
           <span className="answerElement" key={answer.answer_id}>
           <span key={`${answer.answer_id}/span`} className="answerBody">{answer.body}</span>
           <br></br>
-            by{' '}{answer.answerer_name === 'Seller' ? <span className="bold answerer">{answer.answerer_name}</span> : <span className="answerer">{answer.answerer_name}</span>}
+          <br />
+           {answer.answerer_name === 'Seller' ? <span className="bold answerer">by{' '}{answer.answerer_name}</span> : <span className="answerer"> by{' '}{answer.answerer_name}</span>}
             <span className="answerer">,{' '}{moment(answer.date).format('MMMM Do YYYY')}</span>
           {' '}<span id="helpTxtA">Helpful?{' '}</span>
             <span id={answer.answer_id}>
@@ -49,7 +51,11 @@ const Answers = ({ questionId, questionBody }) => {
   ))}
         <div id="answer-btn-container">
         {answers.length > 2 ? <LoadMoreAnswers handler={loadMore} />
-          : <AddAnswer questionId={questionId} questionBody={questionBody} /> }
+          : <></>}
+          {answers.length === 0
+            ? <span className="bold"> No answers found... would you like to add a new one?
+               <AddAnswer questionId={questionId} questionBody={questionBody} /></span>
+            : <></>}
           </div>
           <br></br>
       </div>

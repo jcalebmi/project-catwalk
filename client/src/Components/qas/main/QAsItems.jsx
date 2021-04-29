@@ -19,6 +19,7 @@ const QAsItems = ({ questions }) => {
   const observer = useRef();
   const count = useRef(4);
   const [isSearching, setIsSearching] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
   const [display, updateDisplay] = useState(questions.slice(0, count.current));
   const [hasMore, setHasMore] = useState(true);
 
@@ -48,9 +49,9 @@ const QAsItems = ({ questions }) => {
     }
   }, [hasMore]);
 
-  const handleSearch = (bool, results) => {
+  const handleSearch = (bool, results, searchVal) => {
     setIsSearching(bool);
-
+    setSearchTerm(searchVal);
     updateDisplay(results);
   };
 
@@ -65,7 +66,7 @@ const QAsItems = ({ questions }) => {
             return (
               <div ref={lastElementRef} key={question.question_id} id="q-a-item">
                 <div id="question">
-                <span className="bold questionHeader">Q: {question.question_body}</span>
+                  <span className="bold questionHeader">Q: {question.question_body}</span>
                 <span id="helpTxt">Helpful?</span>
                   <QsFeedback questionId={question.question_id}
                   questionHelpfulness= {question.question_helpfulness || 0} />

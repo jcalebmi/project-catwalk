@@ -9,7 +9,7 @@ const BUTTON_WRAPPER_STYLES = {
   zIndex: 1,
 };
 
-const getProduct = (state) => state.product;
+const getProduct = (state) => state.product.product;
 
 const AddQuestion = () => {
   const product = useSelector(getProduct);
@@ -23,7 +23,7 @@ const AddQuestion = () => {
   const handleUserName = (e) => setUserName(e.target.value);
   const handleUserEmail = (e) => setUserEmail(e.target.value);
 
-  if ((userQuestion.length && userName.length) > 0 && userEmail.includes('@')) {
+  if ((userQuestion.length && userName.length) > 0 && userEmail.includes('@') && userEmail.length > 5) {
     document.getElementById('questionSubmitBtn').removeAttribute('disabled');
   }
   const handleSubmit = (e) => {
@@ -46,17 +46,18 @@ const AddQuestion = () => {
     <button onClick={() => setIsOpen(true)} className="useBgContrast light feedback-btn" id="add-question-btn">Add A Question +</button>
     <Modal id="questionsModal" open={isOpen} onClose={() => setIsOpen(false)}>
       <form className="answerForm">
-      <h1 className="addQA light">Submit Your Question</h1>
-      <h2 className="addQA light">Product Name: {product.name}</h2>
-      *Your answer
-      <textarea name="body" className="answer-modal" rows="10" cols="100" onChange={handleUserQuestion}></textarea>
-      *What is your nickname?:
-      <input name="name" onChange={handleUserName} className="modal-nickname" type="text" placeholder="Example: jack543!" id="answerers-nickname"></input>
+      <h1 className="addQA light">Ask your Question</h1>
+      <h2 className="addQA light">About the {product.name}</h2>
+      <label htmlFor="modalAnswer">*Your Answer
+      <textarea id="modalAnswer" className="answer-modal" rows="10" cols="50" onChange={handleUserQuestion}></textarea></label>
+     {/** USERNAME INPUT */}
+      <label htmlFor="modalNickname">*What is your nickname?</label>
+      <input onChange={handleUserName} id="modalNickname" className="modal-nickname" type="text" placeholder="Example: jack543!"></input>
       <h6>For privacy reasons, do not use your full name or email address</h6>
-      *What is your email address?
-      <input name="email" onChange={handleUserEmail} type="text" className="modal-email" placeholder="Example: jack@email.com"></input>
+      {/** EMAIL INPUT */}
+      <label htmlFor="modalEmail">*What is your email address?
+      <input onChange={handleUserEmail} id="modalEmail" type="text" className="modal-email" placeholder="Example: jack@email.com"></input></label>
       <h6>For authentication reasons, you will not be emailed</h6>
-      <span>* Required fields</span>
       <button id="questionSubmitBtn" onClick={handleSubmit} type="submit" disabled={true}>Submit Answer</button>
       </form>
     </Modal>
