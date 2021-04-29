@@ -82,9 +82,9 @@ function ReviewsBox (props) {
   };
 
   const highlight = (text) => {
+    const reviews = document.getElementsByClassName('reviewBody');
+    const reviewsArr = Array.prototype.slice.call(reviews);
     if (text.length > 2) {
-      const reviews = document.getElementsByClassName('reviewBody');
-      const reviewsArr = Array.prototype.slice.call(reviews);
       reviewsArr.map((review) => {
         const inner = review.innerHTML;
         const index = inner.toLowerCase().indexOf(text.toLowerCase());
@@ -93,7 +93,7 @@ function ReviewsBox (props) {
           return review;
         }
       });
-    };
+    }
   };
 
   // Handles searchbar filter
@@ -104,12 +104,12 @@ function ReviewsBox (props) {
     if (text.length < 3) {
       setSearching(false);
     }
-    highlight(text);
     setSearch(text);
     const sorted = sortReviews(filter, results, text, starFilter);
     const sliced = sorted.slice(0, currentLength);
     setResults(resultsStorage);
     setDisplay(sliced);
+    highlight(text);
   };
 
   // Handles star rating search filter
