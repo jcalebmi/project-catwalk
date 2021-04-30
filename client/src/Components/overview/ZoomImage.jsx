@@ -9,14 +9,23 @@ const ZoomImage = ({
 }) => {
   const style = styles[styleIdx];
   const { photos } = style;
-  const { x, y } = coords;
-  let setY = y < 20 ? 20 : y;
-  setY = setY > 80 ? 80 : setY;
-  let setX = x < 20 ? 20 : x;
-  setX = setX > 80 ? 80 : setX;
+  const { x, y, width} = coords;
+  const boxSize = 50; // percent of height
+  const boxOffset = boxSize / 2; // percent offset
+
+  const xLow = boxOffset / 1.5;
+  const xHi = 100 - xLow;
+  let setX = x < xLow ? xLow : x;
+  setX = setX > xHi ? xHi : setX;
+
+  const yLow = boxOffset;
+  const yHi = 100 - yLow;
+  let setY = y < yLow ? yLow : y;
+  setY = setY > yHi ? yHi : setY;
+
   const imgStyle = {
-    left: `${(setX + 2.5) * -3.4}%`,
-    top: `${(setY - 19) * -1.7}%`,
+    left: `${(setX + 10) * -3.0}%`,
+    top: `${(setY - 24.5) * -2.1}%`,
   };
   const mainImg = <img
     style={imgStyle}
