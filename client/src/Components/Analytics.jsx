@@ -16,7 +16,7 @@ function Analytics(props) {
         <ul>
           {Object.keys(overviewElements).map((element, index) => {
             return <li key={index}>
-                <span>{element}:</span><br></br>
+                <span className="bold">{element}:</span><br></br>
                 <span className="bold">Clicks: {overviewElements[element].clicks}</span><br></br>
                 <div><br></br>
                   <span className="bold">Time:</span><br></br>
@@ -33,7 +33,7 @@ function Analytics(props) {
         <ul>
           {Object.keys(QAElements).map((element, index) => {
             return <li key={index}>
-                <span>{element}:</span><br></br>
+                <span className="bold">{element}:</span><br></br>
                 <span class="bold">Clicks: {QAElements[element].clicks}</span><br></br>
                 <div> <br></br>
                   <span class="bold">Time:</span><br></br>
@@ -50,7 +50,7 @@ function Analytics(props) {
         <ul>
           {Object.keys(reviewElements).map((element, index) => {
             return <li key={index}>
-                <span>{element}:</span><br></br>
+                <span className="bold">{element}:</span><br></br>
                 <span class="bold">Clicks: {reviewElements[element].clicks}</span><br></br>
                 <div><br></br>
                   <span class="bold">Time:</span><br></br>
