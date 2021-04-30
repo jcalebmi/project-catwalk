@@ -12,6 +12,8 @@ import Cart from './cart/Cart.jsx';
 // Initialization of Products
 // import {setProduct, setQuestions} from './helpers/setProduct.jsx';
 import setProduct from './helpers/setProduct.jsx';
+import setAllProducts from './helpers/setAllProducts.jsx';
+
 // QAs Import
 import QAs from './qas/QAs.jsx';
 import Analytics from './Analytics.jsx';
@@ -84,11 +86,14 @@ function App() {
   const handleStats = () => {
     setStats(clicks);
   };
-
+  
   if (!isLoaded) {
-    setProduct()
+    setAllProducts()
       .then(() => {
-        setLoaded(true);
+        setProduct()
+          .then(() => {
+            setLoaded(true);
+          });
       });
     return null;
   }
@@ -96,7 +101,7 @@ function App() {
 
   if (page === 'modules') {
     return (
-      <div onClick={handleClick} id='modules'>
+      <div onClick={handleClick} id='modules container'>
         <NavigationBar handleStats={handleStats} handleColor={handleColor} setPage={setPage} />
         <Overview />
         <QAs />
@@ -106,7 +111,7 @@ function App() {
   }
   if (page === 'cart') {
     return (
-      <div id='cart'>
+      <div id='cartPage container'>
         <NavigationBar handleStats={handleStats} setPage={setPage} handleColor={handleColor} />
         <Cart />
       </div>

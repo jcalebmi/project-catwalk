@@ -15,8 +15,7 @@ const ImgThumbnails = ({
   const thumbnails = photos.slice(start, start + 7).map((photo, idx) => (
     <img className='thumbnail'
     key={idx}
-    onClick={(e) => {
-      e.stopPropagation();
+    onClick={() => {
       setPhotoIdx(start + idx);
     }}
     src={photo.thumbnail_url}/>));

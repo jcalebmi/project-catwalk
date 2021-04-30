@@ -63,6 +63,7 @@ function ReviewsBox (props) {
     // gets meta data for reviews
     reviews();
   }, [product]);
+
   if (!isLoaded) {
     if (results.length > 0) {
       setLoaded(true);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-scroll';
 import StyleThumbnails from './StyleThumbnails.jsx';
@@ -14,12 +14,13 @@ const ProductSelection = ({
   styles,
   styleIdx,
   setStyleIdx,
-  cart,
-  setCart,
 }) => {
   const [sizeSku, setSize] = useState(null);
   const [quant, setQuant] = useState(1);
-
+  useEffect(() => {
+    setSize(null);
+  },
+  [styleIdx]);
   const style = styles[styleIdx];
   const price = style.original_price;
   // style.sale_price = '50.00';
@@ -66,9 +67,9 @@ const ProductSelection = ({
       </div>
       <div className='addFave'>
         <AddToCart
-        cart={cart}
-        setCart={setCart}
+        setSize={setSize}
         sizeSku={sizeSku}
+        setQuant={setQuant}
         quant={quant}
         style={style}
         product={product}/>

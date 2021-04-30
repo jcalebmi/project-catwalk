@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import cart, * as fromCart from './cart.jsx';
 import product from './product.jsx';
+import allProducts from './allProducts.jsx';
 
 export default combineReducers({
   cart,
   product,
+  allProducts,
 });
 
 const getAddedIds = (state) => fromCart.getAddedIds(state.cart);

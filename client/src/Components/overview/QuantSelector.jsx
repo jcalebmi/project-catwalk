@@ -13,7 +13,6 @@ const QuantSelector = ({
     ? style.skus[sizeSku].quantity
     : null;
   const handleChange = (e) => {
-    e.stopPropagation();
     setQuant(Number(e.target.value));
   };
   const quantOptions = quantity > 0
