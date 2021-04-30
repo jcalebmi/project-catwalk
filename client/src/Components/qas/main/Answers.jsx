@@ -4,19 +4,20 @@ import LoadMoreAnswers from '../buttons/LoadMoreAnswers.jsx';
 import AsFeedback from '../buttons/AsFeedback.jsx';
 import { fetchAnswers } from '../helpers/server-requests';
 import AddAnswer from '../buttons/AddAnswerBtn.jsx';
+import Modal from '../Modal';
 
-const axios = require('axios');
 const moment = require('moment');
 
 const Answers = ({ questionId, questionBody }) => {
   const [answers, setAnswers] = useState([]);
   const [display, updateDisplay] = useState([]);
+  const [imageOpen, setImageOpen] = useState(false);
   const pointer = useRef(2);
 
   useEffect(() => {
     fetchAnswers(questionId, (results) => {
       setAnswers(results);
-      updateDisplay(results.slice(0, pointer.current));
+      updateDisplay(results.slice(0, 2));
     });
   }, []);
 
@@ -40,13 +41,16 @@ const Answers = ({ questionId, questionBody }) => {
           <span className="answerElement" key={answer.answer_id}>
           <span key={`${answer.answer_id}/span`} className="answerBody">{answer.body}</span>
           <br></br>
+          {answer.photos.length > 0 ? <span><img className="answerImg" onClick={() => setImageOpen(true)} src="https://placeimg.com/50/50/any"></img><Modal id="imageModal" open={imageOpen} onClose={() => setImageOpen(false)}>
+          <img className="modalImg" src="https://placeimg.com/400/400/any"></img>
+            </Modal> </span> : <></>}
           <br />
-           {answer.answerer_name === 'Seller' ? <span className="bold answerer">by{' '}{answer.answerer_name}</span> : <span className="answerer"> by{' '}{answer.answerer_name}</span>}
-            <span className="answerer">,{' '}{moment(answer.date).format('MMMM Do YYYY')}</span>
+          {answer.answerer_name === 'Seller' ? <span className="bold answerer">by{' '}{answer.answerer_name}</span> : <span className="answerer"> by{' '}{answer.answerer_name}</span>}
+          <span className="answerer">,{' '}{moment(answer.date).format('MMMM Do YYYY')}</span>
           {' '}<span id="helpTxtA">Helpful?{' '}</span>
-            <span id={answer.answer_id}>
+          <span id={answer.answer_id}>
             <AsFeedback answerId={answer.answer_id} answerHelpfulness={answer.helpfulness || 0}/>
-            </span>
+          </span>
         </span>
   ))}
         <div id="answer-btn-container">

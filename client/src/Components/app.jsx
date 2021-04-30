@@ -99,7 +99,7 @@ function App() {
       <div onClick={handleClick} id='modules'>
         <NavigationBar handleStats={handleStats} handleColor={handleColor} setPage={setPage} />
         <Overview />
-        {/* <QAs /> */}
+        <QAs />
         <ReviewsBox mode={mode} />
       </div>
     );

@@ -19,7 +19,7 @@ const AddAnswer = ({ questionId }) => {
   const [userAnswer, setUserAnswer] = useState('');
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
-  const [images, setImages] = useState({ file: [] });
+  const [file, setFile] = useState();
 
   const [formInput, setFormInput] = useState({
     userAnswer: '',
@@ -33,34 +33,13 @@ const AddAnswer = ({ questionId }) => {
   const handleUserAnswer = (e) => setUserAnswer(e.target.value);
   const handleUserName = (e) => setUserName(e.target.value);
   const handleUserEmail = (e) => setUserEmail(e.target.value);
-  const fileSelected = (e) => setImages({
-    file: [...images.file, URL.createObjectURL(e.target.files[0])],
-  });
+  // const fileSelected = (e) => setImages({
+  //   file: [...images.file, URL.createObjectURL(e.target.files[0])],
+  // });
 
   if ((userAnswer.length && userName.length && userEmail.length) > 5 && userEmail.includes('@')) {
     document.getElementById('answerSubmitBtn').removeAttribute('disabled');
   }
-
-  const validate = () => {
-    let err = false;
-    const errors = {};
-
-    if (formInput.userAnswer.length < 5) {
-      err = true;
-      errors.answerError = 'INVALID RESPONSE';
-    }
-    if (formInput.userEmail.includes('@') || formInput.userEmail.length < 5) {
-      err = true;
-      errors.emailError = 'INVALID EMAIL';
-    }
-    if (err) {
-      err = true;
-      errors.nameError = 'INVALID USERNAME';
-    }
-    setFormInput({
-      ...formInput, ...errors,
-    });
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -68,12 +47,17 @@ const AddAnswer = ({ questionId }) => {
       body: userAnswer,
       name: userName,
       email: userEmail,
-      photos: images,
+      photos: files,
     };
 
     postAs(questionId, requestBody);
     setIsOpen(false);
   };
+
+  const handleFileChange = (e) => {
+    setFile(e.target.filesf);
+    console.log(e.target)
+  }
 
   return (
   <>
@@ -85,18 +69,18 @@ const AddAnswer = ({ questionId }) => {
       <h1 className="addQA light">Submit your Answer</h1>
       <h2 className="addQA light">Product Name: {productName}</h2>
      {/** UI RESPONSE BODY */}
-      <label htmlFor="modalAnswer">*Your Answer
-      <textarea errorText={formInput.answerError} id="modalAnswer" className="answer-modal" rows="10" cols="50" onChange={handleUserAnswer}></textarea></label>
+      <label htmlFor="modalAnswer">*Your Answer{<br />}
+      <textarea id="modalAnswer" className="answer-modal" rows="10" cols="50" onChange={handleUserAnswer}></textarea></label>
      {/** USERNAME INPUT */}
       <label htmlFor="modalNickname">*What is your nickname?</label>
-      <input onChange={handleUserName} id="modalNickname" className="modal-nickname" type="text" placeholder="Example: jack543!" errorText={formInput.nameError}></input>
+      <input onChange={handleUserName} id="modalNickname" className="modal-nickname" type="text" placeholder="Example: jack543!"></input>
       <h6>For privacy reasons, do not use your full name or email address</h6>
       {/** EMAIL INPUT */}
       <label htmlFor="modalEmail">*What is your email address?
-      <input onChange={handleUserEmail} id="modalEmail" type="text" className="modal-email" placeholder="Example: jack@email.com" errorText={formInput.emailError}></input></label>
+      <input onChange={handleUserEmail} id="modalEmail" type="text" className="modal-email" placeholder="Example: jack@email.com"></input></label>
       <h6>For authentication reasons, you will not be emailed</h6>
       {/** IMAGE INPUT */}
-      <input type="file" onChange={fileSelected}></input>
+      <input type="file" className="form-control" multiple onChange={handleFileChange}></input>
       {/* {images.file.forEach((img) => (
         <img src={img}/>
       ))} */}

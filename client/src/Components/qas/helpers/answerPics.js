@@ -23,20 +23,16 @@ const OVERLAY_STYLES = {
   zIndex: 1000,
 };
 
-export default function Modal({ open, onClose, children }) {
-  if (!open) return null;
+console.log('you dont know what ur doing')
 
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-      onClose(true);
-    }
-  });
+export default function answerPic({ open, onClose, children }) {
+  if (!open) return null;
 
   return ReactDOM.createPortal(
     <>
       <div style={OVERLAY_STYLES} />
       <div style={MODAL_STYLES}>
-        <button className="closeModal" onClick={onClose}>X</button>
+        <button onClick={onClose}>Close Modal</button>
         {children}
       </div>
      </>,

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import Modal from '../Modal';
 
@@ -24,7 +24,9 @@ const AddQuestion = () => {
   const handleUserEmail = (e) => setUserEmail(e.target.value);
 
   if ((userQuestion.length && userName.length) > 0 && userEmail.includes('@') && userEmail.length > 5) {
-    document.getElementById('questionSubmitBtn').removeAttribute('disabled');
+    if (document.getElementById('questionSubmitBtn')) {
+      document.getElementById('questionSubmitBtn').removeAttribute('disabled');
+    }
   }
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,6 +42,7 @@ const AddQuestion = () => {
     setIsOpen(false);
   };
 
+
   return (
     <>
   <div style={BUTTON_WRAPPER_STYLES}>
@@ -48,7 +51,7 @@ const AddQuestion = () => {
       <form className="answerForm">
       <h1 className="addQA light">Ask your Question</h1>
       <h2 className="addQA light">About the {product.name}</h2>
-      <label htmlFor="modalAnswer">*Your Answer
+      <label htmlFor="modalAnswer">*Your Question{<br />}
       <textarea id="modalAnswer" className="answer-modal" rows="10" cols="50" onChange={handleUserQuestion}></textarea></label>
      {/** USERNAME INPUT */}
       <label htmlFor="modalNickname">*What is your nickname?</label>
@@ -58,7 +61,7 @@ const AddQuestion = () => {
       <label htmlFor="modalEmail">*What is your email address?
       <input onChange={handleUserEmail} id="modalEmail" type="text" className="modal-email" placeholder="Example: jack@email.com"></input></label>
       <h6>For authentication reasons, you will not be emailed</h6>
-      <button id="questionSubmitBtn" onClick={handleSubmit} type="submit" disabled={true}>Submit Answer</button>
+      <button id="questionSubmitBtn" onClick={handleSubmit} type="submit" disabled={true}>Submit question</button>
       </form>
     </Modal>
   </div>

@@ -19,7 +19,6 @@ const QAsItems = ({ questions }) => {
   const observer = useRef();
   const count = useRef(4);
   const [isSearching, setIsSearching] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
   const [display, updateDisplay] = useState(questions.slice(0, count.current));
   const [hasMore, setHasMore] = useState(true);
 
@@ -49,9 +48,8 @@ const QAsItems = ({ questions }) => {
     }
   }, [hasMore]);
 
-  const handleSearch = (bool, results, searchVal) => {
+  const handleSearch = (bool, results) => {
     setIsSearching(bool);
-    setSearchTerm(searchVal);
     updateDisplay(results);
   };
 
