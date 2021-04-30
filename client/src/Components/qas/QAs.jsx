@@ -12,22 +12,14 @@ const QAs = () => {
 
   useEffect(() => {
     fetchQuestions(product.id, (qs) => {
-      console.log(qs.data)
       setQuestions(qs.data);
-      // setHasMore(qs.data.length > 0);
     });
   }, []);
-
-  const updateQuestions = () => {
-    fetchQuestions(product.id, (qs) => {
-      setQuestions(qs);
-    });
-  };
 
   return (
     <div id="q-as-container">
       <QAsItems questions={questions} />
-      <AddQuestion updateQs={() => updateQuestions()} />
+      <AddQuestion />
     </div>
   );
 };

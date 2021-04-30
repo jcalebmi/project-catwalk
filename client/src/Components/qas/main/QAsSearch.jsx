@@ -6,13 +6,14 @@ const QAsSearch = ({ questions, callback }) => {
   const handleChange = (e) => {
     if (e.target.value.length >= 3) {
       filter(e.target.value, questions, (matchedResults) => {
-        callback(true, matchedResults);
+        callback(true, matchedResults, e.target.value);
       });
     }
     if (e.target.value.length < 3) {
-      callback(false, questions.slice(0, 4));
+      callback(false, questions.slice(0, 4), '');
     }
   };
+
 
   return (
         <div className="qas-search">

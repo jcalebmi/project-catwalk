@@ -8,7 +8,7 @@ const LoadMoreAnswers = ({ handler }) => (
       className='useBgContrast light'
       id="more-answers-btn"
       onClick={(e) => handler(e)}>
-        LOAD MORE ANSWERS</button>
+        SEE MORE ANSWERS</button>
   </div>
 );
 

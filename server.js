@@ -92,6 +92,7 @@ app.post('/reviews/', (req, res) => {
 app.get('/qa/questions/:productId/', (req, res) => {
   const { productId } = req.params;
   fetchQuestions(productId, (questions) => {
+    console.log(questions)
     sortData(questions, 'question_helpfulness', (sorted) => {
       res.send(sorted);
     });
