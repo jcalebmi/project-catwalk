@@ -78,7 +78,7 @@ function Characteristics(props) {
           ? <div>
               <h6>Quality</h6>
               <div className="ratingSlider">
-                <input type="range" min='1' max="5" readOnly={true} value={props.meta.characteristics.Quality === undefined ? '1' : props.meta.characteristics.Quality.value}>
+                <input type="range" min='1' max="5" readOnly={true} value={!props.meta.characteristics.Quality.value ? '1' : props.meta.characteristics.Quality.value}>
                 </input>
                 <div className='reviews characteristics'>
                   <div className="char">Poor</div>

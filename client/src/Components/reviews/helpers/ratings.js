@@ -16,6 +16,8 @@ const ratings = (meta, results) => {
   });
   if (!Number.isNaN(recSum / results.length)) {
     recommend = `${((recSum / results.length) * 100).toFixed(2)}%`;
+  } else {
+    recommend = '0%';
   }
 
   let aveSum = 0;
@@ -24,6 +26,8 @@ const ratings = (meta, results) => {
   });
   if (!Number.isNaN(aveSum / results.length)) {
     ave = (aveSum / results.length).toFixed(1);
+  } else {
+    ave = 0;
   }
 
   return {

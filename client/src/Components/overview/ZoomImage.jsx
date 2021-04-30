@@ -25,7 +25,7 @@ const ZoomImage = ({
 
   const imgStyle = {
     left: `${(setX + 10) * -3.0}%`,
-    top: `${(setY - 24.5) * -2.1}%`,
+    top: `${(setY - 24.5) * -2}%`,
   };
   const mainImg = <img
     style={imgStyle}
