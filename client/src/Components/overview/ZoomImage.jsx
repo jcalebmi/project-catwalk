@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import ScrollArrows from './ScrollArrows.jsx';
-import RightScrollArrow from './RightScrollArrow.jsx';
-import LeftScrollArrow from './LeftScrollArrow.jsx';
-import ImgThumbnails from './ImgThumbnails.jsx';
 
 const ZoomImage = ({
   styleIdx,
