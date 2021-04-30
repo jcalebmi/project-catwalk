@@ -40,7 +40,6 @@ function ReviewsBox (props) {
   const metaData = () => {
     if (product.id !== undefined) {
       getMetaData(product.id).then((data) => {
-        console.log(data);
         setMeta(data);
       });
     }

@@ -6,7 +6,6 @@ import { checkout } from '../../actions/index.jsx';
 
 const Cart = () => {
   const cart = useSelector(getCartProducts);
-  console.log(cart);
   const total = useSelector(getTotal);
   const handleCheckout = (e) => {
     e.preventDefault();

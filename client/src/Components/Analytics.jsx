@@ -21,7 +21,7 @@ function Analytics(props) {
                 <div><br></br>
                   <span className="bold">Time:</span><br></br>
                   {Object.keys(overviewElements[element].time).map((date, index) => {
-                    return <p><span>{date}</span><br></br></p>
+                    return <p key={index}><span>{date}</span><br></br></p>
                   })}
                 </div>
               </li>
@@ -38,7 +38,7 @@ function Analytics(props) {
                 <div> <br></br>
                   <span className="bold">Time:</span><br></br>
                   {Object.keys(QAElements[element].time).map((date, index) => {
-                    return <p><span>{date}</span><br></br></p>
+                    return <p key={index}><span>{date}</span><br></br></p>
                   })}
                 </div>
               </li>
@@ -55,7 +55,7 @@ function Analytics(props) {
                 <div><br></br>
                   <span className="bold">Time:</span><br></br>
                   {Object.keys(reviewElements[element].time).map((date, index) => {
-                    return <p><span>{date}</span><br></br></p>
+                    return <p key={index}><span>{date}</span><br></br></p>
                   })}
                 </div>
               </li>
