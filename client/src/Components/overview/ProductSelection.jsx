@@ -69,6 +69,7 @@ const ProductSelection = ({
         <AddToCart
         setSize={setSize}
         sizeSku={sizeSku}
+        setQuant={setQuant}
         quant={quant}
         style={style}
         product={product}/>

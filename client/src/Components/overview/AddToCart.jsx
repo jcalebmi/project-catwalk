@@ -5,6 +5,7 @@ import { addToCart } from '../../actions/index.jsx';
 const AddToCart = ({
   setSize,
   sizeSku,
+  setQuant,
   quant,
   style,
   product
@@ -26,6 +27,7 @@ const AddToCart = ({
       };
       addToCart(sizeSku, quant, newItem);
       setSize(null);
+      setQuant(1);
     }
   };
   return (

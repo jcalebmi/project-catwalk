@@ -12,6 +12,8 @@ import Cart from './cart/Cart.jsx';
 // Initialization of Products
 // import {setProduct, setQuestions} from './helpers/setProduct.jsx';
 import setProduct from './helpers/setProduct.jsx';
+import setAllProducts from './helpers/setAllProducts.jsx';
+
 // QAs Import
 import QAs from './qas/QAs.jsx';
 import Analytics from './Analytics.jsx';
@@ -84,11 +86,14 @@ function App() {
   const handleStats = () => {
     setStats(clicks);
   };
-
+  
   if (!isLoaded) {
-    setProduct()
+    setAllProducts()
       .then(() => {
-        setLoaded(true);
+        setProduct()
+          .then(() => {
+            setLoaded(true);
+          });
       });
     return null;
   }

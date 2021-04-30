@@ -13,8 +13,7 @@ const ScrollArrows = ({
   if (photoIdx !== 0) {
     leftArrow = <div
       key='left'
-      onClick={(e) => {
-        e.stopPropagation();
+      onClick={() => {
         setPhotoIdx(photoIdx - 1);
       }}
       className='arrowbox'>

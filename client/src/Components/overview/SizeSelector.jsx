@@ -11,7 +11,6 @@ const SizeSelector = ({
   const style = styles[styleIdx];
   const sizes = style.skus;
   const handleChange = (e) => {
-    e.stopPropagation();
     setSize(e.target.value);
   };
   const inStock = Object.keys(sizes)

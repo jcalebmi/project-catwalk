@@ -18,8 +18,7 @@ const StyleThumbnails = ({
         return (<div
           className='styleThumbnail'
           key={curStyle.style_id}>
-          <img onClick={(e) => {
-            e.stopPropagation();
+          <img onClick={() => {
             setStyleIdx(idx);
           }}
           src={curStyle.photos[0].thumbnail_url}/>

@@ -1,12 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const axios = require('axios');
-const apiToken = require('./myconfig');
-const multer = require('multer');
+const path = require('path');
 
 const app = express();
-const path = require('path');
 const getProduct = require('./appHelpers/getProduct.js');
+const getAllProducts = require('./appHelpers/getAllProducts.js');
 const getReviews = require('./reviewHelpers/getReviews.js');
 const updateHelpful = require('./reviewHelpers/helpfulness.js');
 const getMetaData = require('./reviewHelpers/getMeta.js');
@@ -23,15 +21,23 @@ const postNewQuestions = require('./questionsHelpers/postQuestions.js');
 const postNewAnswers = require('./questionsHelpers/postAnswers.js');
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'client', 'dist')));
 
 // Takes product ID & calls Axios helper
 // in appHelpers/getProducts.js
-// Returns products back to client
+// Returns product back to client
 app.get('/product/:product_id', (req, res) => {
   const id = req.params.product_id;
   getProduct(id).then((response) => {
+    res.status(200);
+    res.send(response);
+  });
+});
+
+// Returns products back to client
+app.get('/products', (req, res) => {
+  getAllProducts().then((response) => {
     res.status(200);
     res.send(response);
   });
