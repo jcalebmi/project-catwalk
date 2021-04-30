@@ -239,6 +239,11 @@ span{
     margin: auto;
     padding: 5px 0 5px 0;
   }
+
+  #overview
+  .productHighlight:hover {
+    font-weight: bold;
+  }
   /* Main Overview */
   #overview
   .main {
@@ -1104,4 +1109,10 @@ select.reviewSort {
   #imageModal
   .modalImg {
     background: none;
+}
+
+.modalImageA {
+  width: 5em;
+  height: 5em;
+  object-fit: cover;
 }

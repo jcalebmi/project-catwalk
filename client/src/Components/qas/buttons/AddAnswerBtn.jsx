@@ -19,27 +19,28 @@ const AddAnswer = ({ questionId }) => {
   const [userAnswer, setUserAnswer] = useState('');
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
-  const [file, setFile] = useState();
-
-  const [formInput, setFormInput] = useState({
-    userAnswer: '',
-    answerError: '',
-    userName: '',
-    nameError: '',
-    userEmail: '',
-    emailError: '',
-  });
+  const [files, setFile] = useState();
 
   const handleUserAnswer = (e) => setUserAnswer(e.target.value);
   const handleUserName = (e) => setUserName(e.target.value);
   const handleUserEmail = (e) => setUserEmail(e.target.value);
-  // const fileSelected = (e) => setImages({
-  //   file: [...images.file, URL.createObjectURL(e.target.files[0])],
-  // });
 
   if ((userAnswer.length && userName.length && userEmail.length) > 5 && userEmail.includes('@')) {
     document.getElementById('answerSubmitBtn').removeAttribute('disabled');
   }
+
+  const handleFiles = (e) => {
+    const imgCont = document.getElementById('modalImageA');
+    const img = document.createElement('img');
+    for (let i = 0; i < e.target.files.length; i += 1) {
+      img.src = URL.createObjectURL(e.target.files[i]);
+      img.className = 'modalImageA';
+      imgCont.appendChild(img);
+      if (files.length < 5) {
+        setFile(files.concat(e.target.files[i]));
+      }
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -53,11 +54,6 @@ const AddAnswer = ({ questionId }) => {
     postAs(questionId, requestBody);
     setIsOpen(false);
   };
-
-  const handleFileChange = (e) => {
-    setFile(e.target.filesf);
-    console.log(e.target)
-  }
 
   return (
   <>
@@ -80,10 +76,8 @@ const AddAnswer = ({ questionId }) => {
       <input onChange={handleUserEmail} id="modalEmail" type="text" className="modal-email" placeholder="Example: jack@email.com"></input></label>
       <h6>For authentication reasons, you will not be emailed</h6>
       {/** IMAGE INPUT */}
-      <input type="file" className="form-control" multiple onChange={handleFileChange}></input>
-      {/* {images.file.forEach((img) => (
-        <img src={img}/>
-      ))} */}
+      <input type="file" className="form-control" multiple onChange={handleFiles}></input>
+      <div id='modalImageA'></div>
       <span>*Required fields</span>
       {/** SUBMIT BUTTON */}
       <button onClick={handleSubmit} id="answerSubmitBtn" type="submit" disabled={true}>Submit Answer</button>
