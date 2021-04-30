@@ -16,8 +16,8 @@ function ReviewItem(props) {
   const handleHelpfulness = () => {
     if (!ishelpfulClicked) {
       updateHelpfulness(props.item.review_id);
-      setHelpfulClick(true);
       props.reviews();
+      setHelpfulClick(true);
     }
   };
   const report = () => {
