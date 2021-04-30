@@ -16,14 +16,14 @@ const QAsItems = ({ questions }) => {
         </div>
     );
   }
-
   const observer = useRef();
   const count = useRef(4);
   const [isSearching, setIsSearching] = useState(false);
   const [display, updateDisplay] = useState(questions.slice(0, count.current));
+  const [hasMore, setHasMore] = useState(true);
 
   const lastElementRef = useCallback((node) => {
-    if (isSearching) {
+    if (isSearching || !hasMore) {
       return;
     }
 
@@ -37,6 +37,7 @@ const QAsItems = ({ questions }) => {
         updateDisplay(questions.slice(0, count.current));
 
         if (count.current >= questions.length - 2) {
+          setHasMore(false);
           updateDisplay(questions.slice());
         }
       }
@@ -45,45 +46,48 @@ const QAsItems = ({ questions }) => {
     if (node) {
       observer.current.observe(node);
     }
-  });
+  }, [hasMore]);
 
   const handleSearch = (bool, results) => {
     setIsSearching(bool);
-
     updateDisplay(results);
   };
 
   return (
-    <div id="qAndAs">
+      <div id="qAndAs">
     <span className="questionSearchField">
       <QAsSearch questions={questions} callback={handleSearch} />
     </span>
+    <div id="questionsBody">
         {display.map((question, index) => {
           if (display.length === index + 1) {
             return (
-               <div ref={lastElementRef} key={question.question_id} id="q-a-item">
+              <div ref={lastElementRef} key={question.question_id} id="q-a-item">
                 <div id="question">
-                <span className="bold">Q: {question.question_body}</span>
+                  <span className="bold questionHeader">Q: {question.question_body}</span>
                 <span id="helpTxt">Helpful?</span>
                   <QsFeedback questionId={question.question_id}
                   questionHelpfulness= {question.question_helpfulness || 0} />
                 </div> <h3>A:</h3>
                   <Answers questionId={question.question_id} questionBody={question.question_body}/>
+                  <hr></hr>
                 </div>
             );
           } return (
              <div key={question.question_id} id="q-a-item">
              <div id="question">
-             <span className="bold">Q: {question.question_body}</span>
+             <span className="bold questionHeader">Q: {question.question_body}</span>
              <span id="helpTxt">Helpful?</span>
                <QsFeedback questionId={question.question_id}
                  questionHelpfulness= {question.question_helpfulness || 0} />
                </div> <h3>A:</h3>
                  <Answers questionId={question.question_id} questionBody={question.question_body}/>
+                 <hr></hr>
                </div>
           );
         })}
-     </div>
+        </div>
+        </div>
   );
 };
 
