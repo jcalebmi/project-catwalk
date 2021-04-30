@@ -16,9 +16,8 @@ function ReviewItem(props) {
   const handleHelpfulness = () => {
     if (!ishelpfulClicked) {
       updateHelpfulness(props.item.review_id);
-      setHelpfulClick(true);
       props.reviews();
-      setHelpfulness(props.item.helpfulness + 1);
+      setHelpfulClick(true);
     }
   };
   const report = () => {
@@ -49,11 +48,11 @@ function ReviewItem(props) {
         <p
         className="bold">{props.item.summary}</p>
         {props.item.body.length >= 250
-          ? <p id='reviewBody'>{preview}
+          ? <p className='reviewBody'>{preview}
               <br></br>
               <span onClick={showBody}>Show More</span>
             </p>
-          : <p>{props.item.body}</p> }
+          : <p className='reviewBody'>{props.item.body}</p> }
         {props.item.recommend ?
         <p>&#10003; I recommend this product</p> :
           null}

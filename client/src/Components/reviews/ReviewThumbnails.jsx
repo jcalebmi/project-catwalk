@@ -8,6 +8,7 @@ function ReviewThumbnails (props) {
     setModal(show);
     setImg(e.target.src);
   };
+
   return (
     <div>
       {showModal
@@ -15,9 +16,10 @@ function ReviewThumbnails (props) {
           <img className="reviewsPhotos modal" src={img} onClick={handleClick}/>
         </div>
         : null}
-      {props.photos.map((photo, index) => <img className="reviewsPhotos" key={index}  onClick={handleClick}/>)}
+      {props.photos.map((photo, index) => <img className="reviewsPhotos" src={photo.url} key={index} onClick={handleClick} alt="User Image"/>)}
     </div>
   );
 }
+
 
 export default ReviewThumbnails;

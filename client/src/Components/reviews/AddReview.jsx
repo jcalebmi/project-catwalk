@@ -24,7 +24,7 @@ function AddReview(props) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [files, setFiles] = useState([]);
-  const [filesSRC, setFilesSRC] = useState([]);
+  const [filesSRC, setFilesSRC] = useState(['https://mymodernmet.com/wp/wp-content/uploads/2020/10/cooper-baby-corgi-dogs-8.jpg']);
   const [error, setError] = useState(false);
   const overlayMode = `addReview overlay ${props.mode}`;
   const reviewMode = `writeReview ${props.mode}`;
@@ -89,9 +89,9 @@ function AddReview(props) {
       if (files.length < 5) {
         setFiles(files.concat(e.target.files[i]));
       }
-      if (filesSRC.length < 5) {
-        setFilesSRC(filesSRC.concat(img.src));
-      }
+      // if (filesSRC.length < 5) {
+      //   setFilesSRC(filesSRC.concat(img.src));
+      // }
     }
   };
 
@@ -101,9 +101,7 @@ function AddReview(props) {
     // files.forEach(file => {
     //   data.append('file', file);
     // });
-    const photos = files.map(file => {
-      return `urlplaceholder/${file.name}`;
-    });
+
     const info = {
       product_id: props.product.id,
       rating: Number(starRating),
@@ -130,6 +128,7 @@ function AddReview(props) {
   // axios.post('/reviews', data, auth)
     // }
     props.reviews();
+    props.closeReview();
   };
 
   return (
