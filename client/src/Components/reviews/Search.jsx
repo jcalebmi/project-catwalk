@@ -2,15 +2,19 @@ import React from 'react';
 
 const Search = (props) => {
   const handleSearch = (e) => {
-    const text = e.target.value.toLowerCase();
-    props.sendSearch(text.toLowerCase());
+    const text = e.target.value;
+    props.sendSearch(text);
   };
   return (
-    <input
-      type='text'
-      placeholder="search"
-      onChange={handleSearch}>
-      </input>
+    <label htmlFor="reviewSearch">
+      <span style={{'display': 'none'}}>Search: </span>
+      <input
+        id="reviewSearch"
+        type='text'
+        placeholder="search"
+        onChange={handleSearch}>
+        </input>
+    </label>
   );
 };
 
