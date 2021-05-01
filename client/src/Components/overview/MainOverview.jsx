@@ -11,7 +11,14 @@ const MainOverview = () => {
   const [isExpanded, setExpanded] = useState(false);
   const [styles, setStyles] = useState([]);
   const [styleIdx, setStyleIdx] = useState(0);
-  const [coords, setCoords] = useState({ x: 0, y: 0, width: 0, height: 0 });
+  const [coords, setCoords] = useState({
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+    imgWidth: 0,
+    imgHeight: 0,
+  });
   const [photoIdx, setPhotoIdx] = useState(0);
   useEffect(() => {
     if (product.id) {
@@ -24,11 +31,14 @@ const MainOverview = () => {
 
   const handleMouseMove = (e) => {
     const { left, top, width, height } = e.target.getBoundingClientRect();
+    const imgWidth = e.target.naturalWidth;
+    const imgHeight = e.target.naturalHeight;
     const xCoord = e.clientX;
     const yCoord = e.clientY;
     const x = ((xCoord - left) / width) * 100;
     const y = ((yCoord - top) / height) * 100;
-    setCoords({ x, y, width, height });
+    // console.log(JSON.stringify({ x, y, width, height, imgWidth, imgHeight }));
+    setCoords({ x, y, width, height, imgWidth, imgHeight });
   };
 
   if (styles.length === 0) {

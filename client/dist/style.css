@@ -205,8 +205,8 @@ body.dark {
 .gridItem{
   display: inline-grid;
   grid-template-columns: 25% 20% 10% 15% 15% 15%;
-  border-right: solid 1px black
-  align-items:center;
+  border-right: solid 1px black;
+  align-items: center;
   justify-items: center;
 }
   #cart
@@ -299,13 +299,6 @@ span{
       position: relative;
       width: 40%;
       overflow: hidden;
-    }
-    #overview
-    #zoomImage
-    #mainImage {
-      width: 460%;
-      height: auto;
-      position: absolute;
     }
     /* Scroll Arrows */
     #overview
