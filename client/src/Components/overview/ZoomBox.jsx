@@ -33,7 +33,7 @@ const ZoomBox = ({ coords }) => {
 
   return (
   <div id='zoomBox' style={zoomStyle}>
-    x: {x} y: {y} setX: {setX} width: {width} height: {height}
+    {/* x: {x} y: {y} setX: {setX} width: {width} height: {height} */}
   </div>
   );
 };
