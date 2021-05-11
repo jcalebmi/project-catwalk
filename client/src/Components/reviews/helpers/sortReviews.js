@@ -28,31 +28,42 @@ const sortReviews = (sortBy, results, search, starFilter) => {
     filtered = filtered.filter((item) => starRating.includes(item.rating));
   }
 
-  const split = (body, search) => {
-    let result= [];
-    let remainingText = body.slice();
-    let index = remainingText.toLowerCase().indexOf(search.toLowerCase());
-    while ( index !== -1 ) {
-      result.push(remainingText.slice(0, index))
-      remainingText = remainingText.slice(index);
-      result.push(remainingText.slice(0, search.length));
-      remainingText = remainingText.slice(search.length);
-      index = remainingText.toLowerCase().indexOf(search.toLowerCase());
-    }
-    result.push(remainingText);
-    return result;
-    //returns a split array of indices Ex:[‘th’, ‘is’, ' ’, ‘is’, ' a really good f’, ‘Is’, ‘h’]
-  };
+  // const split = (body, search) => {
+  //   let result= [];
+  //   let remainingText = body.slice();
+  //   let index = remainingText.toLowerCase().indexOf(search.toLowerCase());
+  //   while ( index !== -1 ) {
+  //     result.push(remainingText.slice(0, index))
+  //     remainingText = remainingText.slice(index);
+  //     result.push(remainingText.slice(0, search.length));
+  //     remainingText = remainingText.slice(search.length);
+  //     index = remainingText.toLowerCase().indexOf(search.toLowerCase());
+  //   }
+  //   result.push(remainingText);
+  //   return result;
+  //   //returns a split array of indices Ex:[‘th’, ‘is’, ' ’, ‘is’, ' a really good f’, ‘Is’, ‘h’]
+  // };
+
+  // if (search.length >= 2) {
+  //   filtered = filtered.map((review, index) => {
+  //     const bodyArr = split(review.body, search);
+  //     review.body = bodyArr.map((line, index) => {
+  //       if (index % 2 === 0) {
+  //         return line;
+  //       }
+  //       return <span key={index} id="highlight">{line}</span>;
+  //     });
+  //     return review;
+  //   });
+  // }
 
   if (search.length >= 2) {
     filtered = filtered.map((review, index) => {
-      const bodyArr = split(review.body, search);
-      review.body = bodyArr.map((line, index) => {
-        if (index % 2 === 0) {
-          return line;
-        }
-        return <span key={index} id="highlight">{line}</span>;
-      });
+      const i = review.body.toLowerCase().indexOf(search.toLowerCase());
+      if (i !== -1) {
+        const body = review.body.split('');
+        review.body = <span key={index}>{body.slice(0, i)}<span id="highlight">{body.slice(i, i + search.length)}</span>{body.slice(i + search.length)} </span>;
+      }
       return review;
     });
   }
